@@ -12,10 +12,15 @@ One page. Two lists. Nothing else.
 Not a list. Every item is a bubble in a single packed composition, taken in at
 one glance.
 
-**The bubble carries one or two words.** The fuller phrase lives in a key ringing
-the outside, joined to its bubble by a leader line — so the field stays quiet and
-scannable while nothing is lost. An item whose full phrase says no more than its
-label (`USC`, `MLS`, `Purity`) gets no key entry at all.
+**The bubble carries a short, specific label** — up to three words, enough to name
+the thing rather than gesture at it. The fuller phrase lives in a key ringing the
+outside, joined to its bubble by a leader line. An item whose label already says
+everything gets no key entry, which is most of them; the key exists for the ones
+that genuinely need unpacking.
+
+**It fits one screen.** Circles are sized to the tier, not to a sentence, and the
+cluster is deliberately flat and small — the whole field, key, legend and add row
+land inside a 1280×800 laptop without scrolling.
 
 | Tier | | |
 |---|---|---|

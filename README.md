@@ -32,6 +32,17 @@ visible instead of pretending the change was instant.
 Add with the field at the top. `Enter` adds to **Mine** — the default is that a
 new thing is yours until you say otherwise.
 
+## Live
+
+<https://claudekovalenko.github.io/stewardship/> — deployed by GitHub Pages from
+the `claude/responsibility-contributions-app-tvn4e0` branch. Because Pages serves
+this from a subdirectory, every path in the app is relative; the manifest
+`start_url`, `scope`, icons and the service worker all resolve inside
+`/stewardship/`.
+
+`.nojekyll` turns off Jekyll processing — this is a hand-written static site, and
+Jekyll would otherwise skip any file whose name starts with `_`.
+
 ## Running it
 
 Open `index.html`. No build step, no dependencies, no server; the app is one

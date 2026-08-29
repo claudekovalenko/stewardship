@@ -1,108 +1,65 @@
 # Building & Blessing
 
-A standing account of what you carry, and what you back.
+What I am responsible for, and what I am only blessing.
 
-One page, two registers:
+One page. Two lists. Nothing else.
 
-| | Building | Blessing |
-|---|---|---|
-| The question | What am I responsible for? | What am I contributing to? |
-| The claim | Mine to carry. If it stalls, it stalls with me. | Someone else's to carry. I lend weight, not ownership. |
+- **Mine to carry** — if it stalls, it stalls with me.
+- **Blessing** — someone else carries it. Nice to get to, never ahead of the above.
 
-The distinction is the whole point. Plenty of things take your time without being
-yours to answer for, and it is easy to lose track of which is which. Every entry
-has to declare a posture, so the register keeps the two honest.
+## The three things it does
 
-## What it shows you
+**One priority stack.** Responsibilities are numbered `1..n`. Blessings continue
+the *same* numbering below a hard line. There is no separate ranking, so a
+blessing can never sit above a responsibility — the top blessing's "move up"
+button is disabled, because above it is the line. The order on screen is the
+order of your attention.
 
-- **Load.** Each entry carries a weight, 1–5. The masthead bar splits the total
-  between what you own and what you support, so you can see at a glance whether
-  the balance is what you think it is.
-- **My part.** The field that matters most — the specific accountability, not the
-  activity. The editor prompts differently depending on the posture: *what breaks
-  if you stop?* for Building, *name who actually owns it* for Blessing.
-- **Drift.** Anything untouched for 60 days is flagged in red on the card and in
-  the masthead count. Neglect shows up on its own; you don't have to go looking.
-- **Ledger view.** The same entries as a sortable table, for a periodic review.
-- **Share.** A plain-text summary of both registers, ready to paste into a
-  one-on-one, a review doc, or a note to yourself.
+**Switching.** A thing in motion is neither one nor the other, so it gets its own
+place. Press `⇄` on any item and it moves into a **Switching** band with a
+direction — *handing off* or *taking on* — where it sits, counted on neither
+side, until you confirm it landed. A handoff takes weeks; this makes those weeks
+visible instead of pretending the change was instant.
+
+**Editing.** Click a name and type. That is the whole editor.
+
+| Control | Does |
+|---|---|
+| `▲` `▼` | Reorder — within that list only |
+| `⇄` | Start a switch: hand off, or take on |
+| `✕` | Remove |
+
+Add with the field at the top. `Enter` adds to **Mine** — the default is that a
+new thing is yours until you say otherwise.
 
 ## Running it
 
-Open `index.html` in a browser. That's it — no build step, no dependencies, no
-server. The app itself is a single self-contained file.
+Open `index.html`. No build step, no dependencies, no server; the app is one
+self-contained file.
 
-```
-git clone <this repo> && open index.html
-```
-
-## Installing it (PWA)
-
-Served over HTTPS, this is an installable, offline-capable progressive web app —
-add it to a phone home screen or install it as a desktop app and it opens
-standalone, with no browser chrome.
-
-```
-npx http-server .        # or any static host
-```
-
-Any static host works: GitHub Pages, Cloudflare Pages, Netlify, Vercel, a folder
-behind nginx. The requirement is HTTPS (or `localhost`); a `file://` URL cannot
-register a service worker, so opening the file directly gives you the app but
-not offline support.
-
-What makes it installable:
-
-| File | Role |
-|---|---|
-| `manifest.webmanifest` | Name, colours, icons, `display: standalone` |
-| `sw.js` | Precaches the shell so it runs with no network |
-| `icon-192/512.png`, `icon-maskable-512.png` | Home-screen icons; the maskable one is inset for Android's safe zone |
-| `apple-touch-icon.png`, `icon.svg` | iOS home screen, and the browser tab |
-
-The service worker is network-first for the page (a deploy lands on next load)
-and cache-first for icons and fonts. It deliberately does **not** register when
-the page is running inside a frame or from `file://`.
-
-The home-screen label is **Stewardship** — "Building & Blessing" is too long for
-the space a launcher gives it.
+Served over HTTPS it is also an installable, offline-capable PWA — add it to a
+home screen and it opens standalone. `manifest.webmanifest`, `sw.js` and the
+icons do that; the service worker deliberately does not register from `file://`
+or inside a frame.
 
 ## Where the data lives
 
-Your entries never leave your browser.
-
-- **Always:** saved to `localStorage` under `building-and-blessing/v1`.
-- **When published as a Claude Artifact:** the page also saves each change back
-  into its own published copy via the `artifact` capability, so the register
-  follows you across devices instead of living in one browser profile.
-
-Either way there is no server and no account. **Share & export → Data (JSON)**
-copies everything out, and pastes it back in, so you are never locked in.
-
-The app ships with six example entries to show the shape of the thing. They are
-labelled as examples and one button clears them.
-
-## Data model
+In your browser. Saved to `localStorage`, and — when published as a Claude
+Artifact — written back into the published page so it follows you across
+devices. No server, no account.
 
 ```jsonc
 {
-  "v": 1,
-  "demo": false,
-  "entries": [{
-    "id": "e1a2b3",
-    "posture": "building",        // "building" | "blessing"
-    "name": "Q3 platform migration",
-    "what": "One line, for someone who has never heard of it.",
-    "part": "The specific accountability.",
-    "weight": 5,                   // 1–5, what it costs you
-    "status": "Active",            // Starting | Active | Steady | Winding down | Paused
-    "people": "Who else is in it",
-    "next": "The one thing that would move this",
-    "link": "https://…",           // http(s) only; anything else is dropped
-    "touched": "2026-08-26"        // ISO date
-  }]
+  "v": 2,
+  "items": [
+    { "id": "i1a2", "name": "Q3 platform migration", "list": "mine",   "target": null,   "from": null },
+    { "id": "i3b4", "name": "Design system guild",   "list": "bless",  "target": null,   "from": null },
+    { "id": "i5c6", "name": "On-call runbook",       "list": "switching", "target": "bless", "from": "mine" }
+  ]
 }
 ```
 
-Unknown fields are dropped and bad values are coerced on import, so a
-hand-edited file can't put the app into a broken state.
+`list` is one of `mine`, `bless`, `switching`. An item in `switching` carries
+`target` (where it is going) and `from` (where it came from, so cancelling puts
+it back). Array order is priority order. Bad values are coerced on load and v1
+data migrates automatically, so a hand-edited file cannot wedge the app.

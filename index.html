@@ -1,0 +1,1159 @@
+<title>Building &amp; Blessing</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Spectral:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --paper:#F0F2F0;
+  --surface:#FAFBFA;
+  --surface-2:#E6EAE7;
+  --ink:#14201D;
+  --ink-2:#42544F;
+  --ink-3:#73857F;
+  --rule:#D2DAD5;
+  --rule-strong:#B4C0BA;
+  --build:#0D6A57;
+  --build-soft:#DCEAE5;
+  --bless:#8F6410;
+  --bless-soft:#EFE6CE;
+  --alert:#A8372A;
+  --shadow:0 1px 2px rgba(20,32,29,.05), 0 8px 24px -16px rgba(20,32,29,.30);
+  --drawer-shadow:-24px 0 60px -30px rgba(20,32,29,.45);
+
+  --f-display:"Spectral", Georgia, "Times New Roman", serif;
+  --f-body:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0D1413;
+    --surface:#151E1C;
+    --surface-2:#1D2826;
+    --ink:#E7EDEA;
+    --ink-2:#A6B6B0;
+    --ink-3:#788983;
+    --rule:#263330;
+    --rule-strong:#3A4A44;
+    --build:#57BCA0;
+    --build-soft:#11322B;
+    --bless:#D8A94C;
+    --bless-soft:#332711;
+    --alert:#E2735F;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+    --drawer-shadow:-24px 0 60px -30px rgba(0,0,0,.85);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0D1413;
+  --surface:#151E1C;
+  --surface-2:#1D2826;
+  --ink:#E7EDEA;
+  --ink-2:#A6B6B0;
+  --ink-3:#788983;
+  --rule:#263330;
+  --rule-strong:#3A4A44;
+  --build:#57BCA0;
+  --build-soft:#11322B;
+  --bless:#D8A94C;
+  --bless-soft:#332711;
+  --alert:#E2735F;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -16px rgba(0,0,0,.8);
+  --drawer-shadow:-24px 0 60px -30px rgba(0,0,0,.85);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-size:15px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:80px;
+}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;margin:0;text-wrap:balance;line-height:1.2}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--build);outline-offset:2px;border-radius:2px}
+
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.eyebrow{
+  font-family:var(--f-mono);font-size:10.5px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+/* ---------- masthead ---------- */
+.masthead{
+  position:sticky;top:0;z-index:30;
+  background:var(--paper);
+  border-bottom:1px solid var(--rule);
+}
+.mast-inner{
+  display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
+  gap:20px 40px;padding-top:22px;padding-bottom:16px;
+}
+.mast-id h1{font-size:29px;letter-spacing:-.015em}
+.mast-id h1 .amp{font-family:var(--f-display);font-style:italic;font-weight:400;color:var(--ink-3);padding:0 .06em}
+.mast-sub{color:var(--ink-2);font-size:13.5px;margin-top:2px}
+
+.load{min-width:320px;flex:1;max-width:460px}
+.load-bar{
+  display:flex;height:9px;gap:2px;
+  background:var(--surface-2);border-radius:1px;overflow:hidden;
+}
+.load-bar span{display:block;min-width:2px}
+.load-seg-build{background:var(--build)}
+.load-seg-bless{
+  background:repeating-linear-gradient(90deg,var(--bless) 0 5px,transparent 5px 8px);
+  background-color:var(--bless-soft);
+}
+.load-stats{
+  display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:9px;
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.02em;color:var(--ink-3);
+  font-variant-numeric:tabular-nums;
+}
+.load-stats b{font-weight:500;color:var(--ink)}
+.load-stats .k-build b{color:var(--build)}
+.load-stats .k-bless b{color:var(--bless)}
+.load-stats .k-stale b{color:var(--alert)}
+.load-stats .k-stale{color:var(--alert)}
+
+/* ---------- toolbar ---------- */
+.toolbar{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px;
+  padding:18px 0 4px;
+}
+.seg{display:flex;border:1px solid var(--rule-strong);border-radius:3px;overflow:hidden}
+.seg button{
+  background:transparent;border:0;padding:6px 14px;
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);
+}
+.seg button[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+.field{
+  background:var(--surface);border:1px solid var(--rule);border-radius:3px;
+  padding:6px 10px;font-size:13.5px;color:var(--ink);
+}
+.field::placeholder{color:var(--ink-3)}
+#search{min-width:200px;flex:1;max-width:300px}
+.spacer{flex:1}
+.btn{
+  background:var(--surface);border:1px solid var(--rule-strong);border-radius:3px;
+  padding:6px 13px;font-size:13px;font-weight:500;
+}
+.btn:hover{border-color:var(--ink-3)}
+.btn-solid{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.btn-solid:hover{opacity:.87}
+.btn-quiet{background:transparent;border-color:transparent;color:var(--ink-3)}
+.btn-quiet:hover{color:var(--ink);border-color:var(--rule)}
+
+.notice{
+  display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;
+  margin-top:14px;padding:9px 14px;
+  border:1px dashed var(--rule-strong);border-radius:3px;
+  font-size:13px;color:var(--ink-2);
+}
+.notice em{font-family:var(--f-display);font-style:italic;color:var(--ink)}
+
+/* ---------- registers ---------- */
+.registers{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:26px}
+@media(max-width:920px){.registers{grid-template-columns:1fr;gap:40px}}
+
+.reg-head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:14px;
+  padding-bottom:10px;border-bottom:1px solid var(--ink);
+}
+.register-bless .reg-head{border-bottom-color:var(--rule-strong)}
+.reg-head h2{font-size:20px;letter-spacing:-.01em}
+.reg-eyebrow{
+  font-family:var(--f-mono);font-size:10px;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:5px;
+}
+.register-build .reg-eyebrow{color:var(--build)}
+.register-bless .reg-eyebrow{color:var(--bless)}
+.reg-count{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.reg-claim{font-size:13px;color:var(--ink-2);margin-top:8px;font-style:italic;font-family:var(--f-display)}
+.reg-list{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+
+.card{
+  position:relative;
+  border:1px solid var(--rule);border-radius:3px;
+  padding:13px 15px 13px 18px;
+  background:transparent;
+  transition:border-color .15s ease, transform .15s ease;
+}
+.card::before{
+  content:"";position:absolute;left:0;top:-1px;bottom:-1px;width:3px;border-radius:3px 0 0 3px;
+}
+.card:hover{border-color:var(--rule-strong);transform:translateX(1px)}
+.card-build{background:var(--surface);box-shadow:var(--shadow)}
+.card-build::before{background:var(--build)}
+.card-bless::before{
+  background:repeating-linear-gradient(180deg,var(--bless) 0 6px,transparent 6px 11px);
+}
+
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.card-name{
+  font-family:var(--f-display);font-size:16.5px;font-weight:600;letter-spacing:-.01em;
+  background:none;border:0;padding:0;text-align:left;line-height:1.25;
+}
+.card-bless .card-name{font-weight:500}
+/* the name button is the card's hit area; the link inside rides above it */
+.card-name::after{content:"";position:absolute;inset:0;border-radius:3px}
+.card-name:focus-visible{outline:none}
+.card-name:focus-visible::after{outline:2px solid var(--build);outline-offset:2px}
+.card-bless .card-name:focus-visible::after{outline-color:var(--bless)}
+.card:has(.card-name:hover){border-color:var(--rule-strong)}
+.meta a{position:relative;z-index:1;text-decoration:none;border-bottom:1px solid var(--rule-strong)}
+.meta a:hover{color:var(--ink);border-bottom-color:var(--ink-3)}
+.card-what{color:var(--ink-2);font-size:13.5px;margin-top:1px}
+
+.pips{display:flex;gap:2px;flex:none;padding-top:6px}
+.pip{width:7px;height:7px;border:1px solid var(--rule-strong);border-radius:1px}
+.card-build .pip-on{background:var(--build);border-color:var(--build)}
+.card-bless .pip-on{background:var(--bless);border-color:var(--bless)}
+
+.part{margin-top:11px}
+.part-label{
+  font-family:var(--f-mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+  display:block;margin-bottom:1px;
+}
+.card-build .part-label{color:var(--build)}
+.card-bless .part-label{color:var(--bless)}
+.part-text{font-size:13.5px;color:var(--ink)}
+
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-top:12px}
+.chip{
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+  border:1px solid var(--rule-strong);border-radius:2px;padding:1.5px 6px;color:var(--ink-2);
+}
+.chip-paused{opacity:.6}
+.meta-item{font-size:12px;color:var(--ink-3)}
+.meta-item .num{font-size:11.5px}
+.stale{color:var(--alert);font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;
+  display:inline-flex;align-items:center;gap:5px}
+.stale::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--alert);flex:none}
+.next{
+  margin-top:11px;padding-top:10px;border-top:1px solid var(--rule);
+  font-size:13px;color:var(--ink-2);display:flex;gap:8px;
+}
+.next .arrow{color:var(--ink-3);flex:none}
+
+.empty{
+  border:1px dashed var(--rule-strong);border-radius:3px;padding:22px 18px;
+  color:var(--ink-3);font-size:13.5px;text-align:center;
+}
+.add-row{margin-top:12px}
+
+/* ---------- ledger ---------- */
+.ledger-scroll{overflow-x:auto;margin-top:24px;border:1px solid var(--rule);border-radius:3px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:940px;font-size:13.5px}
+thead th{
+  position:sticky;top:0;background:var(--surface-2);
+  font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-2);font-weight:500;text-align:left;
+  padding:9px 12px;border-bottom:1px solid var(--rule-strong);white-space:nowrap;
+}
+thead th button{background:none;border:0;padding:0;font:inherit;letter-spacing:inherit;color:inherit;text-transform:inherit}
+thead th button:hover{color:var(--ink)}
+tbody td{padding:11px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--surface-2)}
+.t-name{font-family:var(--f-display);font-weight:600;font-size:14.5px}
+.t-name button{background:none;border:0;padding:0;font:inherit;text-align:left}
+.t-name button:hover{text-decoration:underline;text-underline-offset:3px}
+.t-posture{white-space:nowrap;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase}
+.t-build{color:var(--build)}
+.t-bless{color:var(--bless)}
+.t-num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.t-dim{color:var(--ink-3)}
+
+/* ---------- drawer + sheets ---------- */
+.scrim{
+  position:fixed;inset:0;background:rgba(12,20,18,.42);z-index:40;
+  opacity:0;pointer-events:none;transition:opacity .2s ease;
+}
+.scrim[data-open="true"]{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;width:min(430px,100vw);z-index:50;
+  background:var(--surface);border-left:1px solid var(--rule-strong);box-shadow:var(--drawer-shadow);
+  transform:translateX(100%);transition:transform .24s cubic-bezier(.32,.72,0,1);
+  display:flex;flex-direction:column;
+}
+.drawer[data-open="true"]{transform:none}
+.drawer-head{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:18px 22px 14px;border-bottom:1px solid var(--rule);
+}
+.drawer-head h2{font-size:19px}
+.drawer-body{flex:1 1 auto;min-height:0;overflow-y:auto;padding:20px 22px 26px;display:flex;flex-direction:column;gap:17px}
+.drawer-foot{
+  display:flex;align-items:center;gap:10px;padding:14px 22px;
+  border-top:1px solid var(--rule);background:var(--surface-2);
+}
+.f{display:flex;flex-direction:column;gap:5px}
+.f label{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.f .hint{font-size:12px;color:var(--ink-3);font-style:italic;font-family:var(--f-display)}
+.f input,.f select,.f textarea{
+  background:var(--paper);border:1px solid var(--rule-strong);border-radius:3px;
+  padding:8px 10px;font-size:14px;width:100%;
+}
+.f textarea{resize:vertical;min-height:74px;line-height:1.5}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+.posture-pick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.posture-pick button{
+  border:1px solid var(--rule-strong);background:var(--paper);border-radius:3px;
+  padding:9px 10px;text-align:left;line-height:1.35;
+}
+.posture-pick .pk-title{font-family:var(--f-display);font-weight:600;font-size:14.5px;display:block}
+.posture-pick .pk-sub{font-size:11.5px;color:var(--ink-3);display:block}
+.posture-pick button[aria-pressed="true"][data-posture="building"]{border-color:var(--build);background:var(--build-soft)}
+.posture-pick button[aria-pressed="true"][data-posture="building"] .pk-title{color:var(--build)}
+.posture-pick button[aria-pressed="true"][data-posture="blessing"]{border-color:var(--bless);background:var(--bless-soft)}
+.posture-pick button[aria-pressed="true"][data-posture="blessing"] .pk-title{color:var(--bless)}
+
+.weight-pick{display:flex;align-items:center;gap:6px}
+.weight-pick button{
+  width:34px;height:30px;border:1px solid var(--rule-strong);background:var(--paper);
+  border-radius:3px;font-family:var(--f-mono);font-size:12px;color:var(--ink-3);
+}
+.weight-pick button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.weight-note{font-size:12px;color:var(--ink-3);font-style:italic;font-family:var(--f-display);margin-left:4px}
+
+.sheet{
+  position:fixed;z-index:50;left:50%;top:50%;transform:translate(-50%,-48%) scale(.99);
+  width:min(660px,calc(100vw - 40px));max-height:min(78vh,760px);
+  background:var(--surface);border:1px solid var(--rule-strong);border-radius:4px;
+  box-shadow:0 40px 90px -40px rgba(12,20,18,.6);
+  display:flex;flex-direction:column;
+  opacity:0;pointer-events:none;transition:opacity .18s ease, transform .18s ease;
+}
+.sheet[data-open="true"]{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px 12px;border-bottom:1px solid var(--rule)}
+.sheet-head h2{font-size:18px}
+.sheet-body{flex:1 1 auto;min-height:0;overflow-y:auto;padding:16px 20px 20px;display:flex;flex-direction:column;gap:14px}
+.sheet-body textarea{
+  width:100%;flex:1 1 auto;min-height:230px;background:var(--paper);border:1px solid var(--rule);border-radius:3px;
+  padding:12px;font-family:var(--f-mono);font-size:12px;line-height:1.65;resize:vertical;
+}
+.sheet-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.status-msg{font-size:12.5px;color:var(--build);font-weight:500}
+
+.danger{color:var(--alert)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media(max-width:620px){
+  .wrap{padding:0 18px}
+  .mast-id h1{font-size:24px}
+  .load{min-width:100%}
+  .f-row{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none !important;animation:none !important}
+}
+</style>
+
+<header class="masthead">
+  <div class="wrap mast-inner">
+    <div class="mast-id">
+      <h1>Building <span class="amp">&amp;</span> Blessing</h1>
+      <p class="mast-sub">A standing account of what you carry, and what you back.</p>
+    </div>
+    <div class="load" id="load"></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="toolbar">
+    <div class="seg" role="tablist" aria-label="View">
+      <button role="tab" id="tab-registers" aria-selected="true" data-view="registers">Registers</button>
+      <button role="tab" id="tab-ledger" aria-selected="false" data-view="ledger">Ledger</button>
+    </div>
+    <input id="search" class="field" type="search" placeholder="Search names, parts, people" aria-label="Search entries">
+    <select id="filter-status" class="field" aria-label="Filter by status">
+      <option value="">Every status</option>
+    </select>
+    <div class="spacer"></div>
+    <button class="btn" id="btn-share">Share &amp; export</button>
+    <button class="btn btn-solid" id="btn-new">Add an entry</button>
+  </div>
+
+  <div id="notice-slot"></div>
+  <main id="view" aria-live="polite"></main>
+</div>
+
+<div class="scrim" id="scrim"></div>
+
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" aria-hidden="true">
+  <div class="drawer-head">
+    <h2 id="drawer-title">Entry</h2>
+    <button class="btn btn-quiet" id="drawer-close" aria-label="Close editor">Close</button>
+  </div>
+  <div class="drawer-body">
+    <div class="f">
+      <label>Posture</label>
+      <div class="posture-pick" id="pick-posture">
+        <button type="button" data-posture="building" aria-pressed="false">
+          <span class="pk-title">Building</span>
+          <span class="pk-sub">Mine to carry</span>
+        </button>
+        <button type="button" data-posture="blessing" aria-pressed="false">
+          <span class="pk-title">Blessing</span>
+          <span class="pk-sub">I lend weight</span>
+        </button>
+      </div>
+    </div>
+    <div class="f">
+      <label for="f-name">Name</label>
+      <input id="f-name" type="text" placeholder="The thing itself">
+    </div>
+    <div class="f">
+      <label for="f-what">What it is</label>
+      <input id="f-what" type="text" placeholder="One line, for someone who has never heard of it">
+    </div>
+    <div class="f">
+      <label for="f-part">My part</label>
+      <textarea id="f-part" placeholder="Be specific. What breaks if you stop showing up?"></textarea>
+      <span class="hint" id="part-hint">Name the accountability, not the activity.</span>
+    </div>
+    <div class="f">
+      <label>Weight — what it costs you</label>
+      <div class="weight-pick" id="pick-weight">
+        <button type="button" data-weight="1" aria-pressed="false">1</button>
+        <button type="button" data-weight="2" aria-pressed="false">2</button>
+        <button type="button" data-weight="3" aria-pressed="false">3</button>
+        <button type="button" data-weight="4" aria-pressed="false">4</button>
+        <button type="button" data-weight="5" aria-pressed="false">5</button>
+        <span class="weight-note" id="weight-note"></span>
+      </div>
+    </div>
+    <div class="f-row">
+      <div class="f">
+        <label for="f-status">Status</label>
+        <select id="f-status"></select>
+      </div>
+      <div class="f">
+        <label for="f-touched">Last touched</label>
+        <input id="f-touched" type="date">
+      </div>
+    </div>
+    <div class="f">
+      <label for="f-people">Who else is in it</label>
+      <input id="f-people" type="text" placeholder="Names, team, nobody yet">
+    </div>
+    <div class="f">
+      <label for="f-next">Next move</label>
+      <input id="f-next" type="text" placeholder="The one thing that would move this">
+    </div>
+    <div class="f">
+      <label for="f-link">Link</label>
+      <input id="f-link" type="url" placeholder="https://">
+    </div>
+  </div>
+  <div class="drawer-foot">
+    <button class="btn btn-solid" id="drawer-save">Save</button>
+    <button class="btn btn-quiet" id="drawer-cancel">Cancel</button>
+    <div class="spacer"></div>
+    <button class="btn btn-quiet danger" id="drawer-delete">Delete</button>
+  </div>
+</aside>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" aria-hidden="true">
+  <div class="sheet-head">
+    <h2 id="sheet-title">Share &amp; export</h2>
+    <button class="btn btn-quiet" id="sheet-close" aria-label="Close">Close</button>
+  </div>
+  <div class="sheet-body">
+    <div class="sheet-actions">
+      <div class="seg" role="tablist" aria-label="Export format">
+        <button role="tab" id="fmt-summary" aria-selected="true" data-fmt="summary">Readable summary</button>
+        <button role="tab" id="fmt-data" aria-selected="false" data-fmt="data">Data (JSON)</button>
+      </div>
+      <div class="spacer"></div>
+      <span class="status-msg" id="sheet-status"></span>
+      <button class="btn" id="sheet-copy">Copy</button>
+      <button class="btn" id="sheet-import" hidden>Replace my entries with this</button>
+    </div>
+    <textarea id="sheet-text" spellcheck="false" aria-label="Export text"></textarea>
+  </div>
+</div>
+
+<script id="state" type="application/json">{"v":1,"entries":null}</script>
+
+<script>
+(function () {
+  "use strict";
+
+  var PRISTINE = "<!doctype html>\n" + document.documentElement.outerHTML;
+  var STORE_KEY = "building-and-blessing/v1";
+
+  var STATUSES = ["Starting", "Active", "Steady", "Winding down", "Paused"];
+  var WEIGHT_NOTES = {
+    1: "a light touch",
+    2: "a real slice of a week",
+    3: "a steady draw",
+    4: "one of the big ones",
+    5: "most of what I've got"
+  };
+  var STALE_DAYS = 60;
+
+  var POSTURE = {
+    building: {
+      key: "building",
+      title: "Building",
+      eyebrow: "Building",
+      question: "What am I responsible for?",
+      claim: "Mine to carry. If it stalls, it stalls with me.",
+      empty: "Nothing here yet. What would go wrong if you walked away tomorrow?"
+    },
+    blessing: {
+      key: "blessing",
+      title: "Blessing",
+      eyebrow: "Blessing",
+      question: "What am I contributing to?",
+      claim: "Someone else's to carry. I lend weight, not ownership.",
+      empty: "Nothing here yet. Whose work do you show up for without owning it?"
+    }
+  };
+
+  var DEMO = [
+    { posture: "building", name: "Q3 platform migration", what: "Moving the last two services off the old runtime.",
+      part: "Accountable for the sequencing and for the call to ship. If it slips past October, that is my slip.",
+      weight: 5, status: "Active", people: "Platform team, plus Dev on release", next: "Get the rollback plan reviewed",
+      link: "", touched: -3 },
+    { posture: "building", name: "Hiring loop for the two open roles", what: "Sourcing through offer for both backend openings.",
+      part: "I own the process end to end — scorecards, debriefs, the final yes. Nobody else is going to close these.",
+      weight: 4, status: "Active", people: "Recruiting partner", next: "Write the take-home rubric",
+      link: "", touched: -9 },
+    { posture: "building", name: "On-call runbook", what: "The document the next person reads at 3am.",
+      part: "Sole author and maintainer. It is out of date because I have not touched it.",
+      weight: 2, status: "Paused", people: "Nobody yet", next: "Rewrite the escalation section",
+      link: "", touched: -84 },
+    { posture: "blessing", name: "Design system guild", what: "A cross-team group setting shared component standards.",
+      part: "I review proposals and defend the headcount in planning. Nadia owns the roadmap — I do not.",
+      weight: 1, status: "Steady", people: "Nadia leads", next: "Read the spacing RFC",
+      link: "", touched: -14 },
+    { posture: "blessing", name: "Neighborhood tool library", what: "A shared shed of borrowable tools on the block.",
+      part: "I cover the insurance and take two Saturdays a month on the desk. I do not set policy.",
+      weight: 2, status: "Steady", people: "Block association", next: "Renew the policy before November",
+      link: "", touched: -21 },
+    { posture: "blessing", name: "Ana's promotion case", what: "The packet going to the fall calibration.",
+      part: "I write the sponsor letter and argue the case in the room. The work is theirs; the advocacy is mine.",
+      weight: 1, status: "Winding down", people: "Ana, plus the calibration panel", next: "Send the draft letter for review",
+      link: "", touched: -6 }
+  ];
+
+  /* ---------------- utilities ---------------- */
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function uid() {
+    return "e" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+  }
+  function todayISO() {
+    var d = new Date();
+    return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+  }
+  function shiftISO(days) {
+    var d = new Date();
+    d.setDate(d.getDate() + days);
+    return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+  }
+  function daysSince(iso) {
+    if (!iso) return null;
+    var then = new Date(iso + "T00:00:00");
+    if (isNaN(then.getTime())) return null;
+    var now = new Date(todayISO() + "T00:00:00");
+    return Math.round((now - then) / 86400000);
+  }
+  function relDays(iso) {
+    var d = daysSince(iso);
+    if (d === null) return "never";
+    if (d <= 0) return "today";
+    if (d === 1) return "yesterday";
+    if (d < 45) return d + "d ago";
+    if (d < 365) return Math.round(d / 30) + "mo ago";
+    return Math.floor(d / 365) + "y ago";
+  }
+  function safeLink(url) {
+    url = String(url || "").trim();
+    if (!url) return "";
+    return /^https?:\/\//i.test(url) ? url : "";
+  }
+  function clampWeight(n) {
+    n = parseInt(n, 10);
+    if (isNaN(n)) return 3;
+    return Math.min(5, Math.max(1, n));
+  }
+
+  /* ---------------- state ---------------- */
+
+  function seed() {
+    return {
+      v: 1,
+      demo: true,
+      entries: DEMO.map(function (d) {
+        var e = {};
+        for (var k in d) if (Object.prototype.hasOwnProperty.call(d, k)) e[k] = d[k];
+        e.id = uid();
+        e.touched = shiftISO(d.touched);
+        return e;
+      })
+    };
+  }
+
+  function normalize(raw) {
+    if (!raw || !Array.isArray(raw.entries)) return null;
+    return {
+      v: 1,
+      demo: !!raw.demo,
+      entries: raw.entries.map(function (e) {
+        e = e || {};
+        return {
+          id: e.id || uid(),
+          posture: e.posture === "blessing" ? "blessing" : "building",
+          name: String(e.name || "Untitled"),
+          what: String(e.what || ""),
+          part: String(e.part || ""),
+          weight: clampWeight(e.weight),
+          status: STATUSES.indexOf(e.status) >= 0 ? e.status : "Active",
+          people: String(e.people || ""),
+          next: String(e.next || ""),
+          link: String(e.link || ""),
+          touched: /^\d{4}-\d{2}-\d{2}$/.test(e.touched) ? e.touched : todayISO()
+        };
+      })
+    };
+  }
+
+  function loadState() {
+    var embedded = null;
+    try {
+      var node = document.getElementById("state");
+      embedded = normalize(JSON.parse(node.textContent || "{}"));
+    } catch (err) { embedded = null; }
+    if (embedded) return embedded;
+
+    var local = null;
+    try {
+      var stored = localStorage.getItem(STORE_KEY);
+      if (stored) local = normalize(JSON.parse(stored));
+    } catch (err) { local = null; }
+    if (local) return local;
+
+    return seed();
+  }
+
+  var state = loadState();
+  var view = "registers";
+  var query = "";
+  var statusFilter = "";
+  var ledgerSort = { key: "weight", dir: -1 };
+  var editingId = null;
+  var draft = null;
+  var sheetFmt = "summary";
+
+  /* ---------------- persistence ---------------- */
+
+  var artifactApi = null;
+  if (window.claude && typeof window.claude.use === "function") {
+    Promise.resolve(window.claude.use("artifact")).then(function (api) {
+      artifactApi = api || null;
+    }).catch(function () { artifactApi = null; });
+  }
+
+  // The tag markers are assembled from pieces so this source never contains a
+  // second copy of them — the search below can only find the real state block.
+  var STATE_OPEN = '<script id="state" type="application/' + 'json">';
+  var STATE_CLOSE = "<" + "/script>";
+
+  function buildDocument() {
+    var start = PRISTINE.indexOf(STATE_OPEN);
+    if (start < 0) return PRISTINE;
+    var from = start + STATE_OPEN.length;
+    var end = PRISTINE.indexOf(STATE_CLOSE, from);
+    if (end < 0) return PRISTINE;
+    var json = JSON.stringify({ v: 1, demo: state.demo, entries: state.entries })
+      .replace(/</g, "\\u003c");
+    return PRISTINE.slice(0, from) + json + PRISTINE.slice(end);
+  }
+
+  var publishTimer = null;
+  function persist() {
+    try {
+      localStorage.setItem(STORE_KEY, JSON.stringify(state));
+    } catch (err) { /* private mode, quota — the page still works for this session */ }
+
+    if (publishTimer) clearTimeout(publishTimer);
+    publishTimer = setTimeout(function () {
+      if (!artifactApi) return;
+      try {
+        Promise.resolve(artifactApi.publish(buildDocument())).catch(function () {
+          /* conflict: another view published first and every view reloads to it */
+        });
+      } catch (err) { /* publishing is best effort; local copy already saved */ }
+    }, 800);
+  }
+
+  /* ---------------- derived ---------------- */
+
+  function visibleEntries() {
+    var q = query.trim().toLowerCase();
+    return state.entries.filter(function (e) {
+      if (statusFilter && e.status !== statusFilter) return false;
+      if (!q) return true;
+      return (e.name + " " + e.what + " " + e.part + " " + e.people + " " + e.next)
+        .toLowerCase().indexOf(q) >= 0;
+    });
+  }
+  function isStale(e) {
+    var d = daysSince(e.touched);
+    return d !== null && d >= STALE_DAYS;
+  }
+  function sumWeight(list) {
+    return list.reduce(function (a, e) { return a + e.weight; }, 0);
+  }
+
+  /* ---------------- rendering ---------------- */
+
+  function renderLoad() {
+    var all = state.entries;
+    var build = all.filter(function (e) { return e.posture === "building"; });
+    var bless = all.filter(function (e) { return e.posture === "blessing"; });
+    var wb = sumWeight(build), wl = sumWeight(bless), total = wb + wl;
+    var stale = all.filter(isStale).length;
+
+    var bar = total === 0
+      ? '<div class="load-bar"></div>'
+      : '<div class="load-bar" role="img" aria-label="' +
+          wb + ' of ' + total + ' units of weight are things you are building">' +
+          (wb ? '<span class="load-seg-build" style="flex:' + wb + '"></span>' : "") +
+          (wl ? '<span class="load-seg-bless" style="flex:' + wl + '"></span>' : "") +
+        "</div>";
+
+    var stats =
+      '<div class="load-stats">' +
+        "<span><b>" + total + "</b> units carried</span>" +
+        '<span class="k-build"><b>' + wb + "</b> building · " + build.length + "</span>" +
+        '<span class="k-bless"><b>' + wl + "</b> blessing · " + bless.length + "</span>" +
+        (stale
+          ? '<span class="k-stale"><b>' + stale + "</b> untouched " + STALE_DAYS + "d+</span>"
+          : "") +
+      "</div>";
+
+    document.getElementById("load").innerHTML = bar + stats;
+  }
+
+  function cardHTML(e) {
+    var pips = "";
+    for (var i = 1; i <= 5; i++) pips += '<span class="pip' + (i <= e.weight ? " pip-on" : "") + '"></span>';
+
+    var bits = [];
+    bits.push('<span class="chip' + (e.status === "Paused" ? " chip-paused" : "") + '">' + esc(e.status) + "</span>");
+    if (e.people) bits.push('<span class="meta-item">' + esc(e.people) + "</span>");
+    bits.push(
+      isStale(e)
+        ? '<span class="stale">untouched ' + daysSince(e.touched) + "d</span>"
+        : '<span class="meta-item">touched <span class="num">' + esc(relDays(e.touched)) + "</span></span>"
+    );
+    if (e.link) {
+      var href = safeLink(e.link);
+      if (href) {
+        bits.push('<a class="meta-item" href="' + esc(href) +
+          '" target="_blank" rel="noopener noreferrer">link &#8599;</a>');
+      }
+    }
+
+    var tone = e.posture === "building" ? "build" : "bless";
+    return '<div class="card card-' + tone + '">' +
+        '<div class="card-top">' +
+          "<div>" +
+            '<button type="button" class="card-name" data-id="' + esc(e.id) +
+              '">' + esc(e.name) + "</button>" +
+            (e.what ? '<div class="card-what">' + esc(e.what) + "</div>" : "") +
+          "</div>" +
+          '<div class="pips" role="img" aria-label="Weight ' + e.weight + ' of 5">' + pips + "</div>" +
+        "</div>" +
+        (e.part
+          ? '<div class="part"><span class="part-label">My part</span>' +
+            '<div class="part-text">' + esc(e.part) + "</div></div>"
+          : "") +
+        '<div class="meta">' + bits.join("") + "</div>" +
+        (e.next
+          ? '<div class="next"><span class="arrow">&#8594;</span><span>' + esc(e.next) + "</span></div>"
+          : "") +
+      "</div>";
+  }
+
+  function registerHTML(postureKey, list) {
+    var p = POSTURE[postureKey];
+    var weight = sumWeight(list);
+    var body = list.length
+      ? '<div class="reg-list">' + list.map(cardHTML).join("") + "</div>"
+      : '<div class="reg-list"><div class="empty">' + esc(p.empty) + "</div></div>";
+
+    var tone = postureKey === "building" ? "build" : "bless";
+    return '<section class="register register-' + tone + '">' +
+        '<div class="reg-head">' +
+          "<div>" +
+            '<span class="reg-eyebrow">' + esc(p.eyebrow) + "</span>" +
+            "<h2>" + esc(p.question) + "</h2>" +
+          "</div>" +
+          '<div class="reg-count">' + list.length + " · weight " + weight + "</div>" +
+        "</div>" +
+        '<p class="reg-claim">' + esc(p.claim) + "</p>" +
+        body +
+        '<div class="add-row"><button class="btn btn-quiet" data-add="' + postureKey + '">' +
+          "+ Add to " + esc(p.title.toLowerCase()) + "</button></div>" +
+      "</section>";
+  }
+
+  function renderRegisters() {
+    var list = visibleEntries();
+    document.getElementById("view").innerHTML =
+      '<div class="registers">' +
+        registerHTML("building", list.filter(function (e) { return e.posture === "building"; })) +
+        registerHTML("blessing", list.filter(function (e) { return e.posture === "blessing"; })) +
+      "</div>";
+  }
+
+  function renderLedger() {
+    var list = visibleEntries().slice();
+    var k = ledgerSort.key, dir = ledgerSort.dir;
+    list.sort(function (a, b) {
+      var av = a[k], bv = b[k];
+      if (k === "weight") return (av - bv) * dir;
+      if (k === "touched") return (String(av) < String(bv) ? -1 : String(av) > String(bv) ? 1 : 0) * dir;
+      return String(av).localeCompare(String(bv)) * dir;
+    });
+
+    function th(key, label, cls) {
+      var arrow = ledgerSort.key === key ? (ledgerSort.dir === 1 ? " ↑" : " ↓") : "";
+      return '<th class="' + (cls || "") + '"><button type="button" data-sort="' + key + '">' +
+        esc(label) + arrow + "</button></th>";
+    }
+
+    var rows = list.map(function (e) {
+      return "<tr>" +
+        '<td class="t-name"><button type="button" data-id="' + esc(e.id) + '">' + esc(e.name) + "</button>" +
+          (e.what ? '<div class="t-dim" style="font-family:var(--f-body);font-weight:400;font-size:12.5px">' +
+            esc(e.what) + "</div>" : "") + "</td>" +
+        '<td class="t-posture t-' + (e.posture === "building" ? "build" : "bless") + '">' +
+          esc(POSTURE[e.posture].title) + "</td>" +
+        "<td>" + (e.part ? esc(e.part) : '<span class="t-dim">&mdash;</span>') + "</td>" +
+        '<td class="t-num">' + e.weight + "</td>" +
+        "<td>" + esc(e.status) + "</td>" +
+        '<td class="t-num' + (isStale(e) ? " danger" : " t-dim") + '">' + esc(relDays(e.touched)) + "</td>" +
+        '<td class="t-dim">' + (e.people ? esc(e.people) : "&mdash;") + "</td>" +
+        "<td>" + (e.next ? esc(e.next) : '<span class="t-dim">&mdash;</span>') + "</td>" +
+      "</tr>";
+    }).join("");
+
+    document.getElementById("view").innerHTML =
+      '<div class="ledger-scroll"><table>' +
+        "<thead><tr>" +
+          th("name", "Name") +
+          th("posture", "Posture") +
+          "<th>My part</th>" +
+          th("weight", "Weight", "t-num") +
+          th("status", "Status") +
+          th("touched", "Touched") +
+          "<th>Who else</th>" +
+          "<th>Next move</th>" +
+        "</tr></thead>" +
+        "<tbody>" + (rows || '<tr><td colspan="8" class="t-dim">Nothing matches that.</td></tr>') + "</tbody>" +
+      "</table></div>";
+  }
+
+  function renderNotice() {
+    var slot = document.getElementById("notice-slot");
+    if (!state.demo) { slot.innerHTML = ""; return; }
+    slot.innerHTML =
+      '<div class="notice"><span>These are <em>example entries</em>, here to show the shape of the thing. ' +
+      "Edit them, or wipe the slate and put your own in.</span>" +
+      '<button class="btn" id="clear-demo">Clear examples</button></div>';
+  }
+
+  function render() {
+    renderLoad();
+    renderNotice();
+    if (view === "registers") renderRegisters(); else renderLedger();
+    document.getElementById("tab-registers").setAttribute("aria-selected", String(view === "registers"));
+    document.getElementById("tab-ledger").setAttribute("aria-selected", String(view === "ledger"));
+  }
+
+  /* ---------------- drawer ---------------- */
+
+  function setPostureUI(posture) {
+    Array.prototype.forEach.call(document.querySelectorAll("#pick-posture button"), function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.posture === posture));
+    });
+    document.getElementById("part-hint").textContent = posture === "building"
+      ? "Name the accountability, not the activity. What breaks if you stop?"
+      : "Name what you lend — and name who actually owns it.";
+  }
+  function setWeightUI(weight) {
+    Array.prototype.forEach.call(document.querySelectorAll("#pick-weight button"), function (b) {
+      b.setAttribute("aria-pressed", String(parseInt(b.dataset.weight, 10) === weight));
+    });
+    document.getElementById("weight-note").textContent = WEIGHT_NOTES[weight] || "";
+  }
+
+  function openDrawer(entry, isNew) {
+    draft = {
+      id: entry.id, posture: entry.posture, name: entry.name, what: entry.what, part: entry.part,
+      weight: entry.weight, status: entry.status, people: entry.people, next: entry.next,
+      link: entry.link, touched: entry.touched
+    };
+    editingId = isNew ? null : entry.id;
+
+    document.getElementById("drawer-title").textContent = isNew ? "New entry" : "Edit entry";
+    document.getElementById("f-name").value = draft.name;
+    document.getElementById("f-what").value = draft.what;
+    document.getElementById("f-part").value = draft.part;
+    document.getElementById("f-status").value = draft.status;
+    document.getElementById("f-touched").value = draft.touched;
+    document.getElementById("f-people").value = draft.people;
+    document.getElementById("f-next").value = draft.next;
+    document.getElementById("f-link").value = draft.link;
+    setPostureUI(draft.posture);
+    setWeightUI(draft.weight);
+    document.getElementById("drawer-delete").hidden = !!isNew;
+
+    document.getElementById("drawer").dataset.open = "true";
+    document.getElementById("drawer").setAttribute("aria-hidden", "false");
+    document.getElementById("scrim").dataset.open = "true";
+    document.getElementById("f-name").focus();
+  }
+
+  function closeDrawer() {
+    document.getElementById("drawer").dataset.open = "false";
+    document.getElementById("drawer").setAttribute("aria-hidden", "true");
+    if (document.getElementById("sheet").dataset.open !== "true") {
+      document.getElementById("scrim").dataset.open = "false";
+    }
+    draft = null;
+    editingId = null;
+  }
+
+  function saveDrawer() {
+    if (!draft) return;
+    draft.name = document.getElementById("f-name").value.trim() || "Untitled";
+    draft.what = document.getElementById("f-what").value.trim();
+    draft.part = document.getElementById("f-part").value.trim();
+    draft.status = document.getElementById("f-status").value;
+    draft.touched = document.getElementById("f-touched").value || todayISO();
+    draft.people = document.getElementById("f-people").value.trim();
+    draft.next = document.getElementById("f-next").value.trim();
+    draft.link = document.getElementById("f-link").value.trim();
+
+    if (editingId) {
+      state.entries = state.entries.map(function (e) { return e.id === editingId ? draft : e; });
+    } else {
+      state.entries.push(draft);
+    }
+    state.demo = false;
+    closeDrawer();
+    persist();
+    render();
+  }
+
+  function deleteEntry() {
+    if (!editingId) return;
+    state.entries = state.entries.filter(function (e) { return e.id !== editingId; });
+    closeDrawer();
+    persist();
+    render();
+  }
+
+  function blankEntry(posture) {
+    return {
+      id: uid(), posture: posture, name: "", what: "", part: "", weight: 3,
+      status: "Starting", people: "", next: "", link: "", touched: todayISO()
+    };
+  }
+
+  /* ---------------- share sheet ---------------- */
+
+  function summaryText() {
+    var lines = [];
+    ["building", "blessing"].forEach(function (key) {
+      var p = POSTURE[key];
+      var list = state.entries.filter(function (e) { return e.posture === key; });
+      lines.push(p.title.toUpperCase() + " — " + p.question);
+      lines.push(p.claim);
+      lines.push("");
+      if (!list.length) {
+        lines.push("  (nothing recorded)");
+      } else {
+        list.slice().sort(function (a, b) { return b.weight - a.weight; }).forEach(function (e) {
+          lines.push("  " + e.name + "  [weight " + e.weight + "/5 · " + e.status + "]");
+          if (e.what) lines.push("    " + e.what);
+          if (e.part) lines.push("    My part: " + e.part);
+          if (e.people) lines.push("    With: " + e.people);
+          if (e.next) lines.push("    Next: " + e.next);
+          lines.push("");
+        });
+      }
+      lines.push("");
+    });
+    var total = sumWeight(state.entries);
+    lines.push("—");
+    lines.push("Carrying " + total + " units across " + state.entries.length + " commitments.");
+    return lines.join("\n").trim() + "\n";
+  }
+
+  function setSheetFmt(fmt) {
+    sheetFmt = fmt;
+    document.getElementById("fmt-summary").setAttribute("aria-selected", String(fmt === "summary"));
+    document.getElementById("fmt-data").setAttribute("aria-selected", String(fmt === "data"));
+    document.getElementById("sheet-import").hidden = fmt !== "data";
+    document.getElementById("sheet-text").value = fmt === "summary"
+      ? summaryText()
+      : JSON.stringify({ v: 1, entries: state.entries }, null, 2);
+    document.getElementById("sheet-status").textContent = "";
+  }
+
+  function openSheet() {
+    setSheetFmt(sheetFmt);
+    document.getElementById("sheet").dataset.open = "true";
+    document.getElementById("sheet").setAttribute("aria-hidden", "false");
+    document.getElementById("scrim").dataset.open = "true";
+    document.getElementById("sheet-copy").focus();
+  }
+  function closeSheet() {
+    document.getElementById("sheet").dataset.open = "false";
+    document.getElementById("sheet").setAttribute("aria-hidden", "true");
+    if (document.getElementById("drawer").dataset.open !== "true") {
+      document.getElementById("scrim").dataset.open = "false";
+    }
+  }
+
+  function flash(msg) {
+    var el = document.getElementById("sheet-status");
+    el.textContent = msg;
+    setTimeout(function () { if (el.textContent === msg) el.textContent = ""; }, 2600);
+  }
+
+  function copyOut() {
+    var ta = document.getElementById("sheet-text");
+    ta.select();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(ta.value).then(
+        function () { flash("Copied."); },
+        function () { flash("Press ⌘C / Ctrl+C to copy the selection."); }
+      );
+    } else {
+      flash("Press ⌘C / Ctrl+C to copy the selection.");
+    }
+  }
+
+  function importIn() {
+    var parsed;
+    try {
+      parsed = normalize(JSON.parse(document.getElementById("sheet-text").value));
+    } catch (err) {
+      parsed = null;
+    }
+    if (!parsed) { flash("That is not valid entry data — paste JSON exported from here."); return; }
+    state = parsed;
+    state.demo = false;
+    persist();
+    render();
+    flash("Replaced with " + state.entries.length + " entries.");
+  }
+
+  /* ---------------- wiring ---------------- */
+
+  var statusSelect = document.getElementById("f-status");
+  var filterSelect = document.getElementById("filter-status");
+  STATUSES.forEach(function (s) {
+    var a = document.createElement("option"); a.value = s; a.textContent = s; statusSelect.appendChild(a);
+    var b = document.createElement("option"); b.value = s; b.textContent = s; filterSelect.appendChild(b);
+  });
+
+  document.getElementById("view").addEventListener("click", function (ev) {
+    var add = ev.target.closest("[data-add]");
+    if (add) { openDrawer(blankEntry(add.dataset.add), true); return; }
+
+    var sort = ev.target.closest("[data-sort]");
+    if (sort) {
+      var key = sort.dataset.sort;
+      if (ledgerSort.key === key) ledgerSort.dir *= -1;
+      else ledgerSort = { key: key, dir: key === "weight" ? -1 : 1 };
+      render();
+      return;
+    }
+
+    if (ev.target.closest("a")) return;
+    var hit = ev.target.closest("[data-id]");
+    if (!hit) return;
+    var entry = state.entries.filter(function (e) { return e.id === hit.dataset.id; })[0];
+    if (entry) openDrawer(entry, false);
+  });
+
+  document.getElementById("notice-slot").addEventListener("click", function (ev) {
+    if (!ev.target.closest("#clear-demo")) return;
+    state = { v: 1, demo: false, entries: [] };
+    persist();
+    render();
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll(".seg [data-view]"), function (b) {
+    b.addEventListener("click", function () { view = b.dataset.view; render(); });
+  });
+
+  document.getElementById("search").addEventListener("input", function (ev) {
+    query = ev.target.value; render();
+  });
+  filterSelect.addEventListener("change", function (ev) {
+    statusFilter = ev.target.value; render();
+  });
+
+  document.getElementById("btn-new").addEventListener("click", function () {
+    openDrawer(blankEntry("building"), true);
+  });
+  document.getElementById("btn-share").addEventListener("click", openSheet);
+
+  document.getElementById("pick-posture").addEventListener("click", function (ev) {
+    var b = ev.target.closest("[data-posture]");
+    if (!b || !draft) return;
+    draft.posture = b.dataset.posture;
+    setPostureUI(draft.posture);
+  });
+  document.getElementById("pick-weight").addEventListener("click", function (ev) {
+    var b = ev.target.closest("[data-weight]");
+    if (!b || !draft) return;
+    draft.weight = clampWeight(b.dataset.weight);
+    setWeightUI(draft.weight);
+  });
+
+  document.getElementById("drawer-save").addEventListener("click", saveDrawer);
+  document.getElementById("drawer-cancel").addEventListener("click", closeDrawer);
+  document.getElementById("drawer-close").addEventListener("click", closeDrawer);
+  document.getElementById("drawer-delete").addEventListener("click", deleteEntry);
+
+  document.getElementById("sheet-close").addEventListener("click", closeSheet);
+  document.getElementById("sheet-copy").addEventListener("click", copyOut);
+  document.getElementById("sheet-import").addEventListener("click", importIn);
+  Array.prototype.forEach.call(document.querySelectorAll("[data-fmt]"), function (b) {
+    b.addEventListener("click", function () { setSheetFmt(b.dataset.fmt); });
+  });
+
+  document.getElementById("scrim").addEventListener("click", function () {
+    closeDrawer(); closeSheet();
+  });
+  document.addEventListener("keydown", function (ev) {
+    if (ev.key === "Escape") { closeDrawer(); closeSheet(); }
+    if ((ev.metaKey || ev.ctrlKey) && ev.key === "Enter" && draft) saveDrawer();
+  });
+
+  render();
+})();
+</script>

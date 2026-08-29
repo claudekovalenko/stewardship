@@ -7,40 +7,40 @@ One page. Two lists. Nothing else.
 - **Mine to carry** — if it stalls, it stalls with me.
 - **Blessing** — someone else carries it. Nice to get to, never ahead of the above.
 
-## One field, seen at once
+## One field, with a key around it
 
-Not a list. Every item is a bubble in a single packed composition, so the whole
-of it is one glance.
+Not a list. Every item is a bubble in a single packed composition, taken in at
+one glance.
 
-| | |
-|---|---|
-| **Deep** | solid — formation, these do not finish |
-| **Current** | tinted — live responsibilities with edges |
-| **Blessing** | outlined warm — I back it, someone else owns it |
-| **Enjoyment** | outlined amber — for gladness, no other reason |
-| **Future** | dotted — not mine yet, preparing |
+**The bubble carries one or two words.** The fuller phrase lives in a key ringing
+the outside, joined to its bubble by a leader line — so the field stays quiet and
+scannable while nothing is lost. An item whose full phrase says no more than its
+label (`USC`, `MLS`, `Purity`) gets no key entry at all.
 
-Size carries meaning twice over: a tier floor (Deep bubbles are never small) plus
-however much room the words need. Each circle is sized to its own wrapped label,
-so text is legible at a fixed size rather than shrunk to fit a fixed circle.
+| Tier | | |
+|---|---|---|
+| **Deep** | solid, largest | Formation. These do not finish. |
+| **Current** | tinted | Live responsibilities with edges. |
+| **Blessing** | warm outline | I back it. Someone else owns it. |
+| **Enjoyment** | amber outline | For gladness. No other reason. |
+| **Future** | dotted | Not mine yet. Preparing. |
 
-**Layout.** Labels are measured on a canvas, wrapped into the line count that
-yields the smallest enclosing circle, then packed largest-first along a spiral
-from the centre in tier order — so what you carry settles in the middle and the
-rest gathers around it. No layout library; the packing is about forty lines.
+**Layout.** Labels are measured on a canvas, then circles pack largest-first
+along a spiral from the centre in tier order, so what is carried settles in the
+middle. Key entries are split left and right by which half of the field their
+bubble sits in, distributed evenly down each side, and joined by a two-segment
+leader drawn *behind* the bubbles. No layout library; about eighty lines.
 
-The spiral's aspect ratio follows the viewport: wide on a desktop, tall and
-narrow on a phone. This matters more than it sounds — a wide composition scaled
-into a 390px screen rendered labels at 7.6px. Narrowing the spiral and tightening
-the tier floors on small screens brings that back to 15.6px without touching the
-font size.
+The spiral's aspect ratio follows the viewport — wide on a desktop, tall and
+narrow on a phone, where the ring is dropped for a two-column key beneath the
+field. A wide composition scaled into a 390px screen renders type at a few
+pixels; this keeps it at 13px+.
 
-**The toggle** — All · Carrying · Blessing — fades the other side to 16% rather
-than removing it. The composition never reflows, so the shape of the whole stays
-put while you look at one half of it.
+**The toggle** — All · Carrying · Blessing — fades the other side, key and
+leaders included, to 14% rather than removing it. The composition never reflows.
 
-**Tap a bubble** to open it: rename, add a note, move it to any tier in one tap,
-or remove it.
+**Tap a bubble or its key entry** to edit the short label, the key phrase and the
+note separately, move it to any tier in one tap, or remove it.
 
 ## Live
 

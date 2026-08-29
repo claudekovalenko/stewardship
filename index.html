@@ -15,7 +15,7 @@
 <style>
 :root{
   --paper:#F3F1EC;
-  --glow:#E7E9E2;
+  --glow:#E8EAE3;
   --ink:#1A1D1B;
   --ink-2:#565E59;
   --ink-3:#8B938E;
@@ -34,14 +34,14 @@
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --paper:#0E1210; --glow:#161C19; --ink:#E9EBE5; --ink-2:#A7AFA9; --ink-3:#79817C;
+    --paper:#0E1210; --glow:#171D1A; --ink:#E9EBE5; --ink-2:#A7AFA9; --ink-3:#79817C;
     --rule:#222825; --rule-2:#333A36;
     --deep:#4FB69C; --current:#3E8F7A; --blessing:#C79245; --joy:#D9A85B; --future:#8E8A76;
     --on-deep:#08100D;
   }
 }
 :root[data-theme="dark"]{
-  --paper:#0E1210; --glow:#161C19; --ink:#E9EBE5; --ink-2:#A7AFA9; --ink-3:#79817C;
+  --paper:#0E1210; --glow:#171D1A; --ink:#E9EBE5; --ink-2:#A7AFA9; --ink-3:#79817C;
   --rule:#222825; --rule-2:#333A36;
   --deep:#4FB69C; --current:#3E8F7A; --blessing:#C79245; --joy:#D9A85B; --future:#8E8A76;
   --on-deep:#08100D;
@@ -52,100 +52,111 @@ body{
   background:var(--paper);color:var(--ink);
   font-family:var(--f-ui);font-size:15px;line-height:1.5;
   -webkit-font-smoothing:antialiased;
-  margin:0;padding:0 18px 60px;
-  background-image:radial-gradient(ellipse 80% 55% at 50% 34%, var(--glow), transparent 70%);
+  margin:0;padding:0 18px 56px;
+  background-image:radial-gradient(ellipse 76% 52% at 50% 36%, var(--glow), transparent 70%);
 }
-.wrap{max-width:860px;margin:0 auto}
+.wrap{max-width:1000px;margin:0 auto}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:1.5px solid var(--current);outline-offset:3px;border-radius:3px}
 
-/* ---------- masthead ---------- */
 header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
-  gap:14px 22px;padding:34px 0 18px}
-h1{font-family:var(--f-display);font-size:27px;font-weight:600;margin:0;letter-spacing:-.02em}
+  gap:12px 22px;padding:32px 0 10px}
+h1{font-family:var(--f-display);font-size:26px;font-weight:600;margin:0;letter-spacing:-.02em}
 h1 .amp{font-style:italic;font-weight:400;color:var(--ink-3);padding:0 .04em}
-.sub{font-family:var(--f-display);font-style:italic;font-size:14px;color:var(--ink-2);margin:4px 0 0}
+.sub{font-family:var(--f-display);font-style:italic;font-size:13.5px;color:var(--ink-2);margin:3px 0 0}
 
 .seg{display:flex;border:1px solid var(--rule-2);border-radius:999px;padding:2px;flex:none}
-.seg button{
-  border-radius:999px;padding:6px 15px;font-size:12px;font-weight:600;
+.seg button{border-radius:999px;padding:6px 15px;font-size:12px;font-weight:600;
   letter-spacing:.04em;color:var(--ink-3);white-space:nowrap;
-  transition:background .16s ease,color .16s ease;
-}
+  transition:background .16s ease,color .16s ease}
 .seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 
-/* ---------- canvas ---------- */
-.field{margin:4px 0 8px}
+/* ---------- the field ---------- */
 svg{display:block;width:100%;height:auto;overflow:visible}
 .bubble{cursor:pointer}
-.bubble circle{
-  transition:opacity .35s ease, filter .2s ease, stroke-width .15s ease;
-  stroke-width:1.25;
-}
+.bubble circle{stroke-width:1.25;transition:opacity .35s ease,stroke-width .15s ease}
 .bubble text{
-  font-family:var(--f-display);pointer-events:none;
+  font-family:var(--f-display);font-weight:500;pointer-events:none;
   transition:opacity .35s ease;
 }
-
 .b-deep circle{fill:var(--deep);stroke:var(--deep)}
 .b-deep text{fill:var(--on-deep)}
-.b-current circle{fill:color-mix(in srgb, var(--current) 26%, transparent);stroke:var(--current)}
+.b-current circle{fill:color-mix(in srgb,var(--current) 30%,transparent);stroke:var(--current)}
 .b-current text{fill:var(--ink)}
-.b-blessing circle{fill:color-mix(in srgb, var(--blessing) 15%, transparent);stroke:var(--blessing)}
-.b-joy circle{fill:color-mix(in srgb, var(--joy) 15%, transparent);stroke:var(--joy)}
+.b-blessing circle{fill:color-mix(in srgb,var(--blessing) 16%,transparent);stroke:var(--blessing)}
+.b-joy circle{fill:color-mix(in srgb,var(--joy) 16%,transparent);stroke:var(--joy)}
 .b-future circle{fill:transparent;stroke:var(--future);stroke-dasharray:3 3.5}
 .b-blessing text,.b-joy text,.b-future text{fill:var(--ink-2)}
-
 .bubble:hover circle{stroke-width:2.5}
-.bubble.sel circle{stroke-width:3}
+.bubble.sel circle{stroke-width:3.5}
 
-/* the toggle: the other side recedes, it never disappears */
-svg.mode-carry .g-other circle,svg.mode-carry .g-other text{opacity:.16}
-svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
+/* the key ringing the outside */
+.lead{stroke:var(--rule-2);stroke-width:1;fill:none;transition:opacity .35s ease}
+.keytext{
+  font-family:var(--f-ui);font-size:10.5px;fill:var(--ink-2);
+  transition:opacity .35s ease;
+}
+.keyrow{cursor:pointer}
+/* The leader is a 1px line and the text glyphs are thin, so give each key
+   entry a real target to tap. */
+.keyrow .hit{fill:transparent}
+.keyrow:hover .keytext{fill:var(--ink)}
+.keyrow:hover .lead{stroke:var(--ink-3)}
+.keydot{transition:opacity .35s ease}
+.sel-key .keytext{fill:var(--ink);font-weight:600}
+.sel-key .lead{stroke:var(--ink-3)}
 
-.legend{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;
-  padding:6px 0 2px;font-size:11.5px;color:var(--ink-3)}
-.legend b{font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:10.5px}
+svg.mode-carry .g-other circle,svg.mode-carry .g-other text,
+svg.mode-carry .g-other .lead,svg.mode-carry .g-other .keydot{opacity:.14}
+svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text,
+svg.mode-bless .g-carry .lead,svg.mode-bless .g-carry .keydot{opacity:.14}
+
+/* ---------- key beneath, on narrow screens ---------- */
+.keylist{display:none;margin:14px auto 0;max-width:520px;
+  columns:2;column-gap:22px;font-size:12px;color:var(--ink-2)}
+.keylist.on{display:block}
+.keylist div{break-inside:avoid;padding:2px 0}
+.keylist b{font-weight:600;color:var(--ink)}
+.keylist i{font-style:normal;display:inline-block;width:7px;height:7px;border-radius:50%;
+  margin-right:6px;border:1.25px solid}
+
+.legend{display:flex;flex-wrap:wrap;gap:5px 16px;justify-content:center;
+  padding:12px 0 0;font-size:11px;color:var(--ink-3)}
+.legend b{font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:10px}
 .key{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;
   vertical-align:-1px;border:1.25px solid}
 .k-deep{background:var(--deep);border-color:var(--deep)}
-.k-current{background:color-mix(in srgb, var(--current) 26%, transparent);border-color:var(--current)}
-.k-blessing{background:color-mix(in srgb, var(--blessing) 15%, transparent);border-color:var(--blessing)}
-.k-joy{background:color-mix(in srgb, var(--joy) 15%, transparent);border-color:var(--joy)}
+.k-current{background:color-mix(in srgb,var(--current) 30%,transparent);border-color:var(--current)}
+.k-blessing{background:color-mix(in srgb,var(--blessing) 16%,transparent);border-color:var(--blessing)}
+.k-joy{background:color-mix(in srgb,var(--joy) 16%,transparent);border-color:var(--joy)}
 .k-future{background:transparent;border-color:var(--future);border-style:dotted}
 
 /* ---------- detail ---------- */
-.detail{
-  max-width:520px;margin:14px auto 0;padding:16px 18px;
-  border:1px solid var(--rule-2);border-radius:10px;background:var(--paper);
-}
+.detail{max-width:500px;margin:16px auto 0;padding:15px 17px;
+  border:1px solid var(--rule-2);border-radius:10px;background:var(--paper)}
 .detail[hidden]{display:none}
-.d-tier{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:7px}
-.d-name,.d-note{
-  display:block;width:100%;background:none;border:0;resize:none;overflow:hidden;
-  font-family:var(--f-display);
-}
-.d-name{font-size:19px;line-height:1.3;padding:1px 0}
-.d-name:focus,.d-note:focus{outline:none;box-shadow:inset 0 -1px 0 var(--rule-2)}
-.d-note{font-style:italic;font-size:14px;color:var(--ink-2);line-height:1.45;padding:4px 0 2px}
-.d-note::placeholder{color:var(--ink-3)}
-.d-move{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;padding-top:13px;border-top:1px solid var(--rule)}
-.d-move button{
-  border:1px solid var(--rule-2);border-radius:999px;padding:5px 12px;
-  font-size:11.5px;font-weight:600;color:var(--ink-2);
-}
+.d-tier{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:8px}
+.d-lab{font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);display:block;margin:9px 0 1px}
+.d-label,.d-name,.d-note{display:block;width:100%;background:none;border:0;
+  resize:none;overflow:hidden;font-family:var(--f-display)}
+.d-label{font-size:21px;font-weight:600;line-height:1.2;padding:1px 0}
+.d-name{font-size:15px;line-height:1.35;padding:1px 0}
+.d-note{font-style:italic;font-size:13.5px;color:var(--ink-2);line-height:1.45;padding:1px 0}
+.d-label:focus,.d-name:focus,.d-note:focus{outline:none;box-shadow:inset 0 -1px 0 var(--rule-2)}
+.d-note::placeholder,.d-name::placeholder{color:var(--ink-3)}
+.d-move{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)}
+.d-move button{border:1px solid var(--rule-2);border-radius:999px;padding:5px 12px;
+  font-size:11.5px;font-weight:600;color:var(--ink-2)}
 .d-move button:hover{border-color:var(--ink-3);color:var(--ink)}
 .d-move button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 .d-move .del{margin-left:auto;border-color:transparent;color:var(--ink-3)}
 .d-move .del:hover{color:#A8372A;border-color:#A8372A}
 
-/* ---------- add ---------- */
-.add{display:flex;gap:7px;max-width:520px;margin:22px auto 0}
-#new{
-  flex:1;min-width:0;background:transparent;border:0;border-bottom:1px solid var(--rule-2);
-  padding:7px 2px;font-family:var(--f-display);font-size:15.5px;
-}
+.add{display:flex;gap:7px;max-width:500px;margin:20px auto 0}
+#new{flex:1;min-width:0;background:transparent;border:0;border-bottom:1px solid var(--rule-2);
+  padding:7px 2px;font-family:var(--f-display);font-size:15px}
 #new::placeholder{color:var(--ink-3);font-style:italic}
 #new:focus{outline:none;border-bottom-color:var(--current)}
 #new-tier{background:transparent;border:1px solid var(--rule-2);border-radius:999px;
@@ -154,13 +165,9 @@ svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
 .add .go:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 
 .hint{text-align:center;font-family:var(--f-display);font-style:italic;
-  font-size:13px;color:var(--ink-3);margin:26px 0 0}
+  font-size:12.5px;color:var(--ink-3);margin:20px 0 0}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
-@media(max-width:560px){
-  header{padding-top:24px}
-  h1{font-size:23px}
-  .seg button{padding:6px 12px;font-size:11.5px}
-}
+@media(max-width:560px){h1{font-size:22px}.seg button{padding:6px 12px;font-size:11.5px}}
 </style>
 
 <div class="wrap">
@@ -176,9 +183,9 @@ svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
     </div>
   </header>
 
-  <div class="field" id="field"></div>
+  <div id="field"></div>
+  <div class="keylist" id="keylist"></div>
   <div class="legend" id="legend"></div>
-
   <div class="detail" id="detail" hidden></div>
 
   <div class="add">
@@ -187,39 +194,47 @@ svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
     <button class="go" id="add">Add</button>
   </div>
 
-  <p class="hint">Tap any bubble to open it, rename it, or move it between tiers.</p>
+  <p class="hint">Tap any bubble to rename it or move it between tiers.</p>
 </div>
 
-<script id="state" type="application/json">{"v":4,"items":null}</script>
+<script id="state" type="application/json">{"v":5,"items":null}</script>
 
 <script>
 (function () {
   "use strict";
 
   var PRISTINE = "<!doctype html>\n" + document.documentElement.outerHTML;
-  var STORE_KEY = "building-and-blessing/v4";
+  var STORE_KEY = "building-and-blessing/v5";
 
   var TIERS = [
-    { key: "deep",     name: "Deep",      side: "carry", min: 62, fs: 15.5, lh: 18.5,
+    { key: "deep",     name: "Deep",      side: "carry", r: 72, fs: 17,   lh: 20,
       blurb: "Formation. These do not finish." },
-    { key: "current",  name: "Current",   side: "carry", min: 52, fs: 13.5, lh: 16.5,
+    { key: "current",  name: "Current",   side: "carry", r: 56, fs: 14.5, lh: 17,
       blurb: "Live responsibilities with edges." },
-    { key: "blessing", name: "Blessing",  side: "other", min: 45, fs: 12.5, lh: 15.5,
+    { key: "blessing", name: "Blessing",  side: "other", r: 47, fs: 13,   lh: 15.5,
       blurb: "I back it. Someone else owns it." },
-    { key: "joy",      name: "Enjoyment", side: "other", min: 44, fs: 12.5, lh: 15.5,
+    { key: "joy",      name: "Enjoyment", side: "other", r: 45, fs: 13,   lh: 15.5,
       blurb: "For gladness. No other reason." },
-    { key: "future",   name: "Future",    side: "other", min: 44, fs: 12.5, lh: 15.5,
+    { key: "future",   name: "Future",    side: "other", r: 45, fs: 13,   lh: 15.5,
       blurb: "Not mine yet. Preparing." }
   ];
-  function rank(key) {
-    for (var i = 0; i < TIERS.length; i++) if (TIERS[i].key === key) return i;
+  function rank(k) {
+    for (var i = 0; i < TIERS.length; i++) if (TIERS[i].key === k) return i;
     return 1;
   }
-  function tierOf(key) { return TIERS[rank(key)]; }
+  function tierOf(k) { return TIERS[rank(k)]; }
 
   /* ---------- state ---------- */
 
   function uid() { return "i" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+
+  // A bubble carries one or two words; the full phrase lives in the key.
+  function shorten(name) {
+    var words = String(name || "").trim().split(/\s+/).filter(Boolean);
+    var skip = { my: 1, the: 1, a: 1, an: 1, our: 1, their: 1, his: 1, her: 1 };
+    if (words.length && skip[words[0].toLowerCase()] && words.length > 1) words = words.slice(1);
+    return words.slice(0, 2).join(" ").replace(/[—–,:;.]$/, "") || "Untitled";
+  }
 
   function normalize(raw) {
     if (!raw) return null;
@@ -233,14 +248,16 @@ svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
         if (e.tier === "bless" || e.list === "bless" || e.posture === "blessing") tier = "blessing";
         else tier = "current";
       }
+      var name = String(e.name || "").slice(0, 300);
       return {
         id: e.id || uid(),
-        name: String(e.name || "").slice(0, 300),
+        label: String(e.label || shorten(name)).slice(0, 40),
+        name: name,
         note: String(e.note || "").slice(0, 500),
         tier: tier
       };
     });
-    return { v: 4, t: typeof raw.t === "number" ? raw.t : 0,
+    return { v: 5, t: typeof raw.t === "number" ? raw.t : 0,
       items: items.map(function (it, i) { return [it, i]; })
         .sort(function (a, b) { return (rank(a[0].tier) - rank(b[0].tier)) || (a[1] - b[1]); })
         .map(function (p) { return p[0]; }) };
@@ -251,12 +268,12 @@ svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
     try { embedded = normalize(JSON.parse(document.getElementById("state").textContent || "{}")); }
     catch (err) { embedded = null; }
     try {
-      var stored = localStorage.getItem(STORE_KEY) || localStorage.getItem("building-and-blessing/v3")
-        || localStorage.getItem("building-and-blessing/v2") || localStorage.getItem("building-and-blessing/v1");
+      var keys = ["/v5", "/v4", "/v3", "/v2", "/v1"], stored = null;
+      for (var i = 0; i < keys.length && !stored; i++) stored = localStorage.getItem("building-and-blessing" + keys[i]);
       if (stored) local = normalize(JSON.parse(stored));
     } catch (err) { local = null; }
     if (embedded && local) return (local.t || 0) > (embedded.t || 0) ? local : embedded;
-    return embedded || local || { v: 4, t: 0, items: [] };
+    return embedded || local || { v: 5, t: 0, items: [] };
   }
 
   var state = load();
@@ -275,15 +292,14 @@ svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
   function buildDocument() {
     var s = PRISTINE.indexOf(STATE_OPEN);
     if (s < 0) return PRISTINE;
-    var from = s + STATE_OPEN.length;
-    var end = PRISTINE.indexOf(STATE_CLOSE, from);
+    var from = s + STATE_OPEN.length, end = PRISTINE.indexOf(STATE_CLOSE, from);
     if (end < 0) return PRISTINE;
     return PRISTINE.slice(0, from) + JSON.stringify(state).replace(/</g, "\\u003c") + PRISTINE.slice(end);
   }
   var timer = null;
   function save() {
     state.t = Date.now();
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (err) { /* private mode */ }
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (err) {}
     if (timer) clearTimeout(timer);
     timer = setTimeout(function () {
       if (!api) return;
@@ -301,67 +317,55 @@ svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
     return -1;
   }
 
-  /* ---------- laying the bubbles out ---------- */
+  /* ---------- measuring and packing ---------- */
 
   var gauge = document.createElement("canvas").getContext("2d");
   function width(text, font) { gauge.font = font; return gauge.measureText(text).width; }
 
-  // Wrap into roughly n lines of even length, so the block sits well in a circle.
-  function wrapInto(words, font, n) {
-    var target = width(words.join(" "), font) / n * 1.06;
-    var lines = [], cur = "";
+  function wrapAt(text, font, maxW) {
+    var words = String(text).split(/\s+/), lines = [], cur = "";
     for (var i = 0; i < words.length; i++) {
       var next = cur ? cur + " " + words[i] : words[i];
-      if (cur && width(next, font) > target) { lines.push(cur); cur = words[i]; }
+      if (cur && width(next, font) > maxW) { lines.push(cur); cur = words[i]; }
       else cur = next;
     }
     if (cur) lines.push(cur);
     return lines;
   }
 
-  // A circle big enough to hold the wrapped block: half-diagonal plus padding.
+  // Labels are one or two words, so a bubble is its tier's size unless the
+  // words genuinely need more room.
   function shape(item) {
     var t = tierOf(item.tier);
-    var font = '400 ' + t.fs + 'px "Spectral", Georgia, serif';
-    var words = (item.name || "…").split(/\s+/);
-    var best = null;
-    for (var n = 1; n <= 5; n++) {
-      var lines = wrapInto(words, font, n);
-      var w = 0;
-      for (var i = 0; i < lines.length; i++) w = Math.max(w, width(lines[i], font));
-      var h = lines.length * t.lh;
-      var r = Math.sqrt((w / 2) * (w / 2) + (h / 2) * (h / 2)) + 13;
-      if (!best || r < best.r) best = { r: r, lines: lines };
-      if (lines.length > n) break;
-    }
-    return { r: Math.max(narrow() ? t.min * 0.78 : t.min, best.r), lines: best.lines, t: t };
+    var font = '500 ' + t.fs + 'px "Spectral", Georgia, serif';
+    var one = width(item.label, font);
+    var lines = one / 2 > t.r * 1.25 ? wrapAt(item.label, font, t.r * 1.3) : [item.label];
+    if (lines.length === 1 && one > t.r * 1.55) lines = wrapAt(item.label, font, t.r * 1.1);
+    var w = 0;
+    for (var i = 0; i < lines.length; i++) w = Math.max(w, width(lines[i], font));
+    var h = lines.length * t.lh;
+    var need = Math.sqrt((w / 2) * (w / 2) + (h / 2) * (h / 2)) + 11;
+    return { r: Math.max(t.r, need), lines: lines, t: t };
   }
 
-  // Largest first, spiralling outward from the centre. Tier order comes first,
-  // so what is carried settles in the middle and the rest gathers around it.
-  function narrow() { return window.innerWidth < 560; }
-
+  function narrow() { return window.innerWidth < 720; }
   function aspect() {
-    var w = window.innerWidth;
-    if (w >= 760) return [1.30, 0.80];
-    if (w >= 560) return [1.05, 0.95];
-    return [0.52, 1.80];
+    if (narrow()) return [0.62, 1.55];
+    return [1.06, 0.92];
   }
 
   function pack(circles) {
-    var ratio = aspect();
-    var placed = [];
+    var ratio = aspect(), placed = [];
     circles.forEach(function (c, i) {
       if (i === 0) { c.x = 0; c.y = 0; placed.push(c); return; }
       var found = false;
       for (var d = 4; d < 3000 && !found; d += 5) {
         var step = Math.PI / Math.max(10, Math.min(90, d / 3));
         for (var a = 0; a < Math.PI * 2 - 1e-9; a += step) {
-          var x = Math.cos(a) * d * ratio[0], y = Math.sin(a) * d * ratio[1];
-          var ok = true;
+          var x = Math.cos(a) * d * ratio[0], y = Math.sin(a) * d * ratio[1], ok = true;
           for (var k = 0; k < placed.length; k++) {
             var p = placed[k], dx = p.x - x, dy = p.y - y;
-            if (dx * dx + dy * dy < (p.r + c.r + 7) * (p.r + c.r + 7)) { ok = false; break; }
+            if (dx * dx + dy * dy < (p.r + c.r + 9) * (p.r + c.r + 9)) { ok = false; break; }
           }
           if (ok) { c.x = x; c.y = y; found = true; break; }
         }
@@ -369,21 +373,28 @@ svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
       if (!found) { c.x = 0; c.y = 0; }
       placed.push(c);
     });
-    return placed;
   }
+
+  /* ---------- render ---------- */
+
+  var KEY_FONT = '400 10.5px "Public Sans", system-ui, sans-serif';
+  var KEY_W = 168, KEY_GAP = 30, KEY_LH = 12.6, KEY_SPACE = 8;
 
   function renderField() {
     var field = document.getElementById("field");
+    var list = document.getElementById("keylist");
     if (!state.items.length) {
       field.innerHTML = '<p class="hint">Nothing here yet. Add the first thing below.</p>';
+      list.className = "keylist";
+      list.innerHTML = "";
       return;
     }
 
     var circles = state.items.map(function (it) {
       var s = shape(it);
-      return { id: it.id, tier: it.tier, r: s.r, lines: s.lines, t: s.t };
+      return { id: it.id, tier: it.tier, name: it.name, label: it.label,
+        r: s.r, lines: s.lines, t: s.t };
     }).sort(function (a, b) { return (rank(a.tier) - rank(b.tier)) || (b.r - a.r); });
-
     pack(circles);
 
     var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
@@ -391,26 +402,90 @@ svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
       minX = Math.min(minX, c.x - c.r); maxX = Math.max(maxX, c.x + c.r);
       minY = Math.min(minY, c.y - c.r); maxY = Math.max(maxY, c.y + c.r);
     });
-    var m = 14;
 
-    var body = circles.map(function (c) {
+    var bubbles = circles.map(function (c) {
       var tspans = c.lines.map(function (line, i) {
         var y = c.y + (i - (c.lines.length - 1) / 2) * c.t.lh;
         return '<tspan x="' + c.x.toFixed(1) + '" y="' + y.toFixed(1) + '">' + esc(line) + "</tspan>";
       }).join("");
-      return '<g class="bubble b-' + c.tier + " g-" + c.t.side +
-          (selected === c.id ? " sel" : "") + '" data-id="' + esc(c.id) +
-          '" tabindex="0" role="button" aria-label="' + esc(c.lines.join(" ")) + '">' +
+      return '<g class="bubble b-' + c.tier + " g-" + c.t.side + (selected === c.id ? " sel" : "") +
+          '" data-id="' + esc(c.id) + '" tabindex="0" role="button" aria-label="' +
+          esc(c.label + (c.name && c.name !== c.label ? " — " + c.name : "")) + '">' +
         '<circle cx="' + c.x.toFixed(1) + '" cy="' + c.y.toFixed(1) + '" r="' + c.r.toFixed(1) + '"/>' +
         '<text text-anchor="middle" dominant-baseline="central" font-size="' + c.t.fs + '">' +
-          tspans + "</text>" +
-      "</g>";
+          tspans + "</text></g>";
     }).join("");
 
+    // The key rings the outside: only for bubbles whose full phrase says more
+    // than the one or two words on the bubble itself.
+    var keyed = circles.filter(function (c) { return c.name && c.name !== c.label; });
+    var keyMarkup = "", padX = 0, keyMinY = Infinity, keyMaxY = -Infinity;
+
+    if (!narrow() && keyed.length) {
+      var mid = (minX + maxX) / 2;
+      var sides = { left: [], right: [] };
+      keyed.forEach(function (c) { sides[c.x < mid ? "left" : "right"].push(c); });
+
+      ["left", "right"].forEach(function (side) {
+        var col = sides[side].sort(function (a, b) { return a.y - b.y; });
+        var blocks = col.map(function (c) {
+          return { c: c, lines: wrapAt(c.name, KEY_FONT, KEY_W) };
+        });
+        var total = blocks.reduce(function (s, b) { return s + b.lines.length * KEY_LH + KEY_SPACE; }, 0);
+        var y = (minY + maxY) / 2 - total / 2;
+        var anchorX = side === "left" ? minX - KEY_GAP : maxX + KEY_GAP;
+
+        blocks.forEach(function (b) {
+          var h = b.lines.length * KEY_LH;
+          var cy = y + h / 2;
+          keyMinY = Math.min(keyMinY, y);
+          keyMaxY = Math.max(keyMaxY, y + h);
+
+          // leader: a short stub off the text, then a straight run to the rim
+          var dx = b.c.x - anchorX, dy = b.c.y - cy, len = Math.sqrt(dx * dx + dy * dy) || 1;
+          var rimX = b.c.x - (dx / len) * b.c.r, rimY = b.c.y - (dy / len) * b.c.r;
+          var stub = side === "left" ? anchorX + 7 : anchorX - 7;
+
+          var hitX = side === "left" ? anchorX - 11 - KEY_W : anchorX + 11;
+          keyMarkup += '<g class="keyrow g-' + b.c.t.side + (selected === b.c.id ? " sel-key" : "") +
+              '" data-id="' + esc(b.c.id) + '" role="button" tabindex="0" aria-label="' +
+              esc(b.c.label + " — " + b.c.name) + '">' +
+            '<rect class="hit" x="' + hitX.toFixed(1) + '" y="' + (y - 3).toFixed(1) +
+              '" width="' + (KEY_W + 11) + '" height="' + (h + 6).toFixed(1) + '"/>' +
+            '<path class="lead" d="M' + anchorX.toFixed(1) + " " + cy.toFixed(1) +
+              "L" + stub.toFixed(1) + " " + cy.toFixed(1) +
+              "L" + rimX.toFixed(1) + " " + rimY.toFixed(1) + '"/>' +
+            '<circle class="keydot" cx="' + rimX.toFixed(1) + '" cy="' + rimY.toFixed(1) +
+              '" r="2" fill="var(--' + b.c.tier + ')"/>' +
+            '<text class="keytext" text-anchor="' + (side === "left" ? "end" : "start") + '">' +
+              b.lines.map(function (line, i) {
+                return '<tspan x="' + (side === "left" ? anchorX - 11 : anchorX + 11).toFixed(1) +
+                  '" y="' + (y + i * KEY_LH + KEY_LH * 0.78).toFixed(1) + '">' + esc(line) + "</tspan>";
+              }).join("") +
+            "</text></g>";
+          y += h + KEY_SPACE;
+        });
+      });
+      padX = KEY_GAP + KEY_W + 16;
+      minY = Math.min(minY, keyMinY - 6);
+      maxY = Math.max(maxY, keyMaxY + 6);
+      list.className = "keylist";
+      list.innerHTML = "";
+    } else {
+      list.className = "keylist" + (keyed.length ? " on" : "");
+      list.innerHTML = keyed.map(function (c) {
+        return "<div><i style=\"background:color-mix(in srgb,var(--" + c.tier +
+          ") 30%,transparent);border-color:var(--" + c.tier + ")\"></i><b>" +
+          esc(c.label) + "</b> &nbsp;" + esc(c.name) + "</div>";
+      }).join("");
+    }
+
+    var m = 14;
     field.innerHTML = '<svg class="mode-' + mode + '" viewBox="' +
-      (minX - m).toFixed(1) + " " + (minY - m).toFixed(1) + " " +
-      (maxX - minX + m * 2).toFixed(1) + " " + (maxY - minY + m * 2).toFixed(1) +
-      '" role="img" aria-label="Everything I am carrying and blessing">' + body + "</svg>";
+      (minX - padX - m).toFixed(1) + " " + (minY - m).toFixed(1) + " " +
+      (maxX - minX + padX * 2 + m * 2).toFixed(1) + " " + (maxY - minY + m * 2).toFixed(1) +
+      '" role="img" aria-label="Everything I carry and everything I bless">' +
+      keyMarkup + bubbles + "</svg>";
   }
 
   function renderLegend() {
@@ -420,6 +495,8 @@ svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
     }).join("");
   }
 
+  function autosize(el) { el.style.height = "auto"; el.style.height = el.scrollHeight + "px"; }
+
   function renderDetail() {
     var box = document.getElementById("detail");
     var it = selected !== null ? state.items[indexOf(selected)] : null;
@@ -428,7 +505,12 @@ svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
     box.innerHTML =
       '<div class="d-tier" style="color:var(--' + it.tier + ')">' + esc(tierOf(it.tier).name) +
         ' &nbsp;·&nbsp; <span style="color:var(--ink-3)">' + esc(tierOf(it.tier).blurb) + "</span></div>" +
-      '<textarea class="d-name" rows="1" aria-label="Name">' + esc(it.name) + "</textarea>" +
+      '<span class="d-lab">On the bubble</span>' +
+      '<textarea class="d-label" rows="1" aria-label="Short label">' + esc(it.label) + "</textarea>" +
+      '<span class="d-lab">In the key</span>' +
+      '<textarea class="d-name" rows="1" placeholder="the fuller phrase" aria-label="Full name">' +
+        esc(it.name) + "</textarea>" +
+      '<span class="d-lab">Note</span>' +
       '<textarea class="d-note" rows="1" placeholder="a note, if it helps" aria-label="Note">' +
         esc(it.note) + "</textarea>" +
       '<div class="d-move">' +
@@ -438,10 +520,8 @@ svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
         }).join("") +
         '<button class="del" data-del="1">Remove</button>' +
       "</div>";
-    box.querySelectorAll(".d-name,.d-note").forEach(autosize);
+    box.querySelectorAll("textarea").forEach(autosize);
   }
-
-  function autosize(el) { el.style.height = "auto"; el.style.height = el.scrollHeight + "px"; }
 
   function render() { renderField(); renderLegend(); renderDetail(); }
 
@@ -462,15 +542,19 @@ svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
     if (selected) document.getElementById("detail").scrollIntoView({ block: "nearest" });
   }
 
+  function placeAt(tier) {
+    var at = 0;
+    while (at < state.items.length && rank(state.items[at].tier) <= rank(tier)) at++;
+    return at;
+  }
+
   function moveTo(id, tier) {
     var i = indexOf(id);
     if (i < 0 || state.items[i].tier === tier) return;
     var it = state.items[i];
     it.tier = tier;
     state.items.splice(i, 1);
-    var at = 0;
-    while (at < state.items.length && rank(state.items[at].tier) <= rank(tier)) at++;
-    state.items.splice(at, 0, it);
+    state.items.splice(placeAt(tier), 0, it);
     save(); render();
   }
 
@@ -479,10 +563,8 @@ svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
     var name = input.value.trim();
     if (!name) { input.focus(); return; }
     var tier = document.getElementById("new-tier").value;
-    var it = { id: uid(), name: name, note: "", tier: tier };
-    var at = 0;
-    while (at < state.items.length && rank(state.items[at].tier) <= rank(tier)) at++;
-    state.items.splice(at, 0, it);
+    var it = { id: uid(), label: shorten(name), name: name, note: "", tier: tier };
+    state.items.splice(placeAt(tier), 0, it);
     input.value = "";
     selected = it.id;
     save(); render();
@@ -505,12 +587,12 @@ svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
 
   var field = document.getElementById("field");
   field.addEventListener("click", function (ev) {
-    var g = ev.target.closest(".bubble");
+    var g = ev.target.closest(".bubble, .keyrow");
     if (g) select(g.dataset.id);
   });
   field.addEventListener("keydown", function (ev) {
     if (ev.key !== "Enter" && ev.key !== " ") return;
-    var g = ev.target.closest(".bubble");
+    var g = ev.target.closest(".bubble, .keyrow");
     if (g) { ev.preventDefault(); select(g.dataset.id); }
   });
 
@@ -526,17 +608,20 @@ svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
     }
   });
   detail.addEventListener("input", function (ev) {
-    if (ev.target.classList.contains("d-name") || ev.target.classList.contains("d-note")) autosize(ev.target);
+    if (ev.target.tagName === "TEXTAREA") autosize(ev.target);
   });
   detail.addEventListener("change", function (ev) {
     var it = state.items[indexOf(selected)];
     if (!it) return;
-    if (ev.target.classList.contains("d-name")) {
-      var v = ev.target.value.trim();
-      if (!v) { ev.target.value = it.name; return; }
-      it.name = v.slice(0, 300);
-    } else if (ev.target.classList.contains("d-note")) {
-      it.note = ev.target.value.trim().slice(0, 500);
+    var el = ev.target;
+    if (el.classList.contains("d-label")) {
+      var v = el.value.trim();
+      if (!v) { el.value = it.label; return; }
+      it.label = v.slice(0, 40);
+    } else if (el.classList.contains("d-name")) {
+      it.name = el.value.trim().slice(0, 300);
+    } else if (el.classList.contains("d-note")) {
+      it.note = el.value.trim().slice(0, 500);
     } else return;
     save(); render();
   });
@@ -550,7 +635,6 @@ svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
   });
 
   render();
-  // Metrics change once the real face arrives, so lay it out again.
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(renderField);
   var last = window.innerWidth;
   window.addEventListener("resize", function () {

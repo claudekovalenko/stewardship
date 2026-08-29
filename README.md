@@ -30,11 +30,42 @@ has to declare a posture, so the register keeps the two honest.
 ## Running it
 
 Open `index.html` in a browser. That's it — no build step, no dependencies, no
-server. It is a single self-contained file.
+server. The app itself is a single self-contained file.
 
 ```
 git clone <this repo> && open index.html
 ```
+
+## Installing it (PWA)
+
+Served over HTTPS, this is an installable, offline-capable progressive web app —
+add it to a phone home screen or install it as a desktop app and it opens
+standalone, with no browser chrome.
+
+```
+npx http-server .        # or any static host
+```
+
+Any static host works: GitHub Pages, Cloudflare Pages, Netlify, Vercel, a folder
+behind nginx. The requirement is HTTPS (or `localhost`); a `file://` URL cannot
+register a service worker, so opening the file directly gives you the app but
+not offline support.
+
+What makes it installable:
+
+| File | Role |
+|---|---|
+| `manifest.webmanifest` | Name, colours, icons, `display: standalone` |
+| `sw.js` | Precaches the shell so it runs with no network |
+| `icon-192/512.png`, `icon-maskable-512.png` | Home-screen icons; the maskable one is inset for Android's safe zone |
+| `apple-touch-icon.png`, `icon.svg` | iOS home screen, and the browser tab |
+
+The service worker is network-first for the page (a deploy lands on next load)
+and cache-first for icons and fonts. It deliberately does **not** register when
+the page is running inside a frame or from `file://`.
+
+The home-screen label is **Stewardship** — "Building & Blessing" is too long for
+the space a launcher gives it.
 
 ## Where the data lives
 

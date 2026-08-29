@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" fill="#14201D"/>
+  <!-- Building: one solid stroke, unbroken -->
+  <rect x="150" y="110" width="64" height="292" rx="20" fill="#2E9C82"/>
+  <!-- Blessing: the same stroke, lent in pieces -->
+  <g fill="#D8A94C">
+    <rect x="298" y="110"  width="64" height="62" rx="18"/>
+    <rect x="298" y="187" width="64" height="62" rx="18"/>
+    <rect x="298" y="264" width="64" height="62" rx="18"/>
+    <rect x="298" y="341"  width="64" height="61" rx="18"/>
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+{
+  "id": "/building-and-blessing",
+  "name": "Building & Blessing",
+  "short_name": "Stewardship",
+  "description": "A standing account of what you carry, and what you back.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#F0F2F0",
+  "theme_color": "#F0F2F0",
+  "categories": ["productivity", "lifestyle"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

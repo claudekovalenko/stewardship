@@ -1,8 +1,8 @@
 <meta charset="utf-8">
 <title>Building &amp; Blessing</title>
 <meta name="description" content="What I am responsible for, and what I am only blessing.">
-<meta name="theme-color" content="#F0F2F0" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0D1413" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F4F3EF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101311" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Stewardship">
@@ -10,147 +10,159 @@
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&display=swap">
 
 <style>
 :root{
-  --paper:#F0F2F0;
-  --surface:#FAFBFA;
-  --ink:#14201D;
-  --ink-2:#42544F;
-  --ink-3:#73857F;
-  --rule:#D2DAD5;
-  --rule-strong:#B4C0BA;
-  --mine:#0D6A57;
-  --bless:#8F6410;
-  --bless-soft:#EFE6CE;
-  --f-display:"Spectral", Georgia, serif;
-  --f-body:"Public Sans", system-ui, -apple-system, sans-serif;
-  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --paper:#F4F3EF;
+  --ink:#1B1E1C;
+  --ink-2:#535B57;
+  --ink-3:#8C948F;
+  --rule:#E4E3DC;
+  --rule-2:#CFCEC4;
+  --carry:#1E5B4E;
+  --light:#94682E;
+  --f-display:"Spectral", Georgia, "Times New Roman", serif;
+  --f-ui:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --paper:#0D1413; --surface:#151E1C; --ink:#E7EDEA; --ink-2:#A6B6B0; --ink-3:#788983;
-    --rule:#263330; --rule-strong:#3A4A44; --mine:#57BCA0; --bless:#D8A94C; --bless-soft:#332711;
+    --paper:#101311; --ink:#E9EAE4; --ink-2:#A9B1AC; --ink-3:#7C847F;
+    --rule:#222722; --rule-2:#343B35; --carry:#5FBBA3; --light:#D2A15E;
   }
 }
 :root[data-theme="dark"]{
-  --paper:#0D1413; --surface:#151E1C; --ink:#E7EDEA; --ink-2:#A6B6B0; --ink-3:#788983;
-  --rule:#263330; --rule-strong:#3A4A44; --mine:#57BCA0; --bless:#D8A94C; --bless-soft:#332711;
+  --paper:#101311; --ink:#E9EAE4; --ink-2:#A9B1AC; --ink-3:#7C847F;
+  --rule:#222722; --rule-2:#343B35; --carry:#5FBBA3; --light:#D2A15E;
 }
 
 *{box-sizing:border-box}
 body{
   background:var(--paper);color:var(--ink);
-  font-family:var(--f-body);font-size:15px;line-height:1.5;
+  font-family:var(--f-ui);font-size:15px;line-height:1.5;
   -webkit-font-smoothing:antialiased;
-  padding:0 20px 90px;
+  padding:0 22px 120px;
 }
-.wrap{max-width:640px;margin:0 auto}
-button{font:inherit;color:inherit;cursor:pointer}
-input{font:inherit;color:inherit}
-:focus-visible{outline:2px solid var(--mine);outline-offset:2px;border-radius:2px}
+.wrap{max-width:620px;margin:0 auto}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+input,select{font:inherit;color:inherit}
+:focus-visible{outline:1.5px solid var(--carry);outline-offset:3px;border-radius:2px}
 
-/* ---------- head ---------- */
-header{padding:38px 0 22px}
-h1{font-family:var(--f-display);font-size:26px;font-weight:600;margin:0;letter-spacing:-.015em}
-h1 .amp{font-style:italic;font-weight:400;color:var(--ink-3)}
-.sub{color:var(--ink-2);font-size:14px;margin:4px 0 0}
+/* ---------- masthead ---------- */
+header{padding:52px 0 20px;border-bottom:1px solid var(--rule-2);margin-bottom:26px}
+h1{
+  font-family:var(--f-display);font-size:31px;font-weight:600;
+  margin:0;letter-spacing:-.02em;line-height:1.15;
+}
+h1 .amp{font-style:italic;font-weight:400;color:var(--ink-3);padding:0 .04em}
+.sub{
+  font-family:var(--f-display);font-style:italic;font-size:15px;
+  color:var(--ink-2);margin:7px 0 0;
+}
 
 /* ---------- add ---------- */
-.add{display:flex;gap:8px;margin-bottom:30px}
+.add{display:flex;gap:7px;margin-bottom:38px}
 #new{
-  flex:1;min-width:0;background:var(--surface);border:1px solid var(--rule-strong);
-  border-radius:4px;padding:10px 12px;font-size:15px;
+  flex:1;min-width:0;background:transparent;
+  border:0;border-bottom:1px solid var(--rule-2);border-radius:0;
+  padding:8px 2px;font-family:var(--f-display);font-size:16.5px;
 }
-#new::placeholder{color:var(--ink-3)}
+#new::placeholder{color:var(--ink-3);font-style:italic}
+#new:focus{outline:none;border-bottom-color:var(--carry)}
+#new-tier{
+  background:transparent;border:1px solid var(--rule-2);border-radius:3px;
+  padding:6px 8px;font-size:12.5px;color:var(--ink-2);
+}
 .add button{
-  border:1px solid var(--rule-strong);background:var(--surface);border-radius:4px;
-  padding:0 14px;font-size:13px;font-weight:500;white-space:nowrap;
+  border:1px solid var(--rule-2);border-radius:3px;
+  padding:0 15px;font-size:12.5px;font-weight:600;letter-spacing:.02em;
 }
-.add button:hover{border-color:var(--ink-3)}
-.add .primary{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.add button:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 
-/* ---------- sections ---------- */
-section{margin-bottom:8px}
-.sec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
-.sec-head h2{
-  font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.16em;
-  text-transform:uppercase;margin:0;
+/* ---------- tiers ---------- */
+.tier{margin-bottom:34px}
+.tier-head{
+  display:flex;align-items:baseline;justify-content:space-between;gap:14px;
+  padding-bottom:6px;border-bottom:1px solid var(--rule-2);
 }
-.sec-mine h2{color:var(--mine)}
-.sec-bless h2{color:var(--bless)}
-.sec-switch h2{color:var(--ink-2)}
-.sec-head .n{font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
-.sec-note{font-family:var(--f-display);font-style:italic;font-size:13.5px;color:var(--ink-2);margin:0 0 12px}
-
-/* ---------- rows ---------- */
-ol,ul{list-style:none;margin:0;padding:0}
-.row{
-  position:relative;display:flex;align-items:center;gap:10px;
-  border:1px solid var(--rule);border-radius:4px;margin-bottom:6px;
-  padding:2px 6px 2px 14px;background:var(--surface);
+.tier-name{font-size:11.5px;font-weight:600;letter-spacing:.15em;text-transform:uppercase}
+.g-carry .tier-name{color:var(--carry)}
+.g-other .tier-name{color:var(--light)}
+.tier-count{font-size:11.5px;color:var(--ink-3);font-variant-numeric:tabular-nums;flex:none}
+.tier-note{
+  font-family:var(--f-display);font-style:italic;font-size:14px;
+  color:var(--ink-2);margin:9px 0 3px;
 }
-.row::before{content:"";position:absolute;left:0;top:-1px;bottom:-1px;width:3px;border-radius:4px 0 0 4px}
-.row-mine::before{background:var(--mine)}
-.row-bless::before{background:repeating-linear-gradient(180deg,var(--bless) 0 6px,transparent 6px 11px)}
-.row-bless{background:transparent}
-.row:focus-within{border-color:var(--rule-strong)}
 
-.rank{
-  font-family:var(--f-mono);font-size:12px;color:var(--ink-3);
-  min-width:20px;text-align:right;font-variant-numeric:tabular-nums;flex:none;
+/* ---------- items ---------- */
+.item{
+  display:grid;grid-template-columns:32px minmax(0,1fr) auto;
+  align-items:start;column-gap:10px;
+  padding:8px 0;border-bottom:1px solid var(--rule);
+}
+.item:last-child{border-bottom:0}
+.gutter{
+  font-size:12.5px;font-weight:500;color:var(--ink-3);
+  font-variant-numeric:tabular-nums;text-align:right;
+  padding-top:5px;
+}
+.mark{display:inline-block;width:6px;height:6px;margin-right:1px}
+.m-blessing{border:1.5px solid var(--light)}
+.m-joy{border-radius:50%;background:var(--light)}
+.m-future{border-radius:50%;border:1.5px dotted var(--light)}
+
+.name,.note{
+  display:block;width:100%;background:none;border:0;
+  resize:none;overflow:hidden;
 }
 .name{
-  flex:1;min-width:0;background:none;border:0;padding:9px 0;
-  font-family:var(--f-display);font-size:16.5px;font-weight:500;
+  padding:2px 0;
+  font-family:var(--f-display);font-size:18px;font-weight:400;line-height:1.35;
 }
-.row-bless .name{font-weight:400}
-.name:focus{outline:none;box-shadow:inset 0 -1px 0 var(--rule-strong)}
+.g-other .name{color:var(--ink-2)}
+.name:focus{outline:none;box-shadow:inset 0 -1px 0 var(--rule-2)}
+.note{
+  grid-column:2;padding:1px 0 3px;
+  font-family:var(--f-display);font-style:italic;font-size:14px;
+  color:var(--ink-2);line-height:1.45;
+}
+.note:focus{outline:none;box-shadow:inset 0 -1px 0 var(--rule-2)}
+.note::placeholder{color:var(--ink-3)}
+/* Notes appear on explicit intent only. Revealing them on hover or focus
+   changed row height, which shifted the rows below out from under the
+   pointer and made the next click land on the wrong item. */
 
-.tools{display:flex;gap:1px;flex:none}
+.tools{grid-row:1;grid-column:3;display:flex;gap:2px;opacity:0;transition:opacity .14s ease}
+.item:hover .tools,.item:focus-within .tools{opacity:1}
+@media (hover:none){.tools{opacity:.5}}
 .tools button{
-  border:0;background:none;color:var(--ink-3);
-  width:28px;height:28px;border-radius:3px;font-size:13px;line-height:1;
+  width:26px;height:26px;border-radius:3px;color:var(--ink-3);
+  font-size:11px;line-height:1;
 }
-.tools button:hover{background:var(--paper);color:var(--ink)}
-.tools button[disabled]{opacity:.25;cursor:default}
-.tools button:hover.del{color:#A8372A}
+.tools button:hover{color:var(--ink)}
+.tools button:disabled{opacity:.2;cursor:default}
+.tools .del:hover{color:#A8372A}
 
-/* ---------- the line ---------- */
-.line{display:flex;align-items:center;gap:12px;margin:26px 0 14px}
-.line::before,.line::after{content:"";height:1px;background:var(--rule-strong);flex:1}
-.line span{
-  font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+/* ---------- divider ---------- */
+.divide{display:flex;align-items:center;gap:15px;margin:44px 0 34px}
+.divide::before,.divide::after{content:"";flex:1;height:1px;background:var(--rule-2)}
+.divide span{
+  font-size:10.5px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
   color:var(--ink-3);white-space:nowrap;
 }
 
-/* ---------- switching ---------- */
-.sec-switch{
-  border:1px dashed var(--rule-strong);border-radius:4px;
-  padding:14px 16px;margin:26px 0;
+.empty-tier{
+  font-family:var(--f-display);font-style:italic;font-size:14px;
+  color:var(--ink-3);padding:9px 0 3px;
 }
-.switch-row{display:flex;align-items:center;gap:10px;padding:5px 0}
-.switch-row .name{font-size:16px}
-.arrow{
-  font-family:var(--f-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
-  white-space:nowrap;flex:none;
-}
-.to-mine{color:var(--mine)}
-.to-bless{color:var(--bless)}
-.switch-row .done{
-  border:1px solid var(--rule-strong);background:var(--surface);border-radius:3px;
-  padding:4px 10px;font-size:12px;font-weight:500;flex:none;
-}
-.switch-row .done:hover{border-color:var(--ink-3)}
-
-/* ---------- empty ---------- */
-.empty{
-  border:1px dashed var(--rule);border-radius:4px;padding:16px;
-  color:var(--ink-3);font-size:13.5px;font-family:var(--f-display);font-style:italic;
-}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+@media(max-width:520px){
+  h1{font-size:26px}
+  .add{flex-wrap:wrap}
+  #new{flex:1 0 100%}
+  .item{grid-template-columns:26px minmax(0,1fr) auto;column-gap:8px}
+  .name{font-size:17px}
+}
 </style>
 
 <div class="wrap">
@@ -161,21 +173,42 @@ ol,ul{list-style:none;margin:0;padding:0}
 
   <div class="add">
     <input id="new" type="text" placeholder="Add something…" aria-label="Name of the thing to add">
-    <button class="primary" id="add-mine">+ Mine</button>
-    <button id="add-bless">+ Blessing</button>
+    <select id="new-tier" aria-label="Which tier to add it to"></select>
+    <button id="add">Add</button>
   </div>
 
   <main id="view"></main>
 </div>
 
-<script id="state" type="application/json">{"v":2,"items":null}</script>
+<script id="state" type="application/json">{"v":3,"items":null}</script>
 
 <script>
 (function () {
   "use strict";
 
   var PRISTINE = "<!doctype html>\n" + document.documentElement.outerHTML;
-  var STORE_KEY = "building-and-blessing/v2";
+  var STORE_KEY = "building-and-blessing/v3";
+
+  // Order here is the priority order of the whole page. Everything in "carry"
+  // is numbered in one run; the rest are listed, not ranked.
+  var TIERS = [
+    { key: "deep",     name: "Deep",      group: "carry",
+      note: "Formation. These do not finish, and nobody else can do them for me." },
+    { key: "current",  name: "Current",   group: "carry",
+      note: "Live responsibilities with edges. Real, but not the deep work." },
+    { key: "blessing", name: "Blessing",  group: "other",
+      note: "I back it. Someone else owns it." },
+    { key: "joy",      name: "Enjoyment", group: "other",
+      note: "For gladness. No other reason needed." },
+    { key: "future",   name: "Future",    group: "other",
+      note: "Not mine yet. The work now is preparing." }
+  ];
+
+  function rank(key) {
+    for (var i = 0; i < TIERS.length; i++) if (TIERS[i].key === key) return i;
+    return 1;
+  }
+  function tierOf(key) { return TIERS[rank(key)]; }
 
   /* ---------- state ---------- */
 
@@ -183,43 +216,48 @@ ol,ul{list-style:none;margin:0;padding:0}
 
   function normalize(raw) {
     if (!raw) return null;
-    // v1 called them entries with a "posture"; carry those names across.
     var src = Array.isArray(raw.items) ? raw.items : (Array.isArray(raw.entries) ? raw.entries : null);
     if (!src) return null;
-    return {
-      v: 2,
-      items: src.map(function (e) {
-        e = e || {};
-        var list = e.list || (e.posture === "blessing" ? "bless" : "mine");
-        if (list === "building") list = "mine";
-        if (list === "blessing") list = "bless";
-        if (list !== "mine" && list !== "bless" && list !== "switching") list = "mine";
-        var target = e.target === "mine" || e.target === "bless" ? e.target : null;
-        if (list === "switching" && !target) list = "mine";
-        return {
-          id: e.id || uid(),
-          name: String(e.name || "").slice(0, 400),
-          list: list,
-          target: list === "switching" ? target : null,
-          from: list === "switching" ? (e.from === "bless" ? "bless" : "mine") : null
-        };
-      })
-    };
+    var known = TIERS.map(function (t) { return t.key; });
+    var items = src.map(function (e) {
+      e = e || {};
+      var tier = e.tier;
+      if (known.indexOf(tier) < 0) {
+        // v1 posture / v2 list names land on the nearest tier.
+        if (e.tier === "bless" || e.list === "bless" || e.posture === "blessing") tier = "blessing";
+        else tier = "current";
+      }
+      return {
+        id: e.id || uid(),
+        name: String(e.name || "").slice(0, 300),
+        note: String(e.note || "").slice(0, 500),
+        tier: tier
+      };
+    });
+    // The array is always grouped in tier order; sort stably to guarantee it.
+    var saved = typeof raw.t === "number" ? raw.t : 0;
+    return { v: 3, t: saved, items: items.map(function (it, i) { return [it, i]; })
+      .sort(function (a, b) { return (rank(a[0].tier) - rank(b[0].tier)) || (a[1] - b[1]); })
+      .map(function (p) { return p[0]; }) };
   }
 
   function load() {
+    var embedded = null, local = null;
     try {
-      var embedded = normalize(JSON.parse(document.getElementById("state").textContent || "{}"));
-      if (embedded) return embedded;
-    } catch (err) { /* fall through */ }
+      embedded = normalize(JSON.parse(document.getElementById("state").textContent || "{}"));
+    } catch (err) { embedded = null; }
     try {
-      var stored = localStorage.getItem(STORE_KEY) || localStorage.getItem("building-and-blessing/v1");
-      if (stored) {
-        var local = normalize(JSON.parse(stored));
-        if (local) return local;
-      }
-    } catch (err) { /* fall through */ }
-    return { v: 2, items: [] };
+      var stored = localStorage.getItem(STORE_KEY)
+        || localStorage.getItem("building-and-blessing/v2")
+        || localStorage.getItem("building-and-blessing/v1");
+      if (stored) local = normalize(JSON.parse(stored));
+    } catch (err) { local = null; }
+
+    // Publishing is debounced, so a page closed straight after an edit has the
+    // change in localStorage but not yet in the published copy. Take whichever
+    // was written last rather than always trusting the embedded one.
+    if (embedded && local) return (local.t || 0) > (embedded.t || 0) ? local : embedded;
+    return embedded || local || { v: 3, t: 0, items: [] };
   }
 
   var state = load();
@@ -241,12 +279,12 @@ ol,ul{list-style:none;margin:0;padding:0}
     var from = start + STATE_OPEN.length;
     var end = PRISTINE.indexOf(STATE_CLOSE, from);
     if (end < 0) return PRISTINE;
-    var json = JSON.stringify(state).replace(/</g, "\\u003c");
-    return PRISTINE.slice(0, from) + json + PRISTINE.slice(end);
+    return PRISTINE.slice(0, from) + JSON.stringify(state).replace(/</g, "\\u003c") + PRISTINE.slice(end);
   }
 
   var timer = null;
   function save() {
+    state.t = Date.now();
     try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (err) { /* private mode */ }
     if (timer) clearTimeout(timer);
     timer = setTimeout(function () {
@@ -264,160 +302,146 @@ ol,ul{list-style:none;margin:0;padding:0}
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
-  function inList(list) {
-    return state.items.filter(function (i) { return i.list === list; });
-  }
-  function indexOfId(id) {
+  function indexOf(id) {
     for (var i = 0; i < state.items.length; i++) if (state.items[i].id === id) return i;
     return -1;
+  }
+  function inTier(key) {
+    return state.items.filter(function (i) { return i.tier === key; });
+  }
+  // Where a member of `key` belongs, given the array stays grouped in tier order.
+  function boundary(key, where) {
+    var r = rank(key), start = 0;
+    while (start < state.items.length && rank(state.items[start].tier) < r) start++;
+    var end = start;
+    while (end < state.items.length && rank(state.items[end].tier) === r) end++;
+    return where === "start" ? start : end;
   }
 
   /* ---------- actions ---------- */
 
-  function add(list) {
+  function add() {
     var input = document.getElementById("new");
     var name = input.value.trim();
     if (!name) { input.focus(); return; }
-    state.items.push({ id: uid(), name: name, list: list, target: null, from: null });
+    var tier = document.getElementById("new-tier").value;
+    state.items.splice(boundary(tier, "end"), 0, { id: uid(), name: name, note: "", tier: tier });
     input.value = "";
     input.focus();
     save(); render();
   }
 
-  // Reorder within a list: swap with the neighbour that shares this item's list,
-  // so moving inside Mine can never step over the line into Blessing.
+  // One control does both jobs: reorder inside a tier, and at a tier's edge,
+  // carry the item across into the neighbouring tier. The page is one stack.
   function move(id, dir) {
-    var idx = indexOfId(id);
-    if (idx < 0) return;
-    var list = state.items[idx].list;
-    var j = idx + dir;
-    while (j >= 0 && j < state.items.length && state.items[j].list !== list) j += dir;
-    if (j < 0 || j >= state.items.length) return;
-    var tmp = state.items[idx];
-    state.items[idx] = state.items[j];
-    state.items[j] = tmp;
-    save(); render(id, dir > 0 ? "down" : "up");
-  }
+    var i = indexOf(id);
+    if (i < 0) return;
+    var it = state.items[i];
+    var siblings = inTier(it.tier);
+    var pos = siblings.indexOf(it);
 
-  function beginSwitch(id) {
-    var it = state.items[indexOfId(id)];
-    if (!it || it.list === "switching") return;
-    it.from = it.list;
-    it.target = it.list === "mine" ? "bless" : "mine";
-    it.list = "switching";
-    save(); render();
-  }
-
-  function finishSwitch(id) {
-    var idx = indexOfId(id);
-    var it = state.items[idx];
-    if (!it || it.list !== "switching") return;
-    it.list = it.target;
-    it.target = null;
-    it.from = null;
-    // Land it at the end of its new list rather than wherever it happened to sit.
-    state.items.splice(idx, 1);
-    state.items.push(it);
-    save(); render();
-  }
-
-  function cancelSwitch(id) {
-    var it = state.items[indexOfId(id)];
-    if (!it || it.list !== "switching") return;
-    it.list = it.from || "mine";
-    it.target = null;
-    it.from = null;
-    save(); render();
+    if (dir === -1 ? pos > 0 : pos < siblings.length - 1) {
+      var j = indexOf(siblings[pos + dir].id);
+      state.items[i] = state.items[j];
+      state.items[j] = it;
+    } else {
+      var next = TIERS[rank(it.tier) + dir];
+      if (!next) return;
+      state.items.splice(i, 1);
+      it.tier = next.key;
+      state.items.splice(boundary(next.key, dir === -1 ? "end" : "start"), 0, it);
+    }
+    save(); render(id, dir);
   }
 
   function remove(id) {
-    var idx = indexOfId(id);
-    if (idx < 0) return;
-    state.items.splice(idx, 1);
+    var i = indexOf(id);
+    if (i < 0) return;
+    state.items.splice(i, 1);
     save(); render();
   }
 
-  function rename(id, name) {
-    var it = state.items[indexOfId(id)];
+  function edit(id, field, value) {
+    var it = state.items[indexOf(id)];
     if (!it) return;
-    name = name.trim();
-    if (!name || name === it.name) return;
-    it.name = name.slice(0, 400);
+    value = value.trim();
+    if (it[field] === value) return;
+    if (field === "name" && !value) return;
+    it[field] = value.slice(0, field === "name" ? 300 : 500);
     save();
   }
 
   /* ---------- render ---------- */
 
-  function rowHTML(item, rank, list, first, last) {
-    return '<li class="row row-' + list + '" data-id="' + esc(item.id) + '">' +
-      '<span class="rank">' + rank + "</span>" +
-      '<input class="name" value="' + esc(item.name) + '" aria-label="Name">' +
-      '<span class="tools">' +
-        '<button data-act="up" ' + (first ? "disabled" : "") + ' aria-label="Move up" title="Move up">&#9650;</button>' +
-        '<button data-act="down" ' + (last ? "disabled" : "") + ' aria-label="Move down" title="Move down">&#9660;</button>' +
-        '<button data-act="switch" aria-label="' +
-          (list === "mine" ? "Start handing this off" : "Start taking this on") + '" title="' +
-          (list === "mine" ? "Hand off" : "Take on") + '">&#8644;</button>' +
+  function itemHTML(it, tier, gutter, first, last) {
+    return '<div class="item" data-id="' + esc(it.id) + '">' +
+      '<div class="gutter">' + gutter + "</div>" +
+      '<textarea class="name" rows="1" aria-label="Name">' + esc(it.name) + "</textarea>" +
+      '<div class="tools">' +
+        '<button data-act="up" ' + (first ? "disabled" : "") +
+          ' aria-label="Move up" title="Move up">&#9650;</button>' +
+        '<button data-act="down" ' + (last ? "disabled" : "") +
+          ' aria-label="Move down" title="Move down">&#9660;</button>' +
+        (it.note || noteOpen === it.id ? "" :
+          '<button data-act="note" aria-label="Add a note" title="Add a note">&#9998;</button>') +
         '<button data-act="del" class="del" aria-label="Remove" title="Remove">&#10005;</button>' +
-      "</span></li>";
+      "</div>" +
+      (it.note || noteOpen === it.id
+        ? '<textarea class="note" rows="1" placeholder="a note, if it helps" aria-label="Note">' +
+          esc(it.note) + "</textarea>"
+        : "") +
+    "</div>";
   }
 
-  function listHTML(list, items, startRank, emptyCopy) {
-    if (!items.length) return '<div class="empty">' + esc(emptyCopy) + "</div>";
-    return '<ol start="' + startRank + '">' + items.map(function (it, n) {
-      return rowHTML(it, startRank + n, list, n === 0, n === items.length - 1);
-    }).join("") + "</ol>";
-  }
+  var noteOpen = null;
 
-  function switchHTML(items) {
-    if (!items.length) return "";
-    return '<section class="sec-switch">' +
-      '<div class="sec-head"><h2>Switching</h2><span class="n">' + items.length + "</span></div>" +
-      '<p class="sec-note">In motion. Not counted on either side until it lands.</p>' +
-      "<ul>" + items.map(function (it) {
-        var toMine = it.target === "mine";
-        return '<li class="switch-row" data-id="' + esc(it.id) + '">' +
-          '<span class="arrow ' + (toMine ? "to-mine" : "to-bless") + '">' +
-            (toMine ? "&#8594; taking on" : "&#8594; handing off") + "</span>" +
-          '<input class="name" value="' + esc(it.name) + '" aria-label="Name">' +
-          '<button class="done" data-act="finish">' +
-            (toMine ? "It&#8217;s mine now" : "Handed off") + "</button>" +
-          '<span class="tools"><button data-act="cancel" aria-label="Cancel the switch" title="Cancel">&#10005;</button></span>' +
-        "</li>";
-      }).join("") + "</ul></section>";
+  // A textarea does not size itself; without this, long notes would be clipped.
+  function autosize(el) {
+    el.style.height = "auto";
+    el.style.height = el.scrollHeight + "px";
   }
 
   function render(focusId, focusDir) {
-    var mine = inList("mine");
-    var bless = inList("bless");
-    var moving = inList("switching");
+    var html = "", counter = 0, total = state.items.length, seen = 0, dividerDone = false;
 
-    document.getElementById("view").innerHTML =
-      '<section class="sec-mine">' +
-        '<div class="sec-head"><h2>Mine to carry</h2><span class="n">' + mine.length + "</span></div>" +
-        '<p class="sec-note">If it stalls, it stalls with me.</p>' +
-        listHTML("mine", mine, 1, "Nothing yet. What would go wrong if you walked away tomorrow?") +
-      "</section>" +
+    TIERS.forEach(function (tier) {
+      var items = inTier(tier.key);
 
-      switchHTML(moving) +
+      if (tier.group === "other" && !dividerDone) {
+        dividerDone = true;
+        html += '<div class="divide"><span>Not mine to carry</span></div>';
+      }
 
-      '<div class="line"><span>Below the line: only if there is room</span></div>' +
+      html += '<section class="tier g-' + tier.group + '">' +
+        '<div class="tier-head"><span class="tier-name">' + esc(tier.name) + "</span>" +
+        '<span class="tier-count">' + items.length + "</span></div>" +
+        '<p class="tier-note">' + esc(tier.note) + "</p>";
 
-      '<section class="sec-bless">' +
-        '<div class="sec-head"><h2>Blessing</h2><span class="n">' + bless.length + "</span></div>" +
-        '<p class="sec-note">Someone else carries it. Nice to get to, never ahead of the above.</p>' +
-        listHTML("bless", bless, mine.length + 1, "Nothing yet. Whose work do you back without owning it?") +
-      "</section>";
+      if (!items.length) {
+        html += '<p class="empty-tier">Nothing here.</p>';
+      } else {
+        items.forEach(function (it) {
+          var gutter = tier.group === "carry"
+            ? ++counter
+            : '<span class="mark m-' + tier.key + '"></span>';
+          html += itemHTML(it, tier, gutter, seen === 0, seen === total - 1);
+          seen++;
+        });
+      }
+      html += "</section>";
+    });
 
-    // Keep the arrow keys usable: after a move, put focus back on the button
-    // that was just pressed, now at the item's new position.
+    document.getElementById("view").innerHTML = html;
+    Array.prototype.forEach.call(document.querySelectorAll(".name,.note"), autosize);
+
+    if (noteOpen) {
+      var opened = document.querySelector('[data-id="' + noteOpen + '"] .note');
+      if (opened) { opened.focus(); return; }
+    }
     if (focusId) {
       var row = document.querySelector('[data-id="' + focusId + '"]');
       if (row) {
-        // Prefer the button just pressed. At the end of a list that button is
-        // now disabled, so fall back to the opposite one, then to the name --
-        // focus must stay on the item that moved, never fall off the page.
-        var order = focusDir === "up" ? ["up", "down"] : ["down", "up"];
+        var order = focusDir === -1 ? ["up", "down"] : ["down", "up"];
         var target = null;
         for (var k = 0; k < order.length && !target; k++) {
           var b = row.querySelector('[data-act="' + order[k] + '"]');
@@ -430,34 +454,42 @@ ol,ul{list-style:none;margin:0;padding:0}
 
   /* ---------- wiring ---------- */
 
-  document.getElementById("add-mine").addEventListener("click", function () { add("mine"); });
-  document.getElementById("add-bless").addEventListener("click", function () { add("bless"); });
+  var tierSelect = document.getElementById("new-tier");
+  TIERS.forEach(function (t) {
+    var o = document.createElement("option");
+    o.value = t.key;
+    o.textContent = t.name;
+    tierSelect.appendChild(o);
+  });
+  tierSelect.value = "current";
+
+  document.getElementById("add").addEventListener("click", add);
   document.getElementById("new").addEventListener("keydown", function (ev) {
-    if (ev.key === "Enter") add("mine");
+    if (ev.key === "Enter") add();
   });
 
   var view = document.getElementById("view");
-
   view.addEventListener("click", function (ev) {
     var btn = ev.target.closest("[data-act]");
     if (!btn) return;
     var id = btn.closest("[data-id]").dataset.id;
-    var act = btn.dataset.act;
-    if (act === "up") move(id, -1);
-    else if (act === "down") move(id, 1);
-    else if (act === "switch") beginSwitch(id);
-    else if (act === "finish") finishSwitch(id);
-    else if (act === "cancel") cancelSwitch(id);
-    else if (act === "del") remove(id);
+    if (btn.dataset.act === "up") move(id, -1);
+    else if (btn.dataset.act === "down") move(id, 1);
+    else if (btn.dataset.act === "note") { noteOpen = id; render(); noteOpen = null; }
+    else remove(id);
   });
-
   view.addEventListener("change", function (ev) {
-    if (!ev.target.classList.contains("name")) return;
-    rename(ev.target.closest("[data-id]").dataset.id, ev.target.value);
+    var el = ev.target;
+    if (!el.classList.contains("name") && !el.classList.contains("note")) return;
+    edit(el.closest("[data-id]").dataset.id, el.classList.contains("name") ? "name" : "note", el.value);
   });
-
+  view.addEventListener("input", function (ev) {
+    if (ev.target.classList.contains("name") || ev.target.classList.contains("note")) autosize(ev.target);
+  });
   view.addEventListener("keydown", function (ev) {
-    if (ev.key === "Enter" && ev.target.classList.contains("name")) ev.target.blur();
+    if (ev.key === "Enter" && (ev.target.classList.contains("name") || ev.target.classList.contains("note"))) {
+      ev.target.blur();
+    }
   });
 
   render();

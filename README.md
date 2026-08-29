@@ -7,30 +7,33 @@ One page. Two lists. Nothing else.
 - **Mine to carry** — if it stalls, it stalls with me.
 - **Blessing** — someone else carries it. Nice to get to, never ahead of the above.
 
-## The three things it does
+## Five tiers, one stack
 
-**One priority stack.** Responsibilities are numbered `1..n`. Blessings continue
-the *same* numbering below a hard line. There is no separate ranking, so a
-blessing can never sit above a responsibility — the top blessing's "move up"
-button is disabled, because above it is the line. The order on screen is the
-order of your attention.
+| Tier | | |
+|---|---|---|
+| **Deep** | numbered | Formation. These do not finish, and nobody else can do them for me. |
+| **Current** | numbered | Live responsibilities with edges. Real, but not the deep work. |
+| — | | *not mine to carry* |
+| **Blessing** | listed | I back it. Someone else owns it. |
+| **Enjoyment** | listed | For gladness. No other reason needed. |
+| **Future** | listed | Not mine yet. The work now is preparing. |
 
-**Switching.** A thing in motion is neither one nor the other, so it gets its own
-place. Press `⇄` on any item and it moves into a **Switching** band with a
-direction — *handing off* or *taking on* — where it sits, counted on neither
-side, until you confirm it landed. A handoff takes weeks; this makes those weeks
-visible instead of pretending the change was instant.
+**Deep** and **Current** share one continuous numbering — `1..n` straight
+through both — because they are the same stack of attention. The three tiers
+below the line are listed, not ranked; they do not compete with what you carry.
 
-**Editing.** Click a name and type. That is the whole editor.
+**`▲` and `▼` do one job in two ways.** Inside a tier they reorder. At a tier's
+edge they carry the item across into the neighbouring tier. So promoting a
+future hope into a live responsibility, or handing a current one down to a
+blessing, is the same gesture as reordering — the page is a single stack, and
+only the very first and very last item have a disabled control.
 
-| Control | Does |
-|---|---|
-| `▲` `▼` | Reorder — within that list only |
-| `⇄` | Start a switch: hand off, or take on |
-| `✕` | Remove |
+**Notes** are optional, one per item, opened with `✎` and shown in italic under
+the name. They open on an explicit press, never on hover: revealing a field on
+hover changes the row's height, which shifts every row below it out from under
+the pointer and makes the next click land on the wrong item.
 
-Add with the field at the top. `Enter` adds to **Mine** — the default is that a
-new thing is yours until you say otherwise.
+Click any name or note to edit it in place. Both grow to fit what you type.
 
 ## Live
 

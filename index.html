@@ -1,8 +1,8 @@
 <meta charset="utf-8">
 <title>Building &amp; Blessing</title>
 <meta name="description" content="What I am responsible for, and what I am only blessing.">
-<meta name="theme-color" content="#F4F3EF" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#101311" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F3F1EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E1210" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Stewardship">
@@ -14,26 +14,37 @@
 
 <style>
 :root{
-  --paper:#F4F3EF;
-  --ink:#1B1E1C;
-  --ink-2:#535B57;
-  --ink-3:#8C948F;
-  --rule:#E4E3DC;
-  --rule-2:#CFCEC4;
-  --carry:#1E5B4E;
-  --light:#94682E;
+  --paper:#F3F1EC;
+  --glow:#E7E9E2;
+  --ink:#1A1D1B;
+  --ink-2:#565E59;
+  --ink-3:#8B938E;
+  --rule:#DEDCD3;
+  --rule-2:#C7C5BA;
+
+  --deep:#15544A;
+  --current:#3B8B77;
+  --blessing:#9A6A2A;
+  --joy:#C4883A;
+  --future:#8A8672;
+
+  --on-deep:#F3F1EC;
   --f-display:"Spectral", Georgia, "Times New Roman", serif;
   --f-ui:"Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --paper:#101311; --ink:#E9EAE4; --ink-2:#A9B1AC; --ink-3:#7C847F;
-    --rule:#222722; --rule-2:#343B35; --carry:#5FBBA3; --light:#D2A15E;
+    --paper:#0E1210; --glow:#161C19; --ink:#E9EBE5; --ink-2:#A7AFA9; --ink-3:#79817C;
+    --rule:#222825; --rule-2:#333A36;
+    --deep:#4FB69C; --current:#3E8F7A; --blessing:#C79245; --joy:#D9A85B; --future:#8E8A76;
+    --on-deep:#08100D;
   }
 }
 :root[data-theme="dark"]{
-  --paper:#101311; --ink:#E9EAE4; --ink-2:#A9B1AC; --ink-3:#7C847F;
-  --rule:#222722; --rule-2:#343B35; --carry:#5FBBA3; --light:#D2A15E;
+  --paper:#0E1210; --glow:#161C19; --ink:#E9EBE5; --ink-2:#A7AFA9; --ink-3:#79817C;
+  --rule:#222825; --rule-2:#333A36;
+  --deep:#4FB69C; --current:#3E8F7A; --blessing:#C79245; --joy:#D9A85B; --future:#8E8A76;
+  --on-deep:#08100D;
 }
 
 *{box-sizing:border-box}
@@ -41,169 +52,165 @@ body{
   background:var(--paper);color:var(--ink);
   font-family:var(--f-ui);font-size:15px;line-height:1.5;
   -webkit-font-smoothing:antialiased;
-  padding:0 22px 120px;
+  margin:0;padding:0 18px 60px;
+  background-image:radial-gradient(ellipse 80% 55% at 50% 34%, var(--glow), transparent 70%);
 }
-.wrap{max-width:620px;margin:0 auto}
+.wrap{max-width:860px;margin:0 auto}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
-input,select{font:inherit;color:inherit}
-:focus-visible{outline:1.5px solid var(--carry);outline-offset:3px;border-radius:2px}
+input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:1.5px solid var(--current);outline-offset:3px;border-radius:3px}
 
 /* ---------- masthead ---------- */
-header{padding:52px 0 20px;border-bottom:1px solid var(--rule-2);margin-bottom:26px}
-h1{
-  font-family:var(--f-display);font-size:31px;font-weight:600;
-  margin:0;letter-spacing:-.02em;line-height:1.15;
-}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;
+  gap:14px 22px;padding:34px 0 18px}
+h1{font-family:var(--f-display);font-size:27px;font-weight:600;margin:0;letter-spacing:-.02em}
 h1 .amp{font-style:italic;font-weight:400;color:var(--ink-3);padding:0 .04em}
-.sub{
-  font-family:var(--f-display);font-style:italic;font-size:15px;
-  color:var(--ink-2);margin:7px 0 0;
+.sub{font-family:var(--f-display);font-style:italic;font-size:14px;color:var(--ink-2);margin:4px 0 0}
+
+.seg{display:flex;border:1px solid var(--rule-2);border-radius:999px;padding:2px;flex:none}
+.seg button{
+  border-radius:999px;padding:6px 15px;font-size:12px;font-weight:600;
+  letter-spacing:.04em;color:var(--ink-3);white-space:nowrap;
+  transition:background .16s ease,color .16s ease;
 }
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+
+/* ---------- canvas ---------- */
+.field{margin:4px 0 8px}
+svg{display:block;width:100%;height:auto;overflow:visible}
+.bubble{cursor:pointer}
+.bubble circle{
+  transition:opacity .35s ease, filter .2s ease, stroke-width .15s ease;
+  stroke-width:1.25;
+}
+.bubble text{
+  font-family:var(--f-display);pointer-events:none;
+  transition:opacity .35s ease;
+}
+
+.b-deep circle{fill:var(--deep);stroke:var(--deep)}
+.b-deep text{fill:var(--on-deep)}
+.b-current circle{fill:color-mix(in srgb, var(--current) 26%, transparent);stroke:var(--current)}
+.b-current text{fill:var(--ink)}
+.b-blessing circle{fill:color-mix(in srgb, var(--blessing) 15%, transparent);stroke:var(--blessing)}
+.b-joy circle{fill:color-mix(in srgb, var(--joy) 15%, transparent);stroke:var(--joy)}
+.b-future circle{fill:transparent;stroke:var(--future);stroke-dasharray:3 3.5}
+.b-blessing text,.b-joy text,.b-future text{fill:var(--ink-2)}
+
+.bubble:hover circle{stroke-width:2.5}
+.bubble.sel circle{stroke-width:3}
+
+/* the toggle: the other side recedes, it never disappears */
+svg.mode-carry .g-other circle,svg.mode-carry .g-other text{opacity:.16}
+svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text{opacity:.16}
+
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;
+  padding:6px 0 2px;font-size:11.5px;color:var(--ink-3)}
+.legend b{font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:10.5px}
+.key{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;
+  vertical-align:-1px;border:1.25px solid}
+.k-deep{background:var(--deep);border-color:var(--deep)}
+.k-current{background:color-mix(in srgb, var(--current) 26%, transparent);border-color:var(--current)}
+.k-blessing{background:color-mix(in srgb, var(--blessing) 15%, transparent);border-color:var(--blessing)}
+.k-joy{background:color-mix(in srgb, var(--joy) 15%, transparent);border-color:var(--joy)}
+.k-future{background:transparent;border-color:var(--future);border-style:dotted}
+
+/* ---------- detail ---------- */
+.detail{
+  max-width:520px;margin:14px auto 0;padding:16px 18px;
+  border:1px solid var(--rule-2);border-radius:10px;background:var(--paper);
+}
+.detail[hidden]{display:none}
+.d-tier{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:7px}
+.d-name,.d-note{
+  display:block;width:100%;background:none;border:0;resize:none;overflow:hidden;
+  font-family:var(--f-display);
+}
+.d-name{font-size:19px;line-height:1.3;padding:1px 0}
+.d-name:focus,.d-note:focus{outline:none;box-shadow:inset 0 -1px 0 var(--rule-2)}
+.d-note{font-style:italic;font-size:14px;color:var(--ink-2);line-height:1.45;padding:4px 0 2px}
+.d-note::placeholder{color:var(--ink-3)}
+.d-move{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;padding-top:13px;border-top:1px solid var(--rule)}
+.d-move button{
+  border:1px solid var(--rule-2);border-radius:999px;padding:5px 12px;
+  font-size:11.5px;font-weight:600;color:var(--ink-2);
+}
+.d-move button:hover{border-color:var(--ink-3);color:var(--ink)}
+.d-move button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.d-move .del{margin-left:auto;border-color:transparent;color:var(--ink-3)}
+.d-move .del:hover{color:#A8372A;border-color:#A8372A}
 
 /* ---------- add ---------- */
-.add{display:flex;gap:7px;margin-bottom:38px}
+.add{display:flex;gap:7px;max-width:520px;margin:22px auto 0}
 #new{
-  flex:1;min-width:0;background:transparent;
-  border:0;border-bottom:1px solid var(--rule-2);border-radius:0;
-  padding:8px 2px;font-family:var(--f-display);font-size:16.5px;
+  flex:1;min-width:0;background:transparent;border:0;border-bottom:1px solid var(--rule-2);
+  padding:7px 2px;font-family:var(--f-display);font-size:15.5px;
 }
 #new::placeholder{color:var(--ink-3);font-style:italic}
-#new:focus{outline:none;border-bottom-color:var(--carry)}
-#new-tier{
-  background:transparent;border:1px solid var(--rule-2);border-radius:3px;
-  padding:6px 8px;font-size:12.5px;color:var(--ink-2);
-}
-.add button{
-  border:1px solid var(--rule-2);border-radius:3px;
-  padding:0 15px;font-size:12.5px;font-weight:600;letter-spacing:.02em;
-}
-.add button:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+#new:focus{outline:none;border-bottom-color:var(--current)}
+#new-tier{background:transparent;border:1px solid var(--rule-2);border-radius:999px;
+  padding:5px 9px;font-size:11.5px;color:var(--ink-2)}
+.add .go{border:1px solid var(--rule-2);border-radius:999px;padding:0 15px;font-size:11.5px;font-weight:600}
+.add .go:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 
-/* ---------- tiers ---------- */
-.tier{margin-bottom:34px}
-.tier-head{
-  display:flex;align-items:baseline;justify-content:space-between;gap:14px;
-  padding-bottom:6px;border-bottom:1px solid var(--rule-2);
-}
-.tier-name{font-size:11.5px;font-weight:600;letter-spacing:.15em;text-transform:uppercase}
-.g-carry .tier-name{color:var(--carry)}
-.g-other .tier-name{color:var(--light)}
-.tier-count{font-size:11.5px;color:var(--ink-3);font-variant-numeric:tabular-nums;flex:none}
-.tier-note{
-  font-family:var(--f-display);font-style:italic;font-size:14px;
-  color:var(--ink-2);margin:9px 0 3px;
-}
-
-/* ---------- items ---------- */
-.item{
-  display:grid;grid-template-columns:32px minmax(0,1fr) auto;
-  align-items:start;column-gap:10px;
-  padding:8px 0;border-bottom:1px solid var(--rule);
-}
-.item:last-child{border-bottom:0}
-.gutter{
-  font-size:12.5px;font-weight:500;color:var(--ink-3);
-  font-variant-numeric:tabular-nums;text-align:right;
-  padding-top:5px;
-}
-.mark{display:inline-block;width:6px;height:6px;margin-right:1px}
-.m-blessing{border:1.5px solid var(--light)}
-.m-joy{border-radius:50%;background:var(--light)}
-.m-future{border-radius:50%;border:1.5px dotted var(--light)}
-
-.name,.note{
-  display:block;width:100%;background:none;border:0;
-  resize:none;overflow:hidden;
-}
-.name{
-  padding:2px 0;
-  font-family:var(--f-display);font-size:18px;font-weight:400;line-height:1.35;
-}
-.g-other .name{color:var(--ink-2)}
-.name:focus{outline:none;box-shadow:inset 0 -1px 0 var(--rule-2)}
-.note{
-  grid-column:2;padding:1px 0 3px;
-  font-family:var(--f-display);font-style:italic;font-size:14px;
-  color:var(--ink-2);line-height:1.45;
-}
-.note:focus{outline:none;box-shadow:inset 0 -1px 0 var(--rule-2)}
-.note::placeholder{color:var(--ink-3)}
-/* Notes appear on explicit intent only. Revealing them on hover or focus
-   changed row height, which shifted the rows below out from under the
-   pointer and made the next click land on the wrong item. */
-
-.tools{grid-row:1;grid-column:3;display:flex;gap:2px;opacity:0;transition:opacity .14s ease}
-.item:hover .tools,.item:focus-within .tools{opacity:1}
-@media (hover:none){.tools{opacity:.5}}
-.tools button{
-  width:26px;height:26px;border-radius:3px;color:var(--ink-3);
-  font-size:11px;line-height:1;
-}
-.tools button:hover{color:var(--ink)}
-.tools button:disabled{opacity:.2;cursor:default}
-.tools .del:hover{color:#A8372A}
-
-/* ---------- divider ---------- */
-.divide{display:flex;align-items:center;gap:15px;margin:44px 0 34px}
-.divide::before,.divide::after{content:"";flex:1;height:1px;background:var(--rule-2)}
-.divide span{
-  font-size:10.5px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--ink-3);white-space:nowrap;
-}
-
-.empty-tier{
-  font-family:var(--f-display);font-style:italic;font-size:14px;
-  color:var(--ink-3);padding:9px 0 3px;
-}
+.hint{text-align:center;font-family:var(--f-display);font-style:italic;
+  font-size:13px;color:var(--ink-3);margin:26px 0 0}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
-@media(max-width:520px){
-  h1{font-size:26px}
-  .add{flex-wrap:wrap}
-  #new{flex:1 0 100%}
-  .item{grid-template-columns:26px minmax(0,1fr) auto;column-gap:8px}
-  .name{font-size:17px}
+@media(max-width:560px){
+  header{padding-top:24px}
+  h1{font-size:23px}
+  .seg button{padding:6px 12px;font-size:11.5px}
 }
 </style>
 
 <div class="wrap">
   <header>
-    <h1>Building <span class="amp">&amp;</span> Blessing</h1>
-    <p class="sub">What I am responsible for, and what I am only blessing.</p>
+    <div>
+      <h1>Building <span class="amp">&amp;</span> Blessing</h1>
+      <p class="sub">What I carry, and what I only bless.</p>
+    </div>
+    <div class="seg" role="group" aria-label="Show">
+      <button data-mode="all" aria-pressed="true">All</button>
+      <button data-mode="carry" aria-pressed="false">Carrying</button>
+      <button data-mode="bless" aria-pressed="false">Blessing</button>
+    </div>
   </header>
+
+  <div class="field" id="field"></div>
+  <div class="legend" id="legend"></div>
+
+  <div class="detail" id="detail" hidden></div>
 
   <div class="add">
     <input id="new" type="text" placeholder="Add something…" aria-label="Name of the thing to add">
-    <select id="new-tier" aria-label="Which tier to add it to"></select>
-    <button id="add">Add</button>
+    <select id="new-tier" aria-label="Which tier"></select>
+    <button class="go" id="add">Add</button>
   </div>
 
-  <main id="view"></main>
+  <p class="hint">Tap any bubble to open it, rename it, or move it between tiers.</p>
 </div>
 
-<script id="state" type="application/json">{"v":3,"items":null}</script>
+<script id="state" type="application/json">{"v":4,"items":null}</script>
 
 <script>
 (function () {
   "use strict";
 
   var PRISTINE = "<!doctype html>\n" + document.documentElement.outerHTML;
-  var STORE_KEY = "building-and-blessing/v3";
+  var STORE_KEY = "building-and-blessing/v4";
 
-  // Order here is the priority order of the whole page. Everything in "carry"
-  // is numbered in one run; the rest are listed, not ranked.
   var TIERS = [
-    { key: "deep",     name: "Deep",      group: "carry",
-      note: "Formation. These do not finish, and nobody else can do them for me." },
-    { key: "current",  name: "Current",   group: "carry",
-      note: "Live responsibilities with edges. Real, but not the deep work." },
-    { key: "blessing", name: "Blessing",  group: "other",
-      note: "I back it. Someone else owns it." },
-    { key: "joy",      name: "Enjoyment", group: "other",
-      note: "For gladness. No other reason needed." },
-    { key: "future",   name: "Future",    group: "other",
-      note: "Not mine yet. The work now is preparing." }
+    { key: "deep",     name: "Deep",      side: "carry", min: 62, fs: 15.5, lh: 18.5,
+      blurb: "Formation. These do not finish." },
+    { key: "current",  name: "Current",   side: "carry", min: 52, fs: 13.5, lh: 16.5,
+      blurb: "Live responsibilities with edges." },
+    { key: "blessing", name: "Blessing",  side: "other", min: 45, fs: 12.5, lh: 15.5,
+      blurb: "I back it. Someone else owns it." },
+    { key: "joy",      name: "Enjoyment", side: "other", min: 44, fs: 12.5, lh: 15.5,
+      blurb: "For gladness. No other reason." },
+    { key: "future",   name: "Future",    side: "other", min: 44, fs: 12.5, lh: 15.5,
+      blurb: "Not mine yet. Preparing." }
   ];
-
   function rank(key) {
     for (var i = 0; i < TIERS.length; i++) if (TIERS[i].key === key) return i;
     return 1;
@@ -223,7 +230,6 @@ h1 .amp{font-style:italic;font-weight:400;color:var(--ink-3);padding:0 .04em}
       e = e || {};
       var tier = e.tier;
       if (known.indexOf(tier) < 0) {
-        // v1 posture / v2 list names land on the nearest tier.
         if (e.tier === "bless" || e.list === "bless" || e.posture === "blessing") tier = "blessing";
         else tier = "current";
       }
@@ -234,33 +240,28 @@ h1 .amp{font-style:italic;font-weight:400;color:var(--ink-3);padding:0 .04em}
         tier: tier
       };
     });
-    // The array is always grouped in tier order; sort stably to guarantee it.
-    var saved = typeof raw.t === "number" ? raw.t : 0;
-    return { v: 3, t: saved, items: items.map(function (it, i) { return [it, i]; })
-      .sort(function (a, b) { return (rank(a[0].tier) - rank(b[0].tier)) || (a[1] - b[1]); })
-      .map(function (p) { return p[0]; }) };
+    return { v: 4, t: typeof raw.t === "number" ? raw.t : 0,
+      items: items.map(function (it, i) { return [it, i]; })
+        .sort(function (a, b) { return (rank(a[0].tier) - rank(b[0].tier)) || (a[1] - b[1]); })
+        .map(function (p) { return p[0]; }) };
   }
 
   function load() {
     var embedded = null, local = null;
+    try { embedded = normalize(JSON.parse(document.getElementById("state").textContent || "{}")); }
+    catch (err) { embedded = null; }
     try {
-      embedded = normalize(JSON.parse(document.getElementById("state").textContent || "{}"));
-    } catch (err) { embedded = null; }
-    try {
-      var stored = localStorage.getItem(STORE_KEY)
-        || localStorage.getItem("building-and-blessing/v2")
-        || localStorage.getItem("building-and-blessing/v1");
+      var stored = localStorage.getItem(STORE_KEY) || localStorage.getItem("building-and-blessing/v3")
+        || localStorage.getItem("building-and-blessing/v2") || localStorage.getItem("building-and-blessing/v1");
       if (stored) local = normalize(JSON.parse(stored));
     } catch (err) { local = null; }
-
-    // Publishing is debounced, so a page closed straight after an edit has the
-    // change in localStorage but not yet in the published copy. Take whichever
-    // was written last rather than always trusting the embedded one.
     if (embedded && local) return (local.t || 0) > (embedded.t || 0) ? local : embedded;
-    return embedded || local || { v: 3, t: 0, items: [] };
+    return embedded || local || { v: 4, t: 0, items: [] };
   }
 
   var state = load();
+  var mode = "all";
+  var selected = null;
 
   /* ---------- persistence ---------- */
 
@@ -269,19 +270,16 @@ h1 .amp{font-style:italic;font-weight:400;color:var(--ink-3);padding:0 .04em}
     Promise.resolve(window.claude.use("artifact")).then(function (a) { api = a || null; })
       .catch(function () { api = null; });
   }
-
   var STATE_OPEN = '<script id="state" type="application/' + 'json">';
   var STATE_CLOSE = "<" + "/script>";
-
   function buildDocument() {
-    var start = PRISTINE.indexOf(STATE_OPEN);
-    if (start < 0) return PRISTINE;
-    var from = start + STATE_OPEN.length;
+    var s = PRISTINE.indexOf(STATE_OPEN);
+    if (s < 0) return PRISTINE;
+    var from = s + STATE_OPEN.length;
     var end = PRISTINE.indexOf(STATE_CLOSE, from);
     if (end < 0) return PRISTINE;
     return PRISTINE.slice(0, from) + JSON.stringify(state).replace(/</g, "\\u003c") + PRISTINE.slice(end);
   }
-
   var timer = null;
   function save() {
     state.t = Date.now();
@@ -289,13 +287,9 @@ h1 .amp{font-style:italic;font-weight:400;color:var(--ink-3);padding:0 .04em}
     if (timer) clearTimeout(timer);
     timer = setTimeout(function () {
       if (!api) return;
-      try {
-        Promise.resolve(api.publish(buildDocument())).catch(function () { /* someone published first */ });
-      } catch (err) { /* best effort */ }
+      try { Promise.resolve(api.publish(buildDocument())).catch(function () {}); } catch (err) {}
     }, 800);
   }
-
-  /* ---------- helpers ---------- */
 
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
@@ -306,193 +300,264 @@ h1 .amp{font-style:italic;font-weight:400;color:var(--ink-3);padding:0 .04em}
     for (var i = 0; i < state.items.length; i++) if (state.items[i].id === id) return i;
     return -1;
   }
-  function inTier(key) {
-    return state.items.filter(function (i) { return i.tier === key; });
-  }
-  // Where a member of `key` belongs, given the array stays grouped in tier order.
-  function boundary(key, where) {
-    var r = rank(key), start = 0;
-    while (start < state.items.length && rank(state.items[start].tier) < r) start++;
-    var end = start;
-    while (end < state.items.length && rank(state.items[end].tier) === r) end++;
-    return where === "start" ? start : end;
+
+  /* ---------- laying the bubbles out ---------- */
+
+  var gauge = document.createElement("canvas").getContext("2d");
+  function width(text, font) { gauge.font = font; return gauge.measureText(text).width; }
+
+  // Wrap into roughly n lines of even length, so the block sits well in a circle.
+  function wrapInto(words, font, n) {
+    var target = width(words.join(" "), font) / n * 1.06;
+    var lines = [], cur = "";
+    for (var i = 0; i < words.length; i++) {
+      var next = cur ? cur + " " + words[i] : words[i];
+      if (cur && width(next, font) > target) { lines.push(cur); cur = words[i]; }
+      else cur = next;
+    }
+    if (cur) lines.push(cur);
+    return lines;
   }
 
+  // A circle big enough to hold the wrapped block: half-diagonal plus padding.
+  function shape(item) {
+    var t = tierOf(item.tier);
+    var font = '400 ' + t.fs + 'px "Spectral", Georgia, serif';
+    var words = (item.name || "…").split(/\s+/);
+    var best = null;
+    for (var n = 1; n <= 5; n++) {
+      var lines = wrapInto(words, font, n);
+      var w = 0;
+      for (var i = 0; i < lines.length; i++) w = Math.max(w, width(lines[i], font));
+      var h = lines.length * t.lh;
+      var r = Math.sqrt((w / 2) * (w / 2) + (h / 2) * (h / 2)) + 13;
+      if (!best || r < best.r) best = { r: r, lines: lines };
+      if (lines.length > n) break;
+    }
+    return { r: Math.max(narrow() ? t.min * 0.78 : t.min, best.r), lines: best.lines, t: t };
+  }
+
+  // Largest first, spiralling outward from the centre. Tier order comes first,
+  // so what is carried settles in the middle and the rest gathers around it.
+  function narrow() { return window.innerWidth < 560; }
+
+  function aspect() {
+    var w = window.innerWidth;
+    if (w >= 760) return [1.30, 0.80];
+    if (w >= 560) return [1.05, 0.95];
+    return [0.52, 1.80];
+  }
+
+  function pack(circles) {
+    var ratio = aspect();
+    var placed = [];
+    circles.forEach(function (c, i) {
+      if (i === 0) { c.x = 0; c.y = 0; placed.push(c); return; }
+      var found = false;
+      for (var d = 4; d < 3000 && !found; d += 5) {
+        var step = Math.PI / Math.max(10, Math.min(90, d / 3));
+        for (var a = 0; a < Math.PI * 2 - 1e-9; a += step) {
+          var x = Math.cos(a) * d * ratio[0], y = Math.sin(a) * d * ratio[1];
+          var ok = true;
+          for (var k = 0; k < placed.length; k++) {
+            var p = placed[k], dx = p.x - x, dy = p.y - y;
+            if (dx * dx + dy * dy < (p.r + c.r + 7) * (p.r + c.r + 7)) { ok = false; break; }
+          }
+          if (ok) { c.x = x; c.y = y; found = true; break; }
+        }
+      }
+      if (!found) { c.x = 0; c.y = 0; }
+      placed.push(c);
+    });
+    return placed;
+  }
+
+  function renderField() {
+    var field = document.getElementById("field");
+    if (!state.items.length) {
+      field.innerHTML = '<p class="hint">Nothing here yet. Add the first thing below.</p>';
+      return;
+    }
+
+    var circles = state.items.map(function (it) {
+      var s = shape(it);
+      return { id: it.id, tier: it.tier, r: s.r, lines: s.lines, t: s.t };
+    }).sort(function (a, b) { return (rank(a.tier) - rank(b.tier)) || (b.r - a.r); });
+
+    pack(circles);
+
+    var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    circles.forEach(function (c) {
+      minX = Math.min(minX, c.x - c.r); maxX = Math.max(maxX, c.x + c.r);
+      minY = Math.min(minY, c.y - c.r); maxY = Math.max(maxY, c.y + c.r);
+    });
+    var m = 14;
+
+    var body = circles.map(function (c) {
+      var tspans = c.lines.map(function (line, i) {
+        var y = c.y + (i - (c.lines.length - 1) / 2) * c.t.lh;
+        return '<tspan x="' + c.x.toFixed(1) + '" y="' + y.toFixed(1) + '">' + esc(line) + "</tspan>";
+      }).join("");
+      return '<g class="bubble b-' + c.tier + " g-" + c.t.side +
+          (selected === c.id ? " sel" : "") + '" data-id="' + esc(c.id) +
+          '" tabindex="0" role="button" aria-label="' + esc(c.lines.join(" ")) + '">' +
+        '<circle cx="' + c.x.toFixed(1) + '" cy="' + c.y.toFixed(1) + '" r="' + c.r.toFixed(1) + '"/>' +
+        '<text text-anchor="middle" dominant-baseline="central" font-size="' + c.t.fs + '">' +
+          tspans + "</text>" +
+      "</g>";
+    }).join("");
+
+    field.innerHTML = '<svg class="mode-' + mode + '" viewBox="' +
+      (minX - m).toFixed(1) + " " + (minY - m).toFixed(1) + " " +
+      (maxX - minX + m * 2).toFixed(1) + " " + (maxY - minY + m * 2).toFixed(1) +
+      '" role="img" aria-label="Everything I am carrying and blessing">' + body + "</svg>";
+  }
+
+  function renderLegend() {
+    document.getElementById("legend").innerHTML = TIERS.map(function (t) {
+      var n = state.items.filter(function (i) { return i.tier === t.key; }).length;
+      return '<span><span class="key k-' + t.key + '"></span><b>' + esc(t.name) + "</b> " + n + "</span>";
+    }).join("");
+  }
+
+  function renderDetail() {
+    var box = document.getElementById("detail");
+    var it = selected !== null ? state.items[indexOf(selected)] : null;
+    if (!it) { box.hidden = true; box.innerHTML = ""; return; }
+    box.hidden = false;
+    box.innerHTML =
+      '<div class="d-tier" style="color:var(--' + it.tier + ')">' + esc(tierOf(it.tier).name) +
+        ' &nbsp;·&nbsp; <span style="color:var(--ink-3)">' + esc(tierOf(it.tier).blurb) + "</span></div>" +
+      '<textarea class="d-name" rows="1" aria-label="Name">' + esc(it.name) + "</textarea>" +
+      '<textarea class="d-note" rows="1" placeholder="a note, if it helps" aria-label="Note">' +
+        esc(it.note) + "</textarea>" +
+      '<div class="d-move">' +
+        TIERS.map(function (t) {
+          return '<button data-tier="' + t.key + '" aria-pressed="' + (t.key === it.tier) + '">' +
+            esc(t.name) + "</button>";
+        }).join("") +
+        '<button class="del" data-del="1">Remove</button>' +
+      "</div>";
+    box.querySelectorAll(".d-name,.d-note").forEach(autosize);
+  }
+
+  function autosize(el) { el.style.height = "auto"; el.style.height = el.scrollHeight + "px"; }
+
+  function render() { renderField(); renderLegend(); renderDetail(); }
+
   /* ---------- actions ---------- */
+
+  function setMode(next) {
+    mode = next;
+    document.querySelectorAll("[data-mode]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.mode === next));
+    });
+    var svg = document.querySelector("#field svg");
+    if (svg) svg.setAttribute("class", "mode-" + next);
+  }
+
+  function select(id) {
+    selected = selected === id ? null : id;
+    render();
+    if (selected) document.getElementById("detail").scrollIntoView({ block: "nearest" });
+  }
+
+  function moveTo(id, tier) {
+    var i = indexOf(id);
+    if (i < 0 || state.items[i].tier === tier) return;
+    var it = state.items[i];
+    it.tier = tier;
+    state.items.splice(i, 1);
+    var at = 0;
+    while (at < state.items.length && rank(state.items[at].tier) <= rank(tier)) at++;
+    state.items.splice(at, 0, it);
+    save(); render();
+  }
 
   function add() {
     var input = document.getElementById("new");
     var name = input.value.trim();
     if (!name) { input.focus(); return; }
     var tier = document.getElementById("new-tier").value;
-    state.items.splice(boundary(tier, "end"), 0, { id: uid(), name: name, note: "", tier: tier });
+    var it = { id: uid(), name: name, note: "", tier: tier };
+    var at = 0;
+    while (at < state.items.length && rank(state.items[at].tier) <= rank(tier)) at++;
+    state.items.splice(at, 0, it);
     input.value = "";
+    selected = it.id;
+    save(); render();
     input.focus();
-    save(); render();
-  }
-
-  // One control does both jobs: reorder inside a tier, and at a tier's edge,
-  // carry the item across into the neighbouring tier. The page is one stack.
-  function move(id, dir) {
-    var i = indexOf(id);
-    if (i < 0) return;
-    var it = state.items[i];
-    var siblings = inTier(it.tier);
-    var pos = siblings.indexOf(it);
-
-    if (dir === -1 ? pos > 0 : pos < siblings.length - 1) {
-      var j = indexOf(siblings[pos + dir].id);
-      state.items[i] = state.items[j];
-      state.items[j] = it;
-    } else {
-      var next = TIERS[rank(it.tier) + dir];
-      if (!next) return;
-      state.items.splice(i, 1);
-      it.tier = next.key;
-      state.items.splice(boundary(next.key, dir === -1 ? "end" : "start"), 0, it);
-    }
-    save(); render(id, dir);
-  }
-
-  function remove(id) {
-    var i = indexOf(id);
-    if (i < 0) return;
-    state.items.splice(i, 1);
-    save(); render();
-  }
-
-  function edit(id, field, value) {
-    var it = state.items[indexOf(id)];
-    if (!it) return;
-    value = value.trim();
-    if (it[field] === value) return;
-    if (field === "name" && !value) return;
-    it[field] = value.slice(0, field === "name" ? 300 : 500);
-    save();
-  }
-
-  /* ---------- render ---------- */
-
-  function itemHTML(it, tier, gutter, first, last) {
-    return '<div class="item" data-id="' + esc(it.id) + '">' +
-      '<div class="gutter">' + gutter + "</div>" +
-      '<textarea class="name" rows="1" aria-label="Name">' + esc(it.name) + "</textarea>" +
-      '<div class="tools">' +
-        '<button data-act="up" ' + (first ? "disabled" : "") +
-          ' aria-label="Move up" title="Move up">&#9650;</button>' +
-        '<button data-act="down" ' + (last ? "disabled" : "") +
-          ' aria-label="Move down" title="Move down">&#9660;</button>' +
-        (it.note || noteOpen === it.id ? "" :
-          '<button data-act="note" aria-label="Add a note" title="Add a note">&#9998;</button>') +
-        '<button data-act="del" class="del" aria-label="Remove" title="Remove">&#10005;</button>' +
-      "</div>" +
-      (it.note || noteOpen === it.id
-        ? '<textarea class="note" rows="1" placeholder="a note, if it helps" aria-label="Note">' +
-          esc(it.note) + "</textarea>"
-        : "") +
-    "</div>";
-  }
-
-  var noteOpen = null;
-
-  // A textarea does not size itself; without this, long notes would be clipped.
-  function autosize(el) {
-    el.style.height = "auto";
-    el.style.height = el.scrollHeight + "px";
-  }
-
-  function render(focusId, focusDir) {
-    var html = "", counter = 0, total = state.items.length, seen = 0, dividerDone = false;
-
-    TIERS.forEach(function (tier) {
-      var items = inTier(tier.key);
-
-      if (tier.group === "other" && !dividerDone) {
-        dividerDone = true;
-        html += '<div class="divide"><span>Not mine to carry</span></div>';
-      }
-
-      html += '<section class="tier g-' + tier.group + '">' +
-        '<div class="tier-head"><span class="tier-name">' + esc(tier.name) + "</span>" +
-        '<span class="tier-count">' + items.length + "</span></div>" +
-        '<p class="tier-note">' + esc(tier.note) + "</p>";
-
-      if (!items.length) {
-        html += '<p class="empty-tier">Nothing here.</p>';
-      } else {
-        items.forEach(function (it) {
-          var gutter = tier.group === "carry"
-            ? ++counter
-            : '<span class="mark m-' + tier.key + '"></span>';
-          html += itemHTML(it, tier, gutter, seen === 0, seen === total - 1);
-          seen++;
-        });
-      }
-      html += "</section>";
-    });
-
-    document.getElementById("view").innerHTML = html;
-    Array.prototype.forEach.call(document.querySelectorAll(".name,.note"), autosize);
-
-    if (noteOpen) {
-      var opened = document.querySelector('[data-id="' + noteOpen + '"] .note');
-      if (opened) { opened.focus(); return; }
-    }
-    if (focusId) {
-      var row = document.querySelector('[data-id="' + focusId + '"]');
-      if (row) {
-        var order = focusDir === -1 ? ["up", "down"] : ["down", "up"];
-        var target = null;
-        for (var k = 0; k < order.length && !target; k++) {
-          var b = row.querySelector('[data-act="' + order[k] + '"]');
-          if (b && !b.disabled) target = b;
-        }
-        (target || row.querySelector(".name")).focus();
-      }
-    }
   }
 
   /* ---------- wiring ---------- */
 
-  var tierSelect = document.getElementById("new-tier");
+  var sel = document.getElementById("new-tier");
   TIERS.forEach(function (t) {
     var o = document.createElement("option");
-    o.value = t.key;
-    o.textContent = t.name;
-    tierSelect.appendChild(o);
+    o.value = t.key; o.textContent = t.name;
+    sel.appendChild(o);
   });
-  tierSelect.value = "current";
+  sel.value = "current";
+
+  document.querySelectorAll("[data-mode]").forEach(function (b) {
+    b.addEventListener("click", function () { setMode(b.dataset.mode); });
+  });
+
+  var field = document.getElementById("field");
+  field.addEventListener("click", function (ev) {
+    var g = ev.target.closest(".bubble");
+    if (g) select(g.dataset.id);
+  });
+  field.addEventListener("keydown", function (ev) {
+    if (ev.key !== "Enter" && ev.key !== " ") return;
+    var g = ev.target.closest(".bubble");
+    if (g) { ev.preventDefault(); select(g.dataset.id); }
+  });
+
+  var detail = document.getElementById("detail");
+  detail.addEventListener("click", function (ev) {
+    var t = ev.target.closest("[data-tier]");
+    if (t) { moveTo(selected, t.dataset.tier); return; }
+    if (ev.target.closest("[data-del]")) {
+      var i = indexOf(selected);
+      if (i >= 0) state.items.splice(i, 1);
+      selected = null;
+      save(); render();
+    }
+  });
+  detail.addEventListener("input", function (ev) {
+    if (ev.target.classList.contains("d-name") || ev.target.classList.contains("d-note")) autosize(ev.target);
+  });
+  detail.addEventListener("change", function (ev) {
+    var it = state.items[indexOf(selected)];
+    if (!it) return;
+    if (ev.target.classList.contains("d-name")) {
+      var v = ev.target.value.trim();
+      if (!v) { ev.target.value = it.name; return; }
+      it.name = v.slice(0, 300);
+    } else if (ev.target.classList.contains("d-note")) {
+      it.note = ev.target.value.trim().slice(0, 500);
+    } else return;
+    save(); render();
+  });
 
   document.getElementById("add").addEventListener("click", add);
   document.getElementById("new").addEventListener("keydown", function (ev) {
     if (ev.key === "Enter") add();
   });
-
-  var view = document.getElementById("view");
-  view.addEventListener("click", function (ev) {
-    var btn = ev.target.closest("[data-act]");
-    if (!btn) return;
-    var id = btn.closest("[data-id]").dataset.id;
-    if (btn.dataset.act === "up") move(id, -1);
-    else if (btn.dataset.act === "down") move(id, 1);
-    else if (btn.dataset.act === "note") { noteOpen = id; render(); noteOpen = null; }
-    else remove(id);
-  });
-  view.addEventListener("change", function (ev) {
-    var el = ev.target;
-    if (!el.classList.contains("name") && !el.classList.contains("note")) return;
-    edit(el.closest("[data-id]").dataset.id, el.classList.contains("name") ? "name" : "note", el.value);
-  });
-  view.addEventListener("input", function (ev) {
-    if (ev.target.classList.contains("name") || ev.target.classList.contains("note")) autosize(ev.target);
-  });
-  view.addEventListener("keydown", function (ev) {
-    if (ev.key === "Enter" && (ev.target.classList.contains("name") || ev.target.classList.contains("note"))) {
-      ev.target.blur();
-    }
+  document.addEventListener("keydown", function (ev) {
+    if (ev.key === "Escape" && selected) { selected = null; render(); }
   });
 
   render();
+  // Metrics change once the real face arrives, so lay it out again.
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(renderField);
+  var last = window.innerWidth;
+  window.addEventListener("resize", function () {
+    if (Math.abs(window.innerWidth - last) < 60) return;
+    last = window.innerWidth;
+    renderField();
+  });
 })();
 </script>
 
@@ -505,7 +570,6 @@ h1 .amp{font-style:italic;font-weight:400;color:var(--ink-3);padding:0 .04em}
   try { framed = window.top !== window.self; } catch (err) { framed = true; }
   if (framed || !("serviceWorker" in navigator)) return;
   if (location.protocol !== "https:" && location.hostname !== "localhost" && location.hostname !== "127.0.0.1") return;
-
   var hadController = !!navigator.serviceWorker.controller;
   var reloading = false;
   navigator.serviceWorker.addEventListener("controllerchange", function () {
@@ -514,7 +578,7 @@ h1 .amp{font-style:italic;font-weight:400;color:var(--ink-3);padding:0 .04em}
     location.reload();
   });
   window.addEventListener("load", function () {
-    navigator.serviceWorker.register("sw.js").catch(function () { /* bonus, not required */ });
+    navigator.serviceWorker.register("sw.js").catch(function () {});
   });
 })();
 </script>

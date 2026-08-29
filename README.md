@@ -7,33 +7,40 @@ One page. Two lists. Nothing else.
 - **Mine to carry** — if it stalls, it stalls with me.
 - **Blessing** — someone else carries it. Nice to get to, never ahead of the above.
 
-## Five tiers, one stack
+## One field, seen at once
 
-| Tier | | |
-|---|---|---|
-| **Deep** | numbered | Formation. These do not finish, and nobody else can do them for me. |
-| **Current** | numbered | Live responsibilities with edges. Real, but not the deep work. |
-| — | | *not mine to carry* |
-| **Blessing** | listed | I back it. Someone else owns it. |
-| **Enjoyment** | listed | For gladness. No other reason needed. |
-| **Future** | listed | Not mine yet. The work now is preparing. |
+Not a list. Every item is a bubble in a single packed composition, so the whole
+of it is one glance.
 
-**Deep** and **Current** share one continuous numbering — `1..n` straight
-through both — because they are the same stack of attention. The three tiers
-below the line are listed, not ranked; they do not compete with what you carry.
+| | |
+|---|---|
+| **Deep** | solid — formation, these do not finish |
+| **Current** | tinted — live responsibilities with edges |
+| **Blessing** | outlined warm — I back it, someone else owns it |
+| **Enjoyment** | outlined amber — for gladness, no other reason |
+| **Future** | dotted — not mine yet, preparing |
 
-**`▲` and `▼` do one job in two ways.** Inside a tier they reorder. At a tier's
-edge they carry the item across into the neighbouring tier. So promoting a
-future hope into a live responsibility, or handing a current one down to a
-blessing, is the same gesture as reordering — the page is a single stack, and
-only the very first and very last item have a disabled control.
+Size carries meaning twice over: a tier floor (Deep bubbles are never small) plus
+however much room the words need. Each circle is sized to its own wrapped label,
+so text is legible at a fixed size rather than shrunk to fit a fixed circle.
 
-**Notes** are optional, one per item, opened with `✎` and shown in italic under
-the name. They open on an explicit press, never on hover: revealing a field on
-hover changes the row's height, which shifts every row below it out from under
-the pointer and makes the next click land on the wrong item.
+**Layout.** Labels are measured on a canvas, wrapped into the line count that
+yields the smallest enclosing circle, then packed largest-first along a spiral
+from the centre in tier order — so what you carry settles in the middle and the
+rest gathers around it. No layout library; the packing is about forty lines.
 
-Click any name or note to edit it in place. Both grow to fit what you type.
+The spiral's aspect ratio follows the viewport: wide on a desktop, tall and
+narrow on a phone. This matters more than it sounds — a wide composition scaled
+into a 390px screen rendered labels at 7.6px. Narrowing the spiral and tightening
+the tier floors on small screens brings that back to 15.6px without touching the
+font size.
+
+**The toggle** — All · Carrying · Blessing — fades the other side to 16% rather
+than removing it. The composition never reflows, so the shape of the whole stays
+put while you look at one half of it.
+
+**Tap a bubble** to open it: rename, add a note, move it to any tier in one tap,
+or remove it.
 
 ## Live
 

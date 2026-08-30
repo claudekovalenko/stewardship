@@ -30,9 +30,10 @@ land inside a 1280×800 laptop without scrolling.
 | **Enjoyment** | amber outline | For gladness. No other reason. |
 | **Future** | dotted | Not mine yet. Preparing. |
 
-**Layout.** Labels are measured on a canvas, then circles pack largest-first
-along a spiral from the centre in tier order, so what is carried settles in the
-middle. Key entries are split left and right by which half of the field their
+**Layout.** Labels are measured on a canvas, then circles pack along a spiral
+from the centre — tier first, then your own order within the tier. Packing runs
+outward, so order decides centrality: the first thing in Deep sits in the middle
+and everything else gathers around it. Key entries are split left and right by which half of the field their
 bubble sits in, distributed evenly down each side, and joined by a two-segment
 leader drawn *behind* the bubbles. No layout library; about eighty lines.
 

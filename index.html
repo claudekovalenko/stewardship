@@ -390,11 +390,14 @@ svg.mode-bless .g-carry .lead,svg.mode-bless .g-carry .keydot{opacity:.14}
       return;
     }
 
-    var circles = state.items.map(function (it) {
+    // Packing runs from the centre outward, so order decides centrality: tier
+    // first, then your own order inside the tier. The first thing in Deep sits
+    // in the middle and everything else gathers around it.
+    var circles = state.items.map(function (it, i) {
       var s = shape(it);
-      return { id: it.id, tier: it.tier, name: it.name, label: it.label,
+      return { id: it.id, tier: it.tier, name: it.name, label: it.label, i: i,
         r: s.r, lines: s.lines, t: s.t };
-    }).sort(function (a, b) { return (rank(a.tier) - rank(b.tier)) || (b.r - a.r); });
+    }).sort(function (a, b) { return (rank(a.tier) - rank(b.tier)) || (a.i - b.i); });
     pack(circles);
 
     var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;

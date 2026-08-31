@@ -69,6 +69,14 @@ home screen and it opens standalone. `manifest.webmanifest`, `sw.js` and the
 icons do that; the service worker deliberately does not register from `file://`
 or inside a frame.
 
+## The list in this repo
+
+`index.html` ships with a real list embedded in its `<script id="state">` block,
+so the hosted copy loads with everything already in place rather than empty.
+This is public, by the owner's explicit choice — anything added here is readable
+by anyone. Keep genuinely private material out of it, or fork this to a private
+repo and host it somewhere that deploys from one.
+
 ## Where the data lives
 
 In your browser. Saved to `localStorage`, and — when published as a Claude

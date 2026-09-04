@@ -393,10 +393,34 @@ svg.mode-bless line.tie.g-carry{opacity:.14}
       var anchor = (c.serves && byId[c.serves]) || null;
       var ax = anchor ? anchor.x : 0, ay = anchor ? anchor.y : 0;
       var found = false;
+      // A tied item hangs below its concept. Try a narrow cone straight down
+      // first and only widen if that whole column is blocked — fanning wide at
+      // close range would put it level with its concept, which reads as
+      // "beside" rather than "under".
+      var spans = anchor ? [Math.PI / 2.4, Math.PI / 2, Math.PI] : [null];
+      for (var si = 0; si < spans.length && !found; si++) {
+      var span = spans[si];
       for (var d = 4; d < 3000 && !found; d += 5) {
         var step = Math.PI / Math.max(10, Math.min(90, d / 3));
-        for (var a = 0; a < Math.PI * 2 - 1e-9; a += step) {
-          var x = ax + Math.cos(a) * d * ratio[0], y = ay + Math.sin(a) * d * ratio[1], ok = true;
+
+        var angles = [];
+        if (anchor) {
+          angles.push(Math.PI / 2);
+          for (var k = 1; k * step <= span + 1e-9; k++) {
+            angles.push(Math.PI / 2 - k * step);
+            angles.push(Math.PI / 2 + k * step);
+          }
+        } else {
+          for (var a0 = 0; a0 < Math.PI * 2 - 1e-9; a0 += step) angles.push(a0);
+        }
+
+        for (var ai = 0; ai < angles.length; ai++) {
+          var a = angles[ai];
+          // The composition is flattened, which squashes "down" into "beside".
+          // A tied item ignores that and hangs on a true circle from its
+          // concept, so the stack reads vertically.
+          var rx = anchor ? 1 : ratio[0], ry = anchor ? 1 : ratio[1];
+          var x = ax + Math.cos(a) * d * rx, y = ay + Math.sin(a) * d * ry, ok = true;
           for (var k = 0; k < placed.length; k++) {
             var p = placed[k], dx = p.x - x, dy = p.y - y;
             var need = (p.rOut || p.r) + (c.rOut || c.r) + 5;
@@ -409,6 +433,7 @@ svg.mode-bless line.tie.g-carry{opacity:.14}
           }
           if (ok) { c.x = x; c.y = y; found = true; break; }
         }
+      }
       }
       if (!found) { c.x = ax; c.y = ay; }
       placed.push(c);

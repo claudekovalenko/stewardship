@@ -45,11 +45,16 @@ pixels; this keeps it at 13px+.
 **The toggle** — All · Carrying · Blessing — fades the other side, key and
 leaders included, to 14% rather than removing it. The composition never reflows.
 
-**Ties.** Anything can be marked as serving one of the Deep concepts. The pair is
-then packed together — the spiral for a tied item runs outward from its concept
-rather than from the centre — and joined by a line, so concrete work reads as
-attached to the thing it is actually for. Packing leaves a deliberate gap
-between a tied pair; touching circles make the connector too short to read.
+**Ties.** Anything can be marked as serving one of the Deep concepts, and then
+it *hangs below* it. The spiral for a tied item runs outward from its concept
+rather than from the centre, searches a narrow cone straight down first, and
+only widens if that whole column is blocked — fanning wide at close range puts
+the item level with its concept, which reads as "beside" rather than "under".
+A tied item also ignores the composition's flattening and hangs on a true
+circle, since a flattened field squashes "down" into "beside".
+
+Packing leaves a deliberate gap between a tied pair; touching circles make the
+connector too short to read as a line.
 
 **Priority is order.** Within a tier, the order of items is their priority, and
 packing consumes that order from the centre outward — so raising something's

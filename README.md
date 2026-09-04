@@ -45,8 +45,20 @@ pixels; this keeps it at 13px+.
 **The toggle** — All · Carrying · Blessing — fades the other side, key and
 leaders included, to 14% rather than removing it. The composition never reflows.
 
+**Ties.** Anything can be marked as serving one of the Deep concepts. The pair is
+then packed together — the spiral for a tied item runs outward from its concept
+rather than from the centre — and joined by a line, so concrete work reads as
+attached to the thing it is actually for. Packing leaves a deliberate gap
+between a tied pair; touching circles make the connector too short to read.
+
+**Progress.** An optional 0–100% per item, drawn as an arc around the outside of
+the circle, opening clockwise from the top. Nothing is drawn at 0. The arc sits
+4px beyond the rim and is counted in both collision and bounds, so rings never
+overlap a neighbour or get clipped.
+
 **Tap a bubble or its key entry** to edit the short label, the key phrase and the
-note separately, move it to any tier in one tap, or remove it.
+note separately, set what it serves and how far along it is, move it to any tier
+in one tap, or remove it.
 
 ## Live
 

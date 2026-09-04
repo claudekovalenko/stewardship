@@ -91,6 +91,15 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 .bubble:hover circle{stroke-width:2.5}
 .bubble.sel circle{stroke-width:3.5}
 
+/* a thing tied to the concept it serves */
+.tie{stroke:var(--deep);stroke-width:1.6;opacity:.55;transition:opacity .35s ease}
+.ring{fill:none;stroke-width:2.5;stroke-linecap:round;transition:opacity .35s ease}
+.b-deep .ring{stroke:var(--deep)}
+.b-current .ring{stroke:var(--current)}
+.b-blessing .ring{stroke:var(--blessing)}
+.b-joy .ring{stroke:var(--joy)}
+.b-future .ring{stroke:var(--future)}
+
 /* the key ringing the outside */
 .lead{stroke:var(--rule-2);stroke-width:1;fill:none;transition:opacity .35s ease}
 .keytext{
@@ -108,9 +117,11 @@ svg{display:block;width:100%;height:auto;overflow:visible}
 .sel-key .lead{stroke:var(--ink-3)}
 
 svg.mode-carry .g-other circle,svg.mode-carry .g-other text,
-svg.mode-carry .g-other .lead,svg.mode-carry .g-other .keydot{opacity:.14}
+svg.mode-carry .g-other .lead,svg.mode-carry .g-other .keydot,
+svg.mode-carry line.tie.g-other{opacity:.14}
 svg.mode-bless .g-carry circle,svg.mode-bless .g-carry text,
-svg.mode-bless .g-carry .lead,svg.mode-bless .g-carry .keydot{opacity:.14}
+svg.mode-bless .g-carry .lead,svg.mode-bless .g-carry .keydot,
+svg.mode-bless line.tie.g-carry{opacity:.14}
 
 /* ---------- key beneath, on narrow screens ---------- */
 .keylist{display:none;margin:14px auto 0;max-width:520px;
@@ -146,6 +157,12 @@ svg.mode-bless .g-carry .lead,svg.mode-bless .g-carry .keydot{opacity:.14}
 .d-note{font-style:italic;font-size:13.5px;color:var(--ink-2);line-height:1.45;padding:1px 0}
 .d-label:focus,.d-name:focus,.d-note:focus{outline:none;box-shadow:inset 0 -1px 0 var(--rule-2)}
 .d-note::placeholder,.d-name::placeholder{color:var(--ink-3)}
+.d-serves{background:transparent;border:1px solid var(--rule-2);border-radius:999px;
+  padding:5px 10px;font-size:12.5px;color:var(--ink-2);max-width:100%}
+.d-pct{display:flex;align-items:center;gap:10px}
+.d-pct input{flex:1;min-width:0;accent-color:var(--current)}
+.d-pct b{font-family:var(--f-ui);font-size:12px;font-weight:600;color:var(--ink-2);
+  min-width:38px;text-align:right;font-variant-numeric:tabular-nums}
 .d-move{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)}
 .d-move button{border:1px solid var(--rule-2);border-radius:999px;padding:5px 12px;
   font-size:11.5px;font-weight:600;color:var(--ink-2)}
@@ -197,7 +214,7 @@ svg.mode-bless .g-carry .lead,svg.mode-bless .g-carry .keydot{opacity:.14}
   <p class="hint">Tap any bubble to rename it or move it between tiers.</p>
 </div>
 
-<script id="state" type="application/json">{"v": 5, "items": [{"id": "s00", "tier": "deep", "label": "Love the Lord", "name": "Love the Lord my God with all my heart, soul, and strength", "note": "The first and greatest."}, {"id": "s00b", "tier": "deep", "label": "Love my neighbor", "name": "Love my neighbor as myself", "note": "The second, like it. Everything else here hangs on these two."}, {"id": "s01", "tier": "deep", "name": "My relationship with God", "note": "", "label": "Walk with God"}, {"id": "s02", "tier": "deep", "name": "My character — actually growing like Christ", "note": "", "label": "Christlikeness"}, {"id": "s03", "tier": "deep", "name": "My calling — walking it out fully before the Lord", "note": "", "label": "My calling"}, {"id": "s04", "tier": "deep", "name": "Purity", "note": "", "label": "Purity"}, {"id": "s05", "tier": "deep", "name": "Preparing myself for my future wife and family", "note": "Getting ready, and learning how to recognise her.", "label": "Preparing for marriage"}, {"id": "s06", "tier": "deep", "name": "My family", "note": "", "label": "My family"}, {"id": "s07", "tier": "deep", "name": "The people I'm discipling", "note": "", "label": "Those I disciple"}, {"id": "s08", "tier": "deep", "name": "My health", "note": "Building it at PF.", "label": "My health"}, {"id": "s09", "tier": "deep", "name": "Where I'm planted", "note": "Where I'm committed and plugged in more deeply. Still discerning this one.", "label": "Where I'm planted"}, {"id": "s10", "tier": "current", "name": "The house", "note": "Needs stewarding, but it isn't the main thing.", "label": "The house"}, {"id": "s11", "tier": "current", "name": "Cypress College", "note": "", "label": "Cypress College"}, {"id": "s12", "tier": "current", "name": "MLS", "note": "", "label": "MLS"}, {"id": "s13", "tier": "current", "name": "Social media campaigns", "note": "Secondary.", "label": "Social campaigns"}, {"id": "s14", "tier": "current", "name": "Seminary homework", "note": "Feels the most stressful of these, and it sits lowest. I'm easily driven by grades and how it looks — I do want to actually learn.", "label": "Seminary work"}, {"id": "s21", "tier": "current", "label": "The podcast", "name": "The podcast", "note": "More external than the rest of these — it faces outward."}, {"id": "s15", "tier": "blessing", "name": "Mariners Church", "note": "Ancillary. Glad to give to it; not mine to carry.", "label": "Mariners Church"}, {"id": "s16", "tier": "joy", "name": "Tuesdays", "note": "Purely for gladness.", "label": "Tuesdays"}, {"id": "s17", "tier": "future", "name": "Stewarding my wife", "note": "Not yet mine. For now the work is preparation.", "label": "My wife"}, {"id": "s18", "tier": "future", "name": "USC", "note": "Hopeful. Not a responsibility yet.", "label": "USC"}, {"id": "s19", "tier": "blessing", "name": "The tool I built with Carter", "note": "Made it, glad it exists — not mine to carry.", "label": "Tool with Carter"}]}</script>
+<script id="state" type="application/json">{"v": 5, "items": [{"id": "s00", "tier": "deep", "label": "Love the Lord", "name": "Love the Lord my God with all my heart, soul, and strength", "note": "The first and greatest.", "serves": "", "pct": 0}, {"id": "s00b", "tier": "deep", "label": "Love my neighbor", "name": "Love my neighbor as myself", "note": "The second, like it. Everything else here hangs on these two.", "serves": "", "pct": 0}, {"id": "s01", "tier": "deep", "name": "My relationship with God", "note": "", "label": "Walk with God", "serves": "", "pct": 0}, {"id": "s02", "tier": "deep", "name": "My character — actually growing like Christ", "note": "", "label": "Christlikeness", "serves": "", "pct": 0}, {"id": "s03", "tier": "deep", "name": "My calling — walking it out fully before the Lord", "note": "", "label": "My calling", "serves": "", "pct": 0}, {"id": "s04", "tier": "deep", "name": "Purity", "note": "", "label": "Purity", "serves": "", "pct": 0}, {"id": "s05", "tier": "deep", "name": "Preparing myself for my future wife and family", "note": "Getting ready, and learning how to recognise her.", "label": "Preparing for marriage", "serves": "", "pct": 0}, {"id": "s06", "tier": "deep", "name": "My family", "note": "", "label": "My family", "serves": "", "pct": 0}, {"id": "s07", "tier": "deep", "name": "The people I'm discipling", "note": "", "label": "Those I disciple", "serves": "", "pct": 0}, {"id": "s08", "tier": "deep", "name": "My health", "note": "Building it at PF.", "label": "My health", "serves": "s02", "pct": 0}, {"id": "s09", "tier": "deep", "name": "Where I'm planted", "note": "Where I'm committed and plugged in more deeply. Still discerning this one.", "label": "Where I'm planted", "serves": "", "pct": 0}, {"id": "s10", "tier": "current", "name": "The house", "note": "Needs stewarding, but it isn't the main thing.", "label": "The house", "serves": "", "pct": 0}, {"id": "s11", "tier": "current", "name": "The ministry at Cypress", "note": "More ancillary than the rest of these.", "label": "Cypress ministry", "serves": "s03", "pct": 0}, {"id": "s12", "tier": "current", "name": "MLS and financial development", "note": "", "label": "MLS & finances", "serves": "", "pct": 0}, {"id": "s13", "tier": "current", "name": "Social media campaigns", "note": "Secondary.", "label": "Social campaigns", "serves": "", "pct": 0}, {"id": "s14", "tier": "current", "name": "Seminary homework", "note": "Feels the most stressful of these, and it sits lowest. I'm easily driven by grades and how it looks — I do want to actually learn.", "label": "Seminary work", "serves": "s03", "pct": 0}, {"id": "s21", "tier": "current", "label": "The podcast", "name": "The podcast", "note": "More external than the rest of these — it faces outward.", "serves": "s07", "pct": 0}, {"id": "s22", "tier": "current", "label": "App with Craig", "pct": 0, "serves": "", "name": "The social media app with Craig Brown", "note": "Your words: a bridge between the two things. Say which two and I'll tie it."}, {"id": "s23", "tier": "current", "label": "E3 for SoCal", "pct": 0, "serves": "", "name": "Updating the E3 systems for SoCal", "note": "Mine to put together."}, {"id": "s15", "tier": "blessing", "name": "Mariners Church", "note": "Ancillary. Glad to give to it; not mine to carry.", "label": "Mariners Church", "serves": "", "pct": 0}, {"id": "s16", "tier": "joy", "name": "Tuesdays", "note": "Purely for gladness.", "label": "Tuesdays", "serves": "", "pct": 0}, {"id": "s17", "tier": "future", "name": "Stewarding my wife", "note": "Not yet mine. For now the work is preparation.", "label": "My wife", "serves": "", "pct": 0}, {"id": "s18", "tier": "future", "name": "USC", "note": "Hopeful. Not a responsibility yet.", "label": "USC", "serves": "", "pct": 0}, {"id": "s19", "tier": "blessing", "name": "The tool I built with Carter", "note": "Made it, glad it exists — not mine to carry.", "label": "Tool with Carter", "serves": "", "pct": 0}]}</script>
 
 <script>
 (function () {
@@ -207,15 +224,15 @@ svg.mode-bless .g-carry .lead,svg.mode-bless .g-carry .keydot{opacity:.14}
   var STORE_KEY = "building-and-blessing/v5";
 
   var TIERS = [
-    { key: "deep",     name: "Deep",      side: "carry", r: 50, fs: 13,   lh: 15.5,
+    { key: "deep",     name: "Deep",      side: "carry", r: 45, fs: 12.5, lh: 15,
       blurb: "Formation. These do not finish." },
-    { key: "current",  name: "Current",   side: "carry", r: 40, fs: 11.5, lh: 14,
+    { key: "current",  name: "Current",   side: "carry", r: 36, fs: 11,   lh: 13.5,
       blurb: "Live responsibilities with edges." },
-    { key: "blessing", name: "Blessing",  side: "other", r: 35, fs: 11,   lh: 13.5,
+    { key: "blessing", name: "Blessing",  side: "other", r: 31, fs: 10.5, lh: 13,
       blurb: "I back it. Someone else owns it." },
-    { key: "joy",      name: "Enjoyment", side: "other", r: 34, fs: 11,   lh: 13.5,
+    { key: "joy",      name: "Enjoyment", side: "other", r: 30, fs: 10.5, lh: 13,
       blurb: "For gladness. No other reason." },
-    { key: "future",   name: "Future",    side: "other", r: 34, fs: 11,   lh: 13.5,
+    { key: "future",   name: "Future",    side: "other", r: 30, fs: 10.5, lh: 13,
       blurb: "Not mine yet. Preparing." }
   ];
   function rank(k) {
@@ -249,13 +266,21 @@ svg.mode-bless .g-carry .lead,svg.mode-bless .g-carry .keydot{opacity:.14}
         else tier = "current";
       }
       var name = String(e.name || "").slice(0, 300);
+      var pct = typeof e.pct === "number" && isFinite(e.pct) ? Math.max(0, Math.min(100, Math.round(e.pct))) : 0;
       return {
         id: e.id || uid(),
         label: String(e.label || shorten(name)).slice(0, 40),
         name: name,
         note: String(e.note || "").slice(0, 500),
-        tier: tier
+        tier: tier,
+        serves: typeof e.serves === "string" ? e.serves : "",
+        pct: pct
       };
+    });
+    var live = {};
+    items.forEach(function (it) { live[it.id] = it; });
+    items.forEach(function (it) {
+      if (it.serves && (!live[it.serves] || live[it.serves].tier !== "deep" || it.serves === it.id)) it.serves = "";
     });
     return { v: 5, t: typeof raw.t === "number" ? raw.t : 0,
       items: items.map(function (it, i) { return [it, i]; })
@@ -351,27 +376,36 @@ svg.mode-bless .g-carry .lead,svg.mode-bless .g-carry .keydot{opacity:.14}
   function narrow() { return window.innerWidth < 720; }
   function aspect() {
     if (narrow()) return [0.66, 1.45];
-    return [1.28, 0.80];
+    return [1.52, 0.70];
   }
 
   function pack(circles) {
-    var ratio = aspect(), placed = [];
+    var ratio = aspect(), placed = [], byId = {};
     circles.forEach(function (c, i) {
-      if (i === 0) { c.x = 0; c.y = 0; placed.push(c); return; }
+      if (i === 0) { c.x = 0; c.y = 0; placed.push(c); byId[c.id] = c; return; }
+      var anchor = (c.serves && byId[c.serves]) || null;
+      var ax = anchor ? anchor.x : 0, ay = anchor ? anchor.y : 0;
       var found = false;
       for (var d = 4; d < 3000 && !found; d += 5) {
         var step = Math.PI / Math.max(10, Math.min(90, d / 3));
         for (var a = 0; a < Math.PI * 2 - 1e-9; a += step) {
-          var x = Math.cos(a) * d * ratio[0], y = Math.sin(a) * d * ratio[1], ok = true;
+          var x = ax + Math.cos(a) * d * ratio[0], y = ay + Math.sin(a) * d * ratio[1], ok = true;
           for (var k = 0; k < placed.length; k++) {
             var p = placed[k], dx = p.x - x, dy = p.y - y;
-            if (dx * dx + dy * dy < (p.r + c.r + 5) * (p.r + c.r + 5)) { ok = false; break; }
+            var need = (p.rOut || p.r) + (c.rOut || c.r) + 5;
+            if (dx * dx + dy * dy < need * need) { ok = false; break; }
+          }
+          if (ok && anchor) {
+            var pdx = anchor.x - x, pdy = anchor.y - y;
+            var want = anchor.r + c.r + 16;
+            if (pdx * pdx + pdy * pdy < want * want) ok = false;
           }
           if (ok) { c.x = x; c.y = y; found = true; break; }
         }
       }
-      if (!found) { c.x = 0; c.y = 0; }
+      if (!found) { c.x = ax; c.y = ay; }
       placed.push(c);
+      byId[c.id] = c;
     });
   }
 
@@ -390,21 +424,46 @@ svg.mode-bless .g-carry .lead,svg.mode-bless .g-carry .keydot{opacity:.14}
       return;
     }
 
-    // Packing runs from the centre outward, so order decides centrality: tier
-    // first, then your own order inside the tier. The first thing in Deep sits
-    // in the middle and everything else gathers around it.
-    var circles = state.items.map(function (it, i) {
+    // Packing runs from the centre outward, so order decides where a thing
+    // lands. Each concept is followed immediately by the work that serves it,
+    // which puts the two next to each other and keeps the tie line short.
+    var used = {}, order = [];
+    state.items.forEach(function (it) {
+      if (it.tier !== "deep" || used[it.id]) return;
+      order.push(it); used[it.id] = 1;
+      state.items.forEach(function (c) {
+        if (!used[c.id] && c.serves === it.id) { order.push(c); used[c.id] = 1; }
+      });
+    });
+    state.items.forEach(function (it) { if (!used[it.id]) { order.push(it); used[it.id] = 1; } });
+
+    var circles = order.map(function (it) {
       var s = shape(it);
-      return { id: it.id, tier: it.tier, name: it.name, label: it.label, i: i,
-        r: s.r, lines: s.lines, t: s.t };
-    }).sort(function (a, b) { return (rank(a.tier) - rank(b.tier)) || (a.i - b.i); });
+      return { id: it.id, tier: it.tier, name: it.name, label: it.label,
+        serves: it.serves, pct: it.pct, r: s.r,
+        rOut: s.r + (it.pct > 0 ? 7 : 0), lines: s.lines, t: s.t };
+    });
     pack(circles);
 
     var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
     circles.forEach(function (c) {
-      minX = Math.min(minX, c.x - c.r); maxX = Math.max(maxX, c.x + c.r);
-      minY = Math.min(minY, c.y - c.r); maxY = Math.max(maxY, c.y + c.r);
+      var e = c.rOut || c.r;
+      minX = Math.min(minX, c.x - e); maxX = Math.max(maxX, c.x + e);
+      minY = Math.min(minY, c.y - e); maxY = Math.max(maxY, c.y + e);
     });
+
+    // ties are drawn first so they pass behind the circles
+    var byId = {};
+    circles.forEach(function (c) { byId[c.id] = c; });
+    var ties = circles.map(function (c) {
+      var p = c.serves && byId[c.serves];
+      if (!p) return "";
+      var dx = p.x - c.x, dy = p.y - c.y, len = Math.sqrt(dx * dx + dy * dy) || 1;
+      var ex = dx / len, ey = dy / len;
+      return '<line class="tie g-' + c.t.side + '" x1="' + (c.x + ex * c.r).toFixed(1) +
+        '" y1="' + (c.y + ey * c.r).toFixed(1) + '" x2="' + (p.x - ex * p.r).toFixed(1) +
+        '" y2="' + (p.y - ey * p.r).toFixed(1) + '"/>';
+    }).join("");
 
     var bubbles = circles.map(function (c) {
       var tspans = c.lines.map(function (line, i) {
@@ -415,6 +474,7 @@ svg.mode-bless .g-carry .lead,svg.mode-bless .g-carry .keydot{opacity:.14}
           '" data-id="' + esc(c.id) + '" tabindex="0" role="button" aria-label="' +
           esc(c.label + (c.name && c.name !== c.label ? " — " + c.name : "")) + '">' +
         '<circle cx="' + c.x.toFixed(1) + '" cy="' + c.y.toFixed(1) + '" r="' + c.r.toFixed(1) + '"/>' +
+        ring(c) +
         '<text text-anchor="middle" dominant-baseline="central" font-size="' + c.t.fs + '">' +
           tspans + "</text></g>";
     }).join("");
@@ -488,7 +548,17 @@ svg.mode-bless .g-carry .lead,svg.mode-bless .g-carry .keydot{opacity:.14}
       (minX - padX - m).toFixed(1) + " " + (minY - m).toFixed(1) + " " +
       (maxX - minX + padX * 2 + m * 2).toFixed(1) + " " + (maxY - minY + m * 2).toFixed(1) +
       '" role="img" aria-label="Everything I carry and everything I bless">' +
-      keyMarkup + bubbles + "</svg>";
+      ties + keyMarkup + bubbles + "</svg>";
+  }
+
+  // Progress as an arc around the rim, opening clockwise from the top.
+  function ring(c) {
+    if (!c.pct) return "";
+    var rr = c.r + 4, circ = 2 * Math.PI * rr;
+    return '<circle class="ring" cx="' + c.x.toFixed(1) + '" cy="' + c.y.toFixed(1) +
+      '" r="' + rr.toFixed(1) + '" stroke-dasharray="' + (circ * c.pct / 100).toFixed(1) +
+      " " + circ.toFixed(1) + '" transform="rotate(-90 ' + c.x.toFixed(1) + " " +
+      c.y.toFixed(1) + ')"><title>' + c.pct + '% along</title></circle>';
   }
 
   function renderLegend() {
@@ -516,6 +586,19 @@ svg.mode-bless .g-carry .lead,svg.mode-bless .g-carry .keydot{opacity:.14}
       '<span class="d-lab">Note</span>' +
       '<textarea class="d-note" rows="1" placeholder="a note, if it helps" aria-label="Note">' +
         esc(it.note) + "</textarea>" +
+      '<span class="d-lab">Serves</span>' +
+      '<select class="d-serves" aria-label="Which deeper thing this serves">' +
+        '<option value=""' + (it.serves ? "" : " selected") + ">— on its own —</option>" +
+        state.items.filter(function (d) { return d.tier === "deep" && d.id !== it.id; })
+          .map(function (d) {
+            return '<option value="' + esc(d.id) + '"' + (d.id === it.serves ? " selected" : "") +
+              ">" + esc(d.label) + "</option>";
+          }).join("") +
+      "</select>" +
+      '<span class="d-lab">How far along</span>' +
+      '<div class="d-pct"><input class="d-range" type="range" min="0" max="100" step="5" value="' +
+        it.pct + '" aria-label="Percent complete"><b>' +
+        (it.pct ? it.pct + "%" : "—") + "</b></div>" +
       '<div class="d-move">' +
         TIERS.map(function (t) {
           return '<button data-tier="' + t.key + '" aria-pressed="' + (t.key === it.tier) + '">' +
@@ -566,7 +649,8 @@ svg.mode-bless .g-carry .lead,svg.mode-bless .g-carry .keydot{opacity:.14}
     var name = input.value.trim();
     if (!name) { input.focus(); return; }
     var tier = document.getElementById("new-tier").value;
-    var it = { id: uid(), label: shorten(name), name: name, note: "", tier: tier };
+    var it = { id: uid(), label: shorten(name), name: name, note: "", tier: tier,
+      serves: "", pct: 0 };
     state.items.splice(placeAt(tier), 0, it);
     input.value = "";
     selected = it.id;
@@ -611,7 +695,13 @@ svg.mode-bless .g-carry .lead,svg.mode-bless .g-carry .keydot{opacity:.14}
     }
   });
   detail.addEventListener("input", function (ev) {
-    if (ev.target.tagName === "TEXTAREA") autosize(ev.target);
+    if (ev.target.tagName === "TEXTAREA") { autosize(ev.target); return; }
+    // Track the slider live, but only redraw the field once it is let go.
+    if (ev.target.classList.contains("d-range")) {
+      var v = parseInt(ev.target.value, 10) || 0;
+      var out = detail.querySelector(".d-pct b");
+      if (out) out.textContent = v ? v + "%" : "—";
+    }
   });
   detail.addEventListener("change", function (ev) {
     var it = state.items[indexOf(selected)];
@@ -625,6 +715,10 @@ svg.mode-bless .g-carry .lead,svg.mode-bless .g-carry .keydot{opacity:.14}
       it.name = el.value.trim().slice(0, 300);
     } else if (el.classList.contains("d-note")) {
       it.note = el.value.trim().slice(0, 500);
+    } else if (el.classList.contains("d-serves")) {
+      it.serves = el.value;
+    } else if (el.classList.contains("d-range")) {
+      it.pct = Math.max(0, Math.min(100, parseInt(el.value, 10) || 0));
     } else return;
     save(); render();
   });

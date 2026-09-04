@@ -51,6 +51,12 @@ rather than from the centre — and joined by a line, so concrete work reads as
 attached to the thing it is actually for. Packing leaves a deliberate gap
 between a tied pair; touching circles make the connector too short to read.
 
+**Priority is order.** Within a tier, the order of items is their priority, and
+packing consumes that order from the centre outward — so raising something's
+priority literally moves it toward the middle of the field. The editor shows an
+item's rank in words (`3rd of 12 in Deep`) with controls to move it, and the
+controls disable at the ends rather than doing nothing.
+
 **Progress.** An optional 0–100% per item, drawn as an arc around the outside of
 the circle, opening clockwise from the top. Nothing is drawn at 0. The arc sits
 4px beyond the rim and is counted in both collision and bounds, so rings never

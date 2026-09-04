@@ -159,6 +159,13 @@ svg.mode-bless line.tie.g-carry{opacity:.14}
 .d-note::placeholder,.d-name::placeholder{color:var(--ink-3)}
 .d-serves{background:transparent;border:1px solid var(--rule-2);border-radius:999px;
   padding:5px 10px;font-size:12.5px;color:var(--ink-2);max-width:100%}
+.d-rank{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.d-rank button{border:1px solid var(--rule-2);border-radius:999px;width:28px;height:24px;
+  font-size:9px;color:var(--ink-2);line-height:1}
+.d-rank button:hover:not(:disabled){border-color:var(--ink-3);color:var(--ink)}
+.d-rank button:disabled{opacity:.3;cursor:default}
+.d-rank b{font-size:12.5px;font-weight:600;color:var(--ink-2);margin-left:2px}
+.d-rank-why{font-family:var(--f-display);font-style:italic;font-size:12px;color:var(--ink-3)}
 .d-pct{display:flex;align-items:center;gap:10px}
 .d-pct input{flex:1;min-width:0;accent-color:var(--current)}
 .d-pct b{font-family:var(--f-ui);font-size:12px;font-weight:600;color:var(--ink-2);
@@ -214,7 +221,7 @@ svg.mode-bless line.tie.g-carry{opacity:.14}
   <p class="hint">Tap any bubble to rename it or move it between tiers.</p>
 </div>
 
-<script id="state" type="application/json">{"v": 5, "items": [{"id": "s00", "tier": "deep", "label": "Love the Lord", "name": "Love the Lord my God with all my heart, soul, and strength", "note": "The first and greatest.", "serves": "", "pct": 0}, {"id": "s00b", "tier": "deep", "label": "Love my neighbor", "name": "Love my neighbor as myself", "note": "The second, like it. Everything else here hangs on these two.", "serves": "", "pct": 0}, {"id": "s01", "tier": "deep", "name": "My relationship with God", "note": "", "label": "Walk with God", "serves": "", "pct": 0}, {"id": "s02", "tier": "deep", "name": "My character — actually growing like Christ", "note": "", "label": "Christlikeness", "serves": "", "pct": 0}, {"id": "s03", "tier": "deep", "name": "My calling — walking it out fully before the Lord", "note": "", "label": "My calling", "serves": "", "pct": 0}, {"id": "s04", "tier": "deep", "name": "Purity", "note": "", "label": "Purity", "serves": "", "pct": 0}, {"id": "s05", "tier": "deep", "name": "Preparing myself for my future wife and family", "note": "Getting ready, and learning how to recognise her.", "label": "Preparing for marriage", "serves": "", "pct": 0}, {"id": "s06", "tier": "deep", "name": "My family", "note": "", "label": "My family", "serves": "", "pct": 0}, {"id": "s07", "tier": "deep", "name": "The people I'm discipling", "note": "", "label": "Those I disciple", "serves": "", "pct": 0}, {"id": "s08", "tier": "deep", "name": "My health", "note": "Building it at PF.", "label": "My health", "serves": "s02", "pct": 0}, {"id": "s09", "tier": "deep", "name": "Where I'm planted", "note": "Where I'm committed and plugged in more deeply. Still discerning this one.", "label": "Where I'm planted", "serves": "", "pct": 0}, {"id": "s10", "tier": "current", "name": "The house", "note": "Needs stewarding, but it isn't the main thing.", "label": "The house", "serves": "", "pct": 0}, {"id": "s11", "tier": "current", "name": "The ministry at Cypress", "note": "More ancillary than the rest of these.", "label": "Cypress ministry", "serves": "s03", "pct": 0}, {"id": "s12", "tier": "current", "name": "MLS and financial development", "note": "", "label": "MLS & finances", "serves": "", "pct": 0}, {"id": "s13", "tier": "current", "name": "Social media campaigns", "note": "Secondary.", "label": "Social campaigns", "serves": "", "pct": 0}, {"id": "s14", "tier": "current", "name": "Seminary homework", "note": "Feels the most stressful of these, and it sits lowest. I'm easily driven by grades and how it looks — I do want to actually learn.", "label": "Seminary work", "serves": "s03", "pct": 0}, {"id": "s21", "tier": "current", "label": "The podcast", "name": "The podcast", "note": "More external than the rest of these — it faces outward.", "serves": "s07", "pct": 0}, {"id": "s22", "tier": "current", "label": "App with Craig", "pct": 0, "serves": "", "name": "The social media app with Craig Brown", "note": "Your words: a bridge between the two things. Say which two and I'll tie it."}, {"id": "s23", "tier": "current", "label": "E3 for SoCal", "pct": 0, "serves": "", "name": "Updating the E3 systems for SoCal", "note": "Mine to put together."}, {"id": "s15", "tier": "blessing", "name": "Mariners Church", "note": "Ancillary. Glad to give to it; not mine to carry.", "label": "Mariners Church", "serves": "", "pct": 0}, {"id": "s16", "tier": "joy", "name": "Tuesdays", "note": "Purely for gladness.", "label": "Tuesdays", "serves": "", "pct": 0}, {"id": "s17", "tier": "future", "name": "Stewarding my wife", "note": "Not yet mine. For now the work is preparation.", "label": "My wife", "serves": "", "pct": 0}, {"id": "s18", "tier": "future", "name": "USC", "note": "Hopeful. Not a responsibility yet.", "label": "USC", "serves": "", "pct": 0}, {"id": "s19", "tier": "blessing", "name": "The tool I built with Carter", "note": "Made it, glad it exists — not mine to carry.", "label": "Tool with Carter", "serves": "", "pct": 0}]}</script>
+<script id="state" type="application/json">{"v": 5, "items": [{"id": "s00", "tier": "deep", "label": "Love the Lord", "name": "Love the Lord my God with all my heart, soul, and strength", "note": "The first and greatest.", "serves": "", "pct": 0}, {"id": "s00b", "tier": "deep", "label": "Love my neighbor", "name": "Love my neighbor as myself", "note": "The second, like it. Everything else here hangs on these two.", "serves": "", "pct": 0}, {"id": "s01", "tier": "deep", "name": "My relationship with God", "note": "", "label": "Walk with God", "serves": "", "pct": 0}, {"id": "s24", "tier": "deep", "label": "Prayer & Word", "pct": 0, "serves": "s01", "name": "Prayer and time in the Word", "note": "To keep growing in. The practice under the relationship."}, {"id": "s02", "tier": "deep", "name": "My character — actually growing like Christ", "note": "", "label": "Christlikeness", "serves": "", "pct": 0}, {"id": "s03", "tier": "deep", "name": "My calling — walking it out fully before the Lord", "note": "", "label": "My calling", "serves": "", "pct": 0}, {"id": "s04", "tier": "deep", "name": "Purity", "note": "", "label": "Purity", "serves": "", "pct": 0}, {"id": "s05", "tier": "deep", "name": "Preparing myself for my future wife and family", "note": "Getting ready, and learning how to recognise her.", "label": "Preparing for marriage", "serves": "", "pct": 0}, {"id": "s06", "tier": "deep", "name": "My family", "note": "", "label": "My family", "serves": "", "pct": 0}, {"id": "s07", "tier": "deep", "name": "The people I'm discipling", "note": "", "label": "Those I disciple", "serves": "", "pct": 0}, {"id": "s08", "tier": "deep", "name": "My health", "note": "Building it at PF.", "label": "My health", "serves": "s02", "pct": 0}, {"id": "s09", "tier": "deep", "name": "Where I'm planted", "note": "Where I'm committed and plugged in more deeply. Still discerning this one.", "label": "Where I'm planted", "serves": "", "pct": 0}, {"id": "s10", "tier": "current", "name": "The house", "note": "Needs stewarding, but it isn't the main thing.", "label": "The house", "serves": "", "pct": 0}, {"id": "s11", "tier": "current", "name": "The ministry at Cypress", "note": "More ancillary than the rest of these.", "label": "Cypress ministry", "serves": "s03", "pct": 0}, {"id": "s12", "tier": "current", "name": "MLS and financial development", "note": "", "label": "MLS & finances", "serves": "", "pct": 0}, {"id": "s13", "tier": "current", "name": "Social media campaigns", "note": "Secondary.", "label": "Social campaigns", "serves": "", "pct": 0}, {"id": "s14", "tier": "current", "name": "Seminary homework", "note": "Feels the most stressful of these, and it sits lowest. I'm easily driven by grades and how it looks — I do want to actually learn.", "label": "Seminary work", "serves": "s03", "pct": 0}, {"id": "s21", "tier": "current", "label": "The podcast", "name": "The podcast", "note": "More external than the rest of these — it faces outward.", "serves": "s07", "pct": 0}, {"id": "s22", "tier": "current", "label": "App with Craig", "pct": 0, "serves": "", "name": "The social media app with Craig Brown", "note": "Your words: a bridge between the two things. Say which two and I'll tie it."}, {"id": "s23", "tier": "current", "label": "E3 for SoCal", "pct": 0, "serves": "", "name": "Updating the E3 systems for SoCal", "note": "Mine to put together."}, {"id": "s15", "tier": "blessing", "name": "Mariners Church", "note": "Ancillary. Glad to give to it; not mine to carry.", "label": "Mariners Church", "serves": "", "pct": 0}, {"id": "s16", "tier": "joy", "name": "Tuesdays", "note": "Purely for gladness.", "label": "Tuesdays", "serves": "", "pct": 0}, {"id": "s17", "tier": "future", "name": "Stewarding my wife", "note": "Not yet mine. For now the work is preparation.", "label": "My wife", "serves": "", "pct": 0}, {"id": "s18", "tier": "future", "name": "USC", "note": "Hopeful. Not a responsibility yet.", "label": "USC", "serves": "", "pct": 0}, {"id": "s19", "tier": "blessing", "name": "The tool I built with Carter", "note": "Made it, glad it exists — not mine to carry.", "label": "Tool with Carter", "serves": "", "pct": 0}]}</script>
 
 <script>
 (function () {
@@ -595,6 +602,21 @@ svg.mode-bless line.tie.g-carry{opacity:.14}
               ">" + esc(d.label) + "</option>";
           }).join("") +
       "</select>" +
+      (function () {
+        var peers = state.items.filter(function (x) { return x.tier === it.tier; });
+        var pos = peers.indexOf(it) + 1;
+        var suffix = pos === 1 ? "st" : pos === 2 ? "nd" : pos === 3 ? "rd" : "th";
+        if (pos > 10 && pos < 14) suffix = "th";
+        return '<span class="d-lab">Priority</span>' +
+          '<div class="d-rank">' +
+            '<button data-mv="-1"' + (pos === 1 ? " disabled" : "") +
+              ' aria-label="Higher priority" title="Higher priority">&#9650;</button>' +
+            '<button data-mv="1"' + (pos === peers.length ? " disabled" : "") +
+              ' aria-label="Lower priority" title="Lower priority">&#9660;</button>' +
+            "<b>" + pos + suffix + " of " + peers.length + " in " + esc(tierOf(it.tier).name) +
+            '</b><span class="d-rank-why">higher sits nearer the centre</span>' +
+          "</div>";
+      })() +
       '<span class="d-lab">How far along</span>' +
       '<div class="d-pct"><input class="d-range" type="range" min="0" max="100" step="5" value="' +
         it.pct + '" aria-label="Percent complete"><b>' +
@@ -632,6 +654,21 @@ svg.mode-bless line.tie.g-carry{opacity:.14}
     var at = 0;
     while (at < state.items.length && rank(state.items[at].tier) <= rank(tier)) at++;
     return at;
+  }
+
+  // Order inside a tier is the priority order, and packing consumes it from the
+  // centre out — so moving something up literally moves it toward the middle.
+  function movePriority(id, dir) {
+    var i = indexOf(id);
+    if (i < 0) return;
+    var it = state.items[i];
+    var peers = state.items.filter(function (x) { return x.tier === it.tier; });
+    var pos = peers.indexOf(it);
+    if (pos + dir < 0 || pos + dir >= peers.length) return;
+    var j = indexOf(peers[pos + dir].id);
+    state.items[i] = state.items[j];
+    state.items[j] = it;
+    save(); render();
   }
 
   function moveTo(id, tier) {
@@ -685,6 +722,8 @@ svg.mode-bless line.tie.g-carry{opacity:.14}
 
   var detail = document.getElementById("detail");
   detail.addEventListener("click", function (ev) {
+    var mv = ev.target.closest("[data-mv]");
+    if (mv) { movePriority(selected, parseInt(mv.dataset.mv, 10)); return; }
     var t = ev.target.closest("[data-tier]");
     if (t) { moveTo(selected, t.dataset.tier); return; }
     if (ev.target.closest("[data-del]")) {
